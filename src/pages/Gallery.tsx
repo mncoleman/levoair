@@ -24,6 +24,19 @@ const Gallery = () => {
     }
   });
 
+  const { data: settings } = useQuery({
+    queryKey: ["gallery-settings"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("gallery_settings")
+        .select("*")
+        .single();
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
@@ -48,7 +61,12 @@ const Gallery = () => {
       </div>
       <DomeGallery 
         images={images} 
-        grayscale={false}
+        fit={settings ? Number(settings.fit) : 0.9}
+        minRadius={settings?.min_radius || 600}
+        maxVerticalRotationDeg={settings?.max_vertical_rotation_deg || 0}
+        segments={settings?.segments || 34}
+        dragDampening={settings ? Number(settings.drag_dampening) : 2}
+        grayscale={settings?.grayscale || false}
         overlayBlurColor="hsl(240 10% 3.9%)"
       />
     </div>

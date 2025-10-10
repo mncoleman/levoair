@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      gallery_settings: {
+        Row: {
+          created_at: string | null
+          drag_dampening: number
+          fit: number
+          grayscale: boolean
+          id: string
+          max_vertical_rotation_deg: number
+          min_radius: number
+          segments: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          drag_dampening?: number
+          fit?: number
+          grayscale?: boolean
+          id?: string
+          max_vertical_rotation_deg?: number
+          min_radius?: number
+          segments?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          drag_dampening?: number
+          fit?: number
+          grayscale?: boolean
+          id?: string
+          max_vertical_rotation_deg?: number
+          min_radius?: number
+          segments?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
