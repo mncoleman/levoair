@@ -14,7 +14,20 @@ import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const imageSchema = z.object({
-  imageUrl: z.string().trim().url({ message: "Please enter a valid URL" }),
+  imageUrl: z.string()
+    .trim()
+    .url({ message: "Please enter a valid URL" })
+    .refine(
+      (url) => {
+        try {
+          const parsed = new URL(url);
+          return ['http:', 'https:'].includes(parsed.protocol);
+        } catch {
+          return false;
+        }
+      },
+      { message: "Only HTTP and HTTPS URLs are allowed" }
+    ),
   altText: z.string().trim().max(200, { message: "Alt text must be less than 200 characters" }).optional()
 });
 
