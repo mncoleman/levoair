@@ -48,15 +48,15 @@ const Portfolio = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="pt-16">
-        <div className="relative min-h-screen">
-          <div className="absolute top-8 left-0 right-0 z-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Portfolio</h1>
-            <p className="text-lg text-muted-foreground">
-              Explore our aerial photography and data collection projects
-            </p>
-          </div>
-          
+      <main className="pt-16 relative">
+        <div className="absolute top-8 left-0 right-0 z-10 text-center pointer-events-none">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Our Portfolio</h1>
+          <p className="text-lg text-muted-foreground">
+            Explore our aerial photography and data collection projects
+          </p>
+        </div>
+        
+        <div className="w-full" style={{ height: 'calc(100vh - 4rem)' }}>
           <DomeGallery
             images={images}
             fit={settings?.fit ?? 0.9}
