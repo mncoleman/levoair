@@ -57,6 +57,11 @@ export const Footer = () => {
             <ul className="space-y-2">
               <li className="text-sm text-muted-foreground">(970) 776-0470</li>
               <li className="text-sm text-muted-foreground">info@levoair.com</li>
+              <li>
+                <Link to="/auth" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Admin Login
+                </Link>
+              </li>
             </ul>
             <div className="flex space-x-4 mt-4">
               <a

@@ -1,34 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { toast } from "sonner";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trash2, LogOut, Plus, ExternalLink } from "lucide-react";
-import { z } from "zod";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Loader2, Trash2, LogOut, Home } from "lucide-react";
+import { z } from "zod";
 
 const imageSchema = z.object({
-  imageUrl: z.string()
-    .trim()
-    .url({ message: "Please enter a valid URL" })
-    .refine(
-      (url) => {
-        try {
-          const parsed = new URL(url);
-          return ['http:', 'https:'].includes(parsed.protocol);
-        } catch {
-          return false;
-        }
-      },
-      { message: "Only HTTP and HTTPS URLs are allowed" }
-    ),
-  altText: z.string().trim().max(200, { message: "Alt text must be less than 200 characters" }).optional()
+  image_url: z.string().url({ message: "Must be a valid URL" }).refine(
+    (url) => url.startsWith("http://") || url.startsWith("https://"),
+    { message: "URL must start with http:// or https://" }
+  ),
+  alt_text: z.string().optional()
 });
 
 const Admin = () => {
@@ -39,29 +29,31 @@ const Admin = () => {
   const [altText, setAltText] = useState("");
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAdmin = async () => {
       const { data: { session } } = await supabase.auth.getSession();
+      
       if (!session) {
         navigate("/auth");
         return;
       }
 
-      const { data: roleData } = await supabase
+      const { data: roles } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", session.user.id)
         .eq("role", "admin")
         .single();
 
-      if (!roleData) {
-        toast.error("You don't have admin access");
-        navigate("/");
+      if (!roles) {
+        toast.error("Access denied. Admin privileges required.");
+        navigate("/auth");
         return;
       }
+
       setIsAdmin(true);
     };
 
-    checkAuth();
+    checkAdmin();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_OUT") {
@@ -72,7 +64,7 @@ const Admin = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const { data: images = [] } = useQuery({
+  const { data: images = [], isLoading: imagesLoading } = useQuery({
     queryKey: ["admin-gallery-images"],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -93,7 +85,7 @@ const Admin = () => {
         .from("gallery_settings")
         .select("*")
         .single();
-      
+
       if (error) throw error;
       return data;
     },
@@ -101,20 +93,24 @@ const Admin = () => {
   });
 
   const addImageMutation = useMutation({
-    mutationFn: async () => {
-      const validated = imageSchema.parse({ imageUrl, altText });
+    mutationFn: async (newImage: { image_url: string; alt_text?: string }) => {
+      const validated = imageSchema.parse(newImage);
       
-      const { error } = await supabase.from("gallery_images").insert({
-        image_url: validated.imageUrl,
-        alt_text: validated.altText || "",
-        display_order: images.length
-      });
+      const { data, error } = await supabase
+        .from("gallery_images")
+        .insert([{
+          image_url: validated.image_url,
+          alt_text: validated.alt_text || null,
+          display_order: images.length
+        }])
+        .select();
 
       if (error) throw error;
+      return data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-gallery-images"] });
-      queryClient.invalidateQueries({ queryKey: ["gallery-images"] });
+      queryClient.invalidateQueries({ queryKey: ["portfolio-images"] });
       toast.success("Image added successfully!");
       setImageUrl("");
       setAltText("");
@@ -139,7 +135,7 @@ const Admin = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-gallery-images"] });
-      queryClient.invalidateQueries({ queryKey: ["gallery-images"] });
+      queryClient.invalidateQueries({ queryKey: ["portfolio-images"] });
       toast.success("Image deleted successfully!");
     },
     onError: (error: any) => {
@@ -148,17 +144,18 @@ const Admin = () => {
   });
 
   const updateSettingsMutation = useMutation({
-    mutationFn: async (updatedSettings: any) => {
+    mutationFn: async (updates: any) => {
       const { error } = await supabase
         .from("gallery_settings")
-        .update(updatedSettings)
+        .update(updates)
         .eq("id", settings?.id);
 
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["gallery-settings"] });
-      toast.success("Settings updated successfully!");
+      queryClient.invalidateQueries({ queryKey: ["portfolio-settings"] });
+      toast.success("Settings updated!");
     },
     onError: (error: any) => {
       toast.error(error.message || "Failed to update settings");
@@ -171,32 +168,26 @@ const Admin = () => {
   };
 
   const handleSettingChange = (key: string, value: any) => {
-    if (!settings) return;
     updateSettingsMutation.mutate({ [key]: value });
   };
 
   if (!isAdmin) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-center">
-          <div className="animate-pulse text-lg text-foreground">Loading...</div>
-        </div>
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Gallery Admin</h1>
-            <p className="text-muted-foreground">Manage your gallery images and settings</p>
-          </div>
+    <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Gallery Admin</h1>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => navigate("/")}>
-              <ExternalLink className="mr-2 h-4 w-4" />
-              View Gallery
+              <Home className="mr-2 h-4 w-4" />
+              Home
             </Button>
             <Button variant="outline" onClick={handleSignOut}>
               <LogOut className="mr-2 h-4 w-4" />
@@ -205,22 +196,23 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="images" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="images" className="space-y-4">
+          <TabsList>
             <TabsTrigger value="images">Gallery Images</TabsTrigger>
             <TabsTrigger value="settings">Dome Settings</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="images" className="space-y-6">
+          <TabsContent value="images" className="space-y-4">
             <Card>
               <CardHeader>
                 <CardTitle>Add New Image</CardTitle>
-                <CardDescription>
-                  Add images to your gallery by providing a URL (Google Drive, Unsplash, etc.)
-                </CardDescription>
+                <CardDescription>Add images to your portfolio gallery</CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={(e) => { e.preventDefault(); addImageMutation.mutate(); }} className="space-y-4">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  addImageMutation.mutate({ image_url: imageUrl, alt_text: altText });
+                }} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="imageUrl">Image URL</Label>
                     <Input
@@ -236,15 +228,13 @@ const Admin = () => {
                     <Label htmlFor="altText">Alt Text (Optional)</Label>
                     <Input
                       id="altText"
-                      type="text"
                       placeholder="Description of the image"
                       value={altText}
                       onChange={(e) => setAltText(e.target.value)}
-                      maxLength={200}
                     />
                   </div>
                   <Button type="submit" disabled={addImageMutation.isPending}>
-                    <Plus className="mr-2 h-4 w-4" />
+                    {addImageMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Add Image
                   </Button>
                 </form>
@@ -254,146 +244,118 @@ const Admin = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Current Images ({images.length})</CardTitle>
-                <CardDescription>Manage your existing gallery images</CardDescription>
+                <CardDescription>Manage your portfolio images</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {images.map((image: any) => (
-                    <div key={image.id} className="relative group">
-                      <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+                {imagesLoading ? (
+                  <div className="flex justify-center p-8">
+                    <Loader2 className="h-8 w-8 animate-spin" />
+                  </div>
+                ) : images.length === 0 ? (
+                  <p className="text-center text-muted-foreground p-8">No images yet. Add your first image above.</p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {images.map((image) => (
+                      <div key={image.id} className="relative group">
                         <img
                           src={image.image_url}
                           alt={image.alt_text || "Gallery image"}
-                          className="w-full h-full object-cover"
+                          className="w-full h-48 object-cover rounded-lg"
                         />
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => deleteImageMutation.mutate(image.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                        {image.alt_text && (
+                          <p className="text-xs text-muted-foreground mt-1 truncate">{image.alt_text}</p>
+                        )}
                       </div>
-                      <Button
-                        variant="destructive"
-                        size="icon"
-                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                        onClick={() => deleteImageMutation.mutate(image.id)}
-                        disabled={deleteImageMutation.isPending}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                      {image.alt_text && (
-                        <p className="mt-2 text-sm text-muted-foreground truncate">
-                          {image.alt_text}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="settings">
-            <Card>
-              <CardHeader>
-                <CardTitle>Dome Gallery Settings</CardTitle>
-                <CardDescription>
-                  Customize the appearance and behavior of your 3D dome gallery
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-8">
-                {settings && (
-                  <>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>Fit</Label>
-                        <span className="text-sm text-muted-foreground">{Number(settings.fit).toFixed(1)}</span>
-                      </div>
+          <TabsContent value="settings" className="space-y-4">
+            {settings && (
+              <>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Display Settings</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-2">
+                      <Label>Fit ({settings.fit})</Label>
                       <Slider
+                        value={[Number(settings.fit)]}
+                        onValueChange={([value]) => handleSettingChange("fit", value)}
                         min={0.1}
                         max={2}
                         step={0.1}
-                        value={[Number(settings.fit)]}
-                        onValueChange={(vals) => handleSettingChange('fit', vals[0])}
-                        disabled={updateSettingsMutation.isPending}
                       />
-                      <p className="text-xs text-muted-foreground">Size factor for the dome radius</p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>Min Radius</Label>
-                        <span className="text-sm text-muted-foreground">{settings.min_radius}px</span>
-                      </div>
+                    <div className="space-y-2">
+                      <Label>Min Radius ({settings.min_radius})</Label>
                       <Slider
-                        min={200}
+                        value={[settings.min_radius]}
+                        onValueChange={([value]) => handleSettingChange("min_radius", value)}
+                        min={100}
                         max={2000}
                         step={50}
-                        value={[settings.min_radius]}
-                        onValueChange={(vals) => handleSettingChange('min_radius', vals[0])}
-                        disabled={updateSettingsMutation.isPending}
                       />
-                      <p className="text-xs text-muted-foreground">Minimum radius for the dome in pixels</p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>Max Vertical Rotation</Label>
-                        <span className="text-sm text-muted-foreground">{settings.max_vertical_rotation_deg}°</span>
-                      </div>
+                    <div className="space-y-2">
+                      <Label>Max Vertical Rotation ({settings.max_vertical_rotation_deg}°)</Label>
                       <Slider
-                        min={0}
-                        max={45}
-                        step={1}
                         value={[settings.max_vertical_rotation_deg]}
-                        onValueChange={(vals) => handleSettingChange('max_vertical_rotation_deg', vals[0])}
-                        disabled={updateSettingsMutation.isPending}
+                        onValueChange={([value]) => handleSettingChange("max_vertical_rotation_deg", value)}
+                        min={-90}
+                        max={90}
+                        step={5}
                       />
-                      <p className="text-xs text-muted-foreground">Maximum vertical tilt angle in degrees</p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>Segments</Label>
-                        <span className="text-sm text-muted-foreground">{settings.segments}</span>
-                      </div>
+                    <div className="space-y-2">
+                      <Label>Segments ({settings.segments})</Label>
                       <Slider
+                        value={[settings.segments]}
+                        onValueChange={([value]) => handleSettingChange("segments", value)}
                         min={10}
                         max={100}
                         step={1}
-                        value={[settings.segments]}
-                        onValueChange={(vals) => handleSettingChange('segments', vals[0])}
-                        disabled={updateSettingsMutation.isPending}
                       />
-                      <p className="text-xs text-muted-foreground">Number of image segments in the dome</p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>Drag Dampening</Label>
-                        <span className="text-sm text-muted-foreground">{Number(settings.drag_dampening).toFixed(1)}</span>
-                      </div>
+                    <div className="space-y-2">
+                      <Label>Drag Dampening ({settings.drag_dampening})</Label>
                       <Slider
-                        min={0}
-                        max={5}
-                        step={0.1}
                         value={[Number(settings.drag_dampening)]}
-                        onValueChange={(vals) => handleSettingChange('drag_dampening', vals[0])}
-                        disabled={updateSettingsMutation.isPending}
+                        onValueChange={([value]) => handleSettingChange("drag_dampening", value)}
+                        min={0.1}
+                        max={10}
+                        step={0.1}
                       />
-                      <p className="text-xs text-muted-foreground">Controls inertia when dragging (higher = more damping)</p>
                     </div>
 
-                    <div className="flex flex-row items-center justify-between rounded-lg border border-border p-4">
-                      <div className="space-y-0.5">
-                        <Label className="text-base">Grayscale</Label>
-                        <p className="text-xs text-muted-foreground">Apply grayscale filter to all images</p>
-                      </div>
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="grayscale">Grayscale</Label>
                       <Switch
+                        id="grayscale"
                         checked={settings.grayscale}
-                        onCheckedChange={(checked) => handleSettingChange('grayscale', checked)}
-                        disabled={updateSettingsMutation.isPending}
+                        onCheckedChange={(checked) => handleSettingChange("grayscale", checked)}
                       />
                     </div>
-                  </>
-                )}
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </>
+            )}
           </TabsContent>
         </Tabs>
       </div>
