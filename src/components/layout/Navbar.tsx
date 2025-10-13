@@ -25,7 +25,11 @@ export const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-gradient">LEVOAIR</div>
+              <img
+    src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/67bcfb2bea8e603b34b872f6.png"
+    alt="LEVOAIR Logo"
+    className="h-8 w-auto"
+  />
           </Link>
 
           {/* Desktop Navigation */}
