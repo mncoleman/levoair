@@ -8,7 +8,13 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="text-2xl font-bold text-gradient">LEVOAIR</div>
+            <Link to="/" className="inline-block">
+              <img
+                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/67bcfb2bea8e603b34b872f6.png"
+                alt="LEVOAIR Logo"
+                className="h-8 w-auto"
+              />
+            </Link>
             <p className="text-sm text-muted-foreground">
               Professional drone data collection services
             </p>
