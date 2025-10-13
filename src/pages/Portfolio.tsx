@@ -49,7 +49,7 @@ const Portfolio = () => {
       <Navbar />
       
       <main className="pt-16 relative">
-        <div className="absolute top-8 left-0 right-0 z-50 text-center pointer-events-none">
+        <div className="absolute top-8 left-0 right-0 z-10 text-center pointer-events-none">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Our Portfolio</h1>
           <p className="text-lg text-muted-foreground">
             Explore our aerial photography and data collection projects
