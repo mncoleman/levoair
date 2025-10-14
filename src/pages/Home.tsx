@@ -6,8 +6,10 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { CTASection } from "@/components/home/CTASection";
+import usePageTitle from "@/lib/usePageTitle";
 
 const Home = () => {
+  usePageTitle("Home");
   const { data: heroData } = useQuery({
     queryKey: ["hero-home"],
     queryFn: async () => {
@@ -60,7 +62,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+  <Navbar />
       
       <main className="pt-16">
         <HeroSection

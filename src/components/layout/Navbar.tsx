@@ -26,7 +26,7 @@ export const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
               <img
-                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/67bcfb2bea8e603b34b872f6.png"
+                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
                 alt="LEVOAIR Logo"
                 className="h-8 w-auto"
               />

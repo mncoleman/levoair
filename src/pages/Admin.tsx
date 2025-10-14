@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, Trash2, LogOut, Home } from "lucide-react";
 import { z } from "zod";
+import usePageTitle from "@/lib/usePageTitle";
 
 const imageSchema = z.object({
   image_url: z.string().url({ message: "Must be a valid URL" }).refine(
@@ -22,6 +23,7 @@ const imageSchema = z.object({
 });
 
 const Admin = () => {
+  usePageTitle("Gallery Admin");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isAdmin, setIsAdmin] = useState(false);

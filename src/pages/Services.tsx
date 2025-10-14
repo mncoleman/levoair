@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card } from "@/components/ui/card";
 import { Plane, Building2, Map, LucideIcon } from "lucide-react";
+import usePageTitle from "@/lib/usePageTitle";
 
 const iconMap: Record<string, LucideIcon> = {
   Plane,
@@ -12,6 +13,7 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const Services = () => {
+  usePageTitle("Our Services");
   const { data: services = [], isLoading } = useQuery({
     queryKey: ["services-page"],
     queryFn: async () => {
