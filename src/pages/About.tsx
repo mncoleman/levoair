@@ -2,8 +2,10 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card } from "@/components/ui/card";
 import { Shield, Target, Zap } from "lucide-react";
+import usePageTitle from "@/lib/usePageTitle";
 
 const About = () => {
+  usePageTitle("About");
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
