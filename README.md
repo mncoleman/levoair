@@ -71,3 +71,20 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Deployment with GitHub Actions (GitHub Pages)
+
+This repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml` that builds the Vite app and deploys the output in `dist/` to GitHub Pages.
+
+Quick notes to get it working:
+
+- The workflow triggers on pushes to the `main` branch and can be run manually from the Actions tab.
+- By default the workflow uses the `dist` folder produced by `npm run build` and the official Pages deploy actions.
+- Ensure GitHub Pages is enabled in the repository settings. In Settings -> Pages choose the deployment source "GitHub Actions" (the Pages action will manage the branch).
+- To use a custom domain, add a `CNAME` file to `public/` with your domain or set it in the Pages settings UI.
+
+Optional improvements:
+
+- Add caching to the workflow to speed up installs (actions/cache for npm).
+- If you have a large bundle, consider code-splitting or adjusting Vite/Rollup manualChunks to reduce chunk sizes.
+
