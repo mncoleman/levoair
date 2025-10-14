@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
-
 export const Footer = () => {
-  return (
-    <footer className="border-t border-border bg-card">
+  return <footer className="border-t border-border bg-card">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="inline-block">
-              <img
-                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
-                alt="LEVOAIR Logo"
-                className="h-8 w-auto"
-              />
+              <img src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png" alt="LEVOAIR Logo" className="h-8 w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Professional drone data collection services
@@ -61,7 +55,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">(970) 776-0470</li>
+              
               <li className="text-sm text-muted-foreground">info@levoair.com</li>
               <li>
                 <Link to="/auth" className="text-sm text-muted-foreground hover:text-primary transition-colors">
@@ -70,12 +64,7 @@ export const Footer = () => {
               </li>
             </ul>
             <div className="flex space-x-4 mt-4">
-              <a
-                href="https://www.linkedin.com/company/levoair/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
+              <a href="https://www.linkedin.com/company/levoair/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
@@ -94,6 +83,5 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
