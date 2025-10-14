@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,26 @@ const contactSchema = z.object({
 
 const Contact = () => {
   usePageTitle("Contact");
+  useEffect(() => {
+    const src = "https://link.msgsndr.com/js/form_embed.js";
+    // Avoid adding the script multiple times
+    if (!document.querySelector(`script[src="${src}"]`)) {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+
+      return () => {
+        // cleanup: remove script if present
+        try {
+          document.body.removeChild(script);
+        } catch (e) {
+          /* ignore */
+        }
+      };
+    }
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -87,83 +107,29 @@ const Contact = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <Card className="lg:col-span-2 p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    rows={6}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    required
+            {/* Contact Form - embedded LeadConnector iframe */}
+            <Card className="lg:col-span-2 p-0 overflow-hidden">
+              <div className="w-full h-full" style={{ minHeight: 500 }}>
+                <div id="leadconnector-form-wrapper" className="w-full h-full">
+                  <iframe
+                    src="https://api.leadconnectorhq.com/widget/form/jKx3hSzkoiVBg6qHF8S2"
+                    style={{ width: '100%', height: '100%', border: 'none', borderRadius: 3 }}
+                    id="inline-jKx3hSzkoiVBg6qHF8S2"
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="LevoAir Form - Site 2.0"
+                    data-height="1299"
+                    data-layout-iframe-id="inline-jKx3hSzkoiVBg6qHF8S2"
+                    data-form-id="jKx3hSzkoiVBg6qHF8S2"
+                    title="LevoAir Form - Site 2.0"
                   />
                 </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full gradient-primary font-semibold"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
+              </div>
             </Card>
 
             {/* Contact Info */}
