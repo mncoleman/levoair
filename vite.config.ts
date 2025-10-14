@@ -5,9 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Allow overriding the base via VITE_BASE environment variable. Default to
-  // / for development and /levoair/ for production if not provided.
-  base: process.env.VITE_BASE || (mode === "development" ? "/" : "/levoair/"),
+  // Use root-relative paths for production to work with both GitHub Pages and custom domain
+  base: process.env.VITE_BASE || "/",
   server: {
     host: "::",
     port: 8080,
