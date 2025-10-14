@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Cubes from "@/components/Cubes";
+import Squares from "@/components/Squares";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroSectionProps {
   badgeText?: string;
@@ -18,6 +20,8 @@ export const HeroSection = ({
   ctaText = "Book a Flight",
   ctaLink = "/contact",
 }: HeroSectionProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Animated gradient orbs */}
@@ -26,18 +30,27 @@ export const HeroSection = ({
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full gradient-radial blur-orb" />
       </div>
 
-      {/* Cubes overlay (replaces topographic SVG). Placed behind content but interactive. */}
+      {/* Background overlay - Cubes for desktop, Squares for mobile */}
       <div className="absolute inset-0 z-0">
-        {/* Full-bleed interactive cubes background */}
-        <Cubes
-          gridSize={10}
-          maxAngle={15}
-          radius={5}
-          borderStyle={'2px dashed rgba(255,255,255,0.3)'}
-          faceColor={'rgba(14, 13, 12, 1)'}
-          autoAnimate={true}
-          rippleOnClick={false} 
-        />
+        {isMobile ? (
+          <Squares 
+            speed={0.1} 
+            squareSize={50}
+            direction='diagonal'
+            borderColor='rgba(255,255,255,0.3)'
+            hoverFillColor='transparent'
+          />
+        ) : (
+          <Cubes
+            gridSize={10}
+            maxAngle={15}
+            radius={5}
+            borderStyle={'2px dashed rgba(255,255,255,0.3)'}
+            faceColor={'rgba(14, 13, 12, 1)'}
+            autoAnimate={true}
+            rippleOnClick={false} 
+          />
+        )}
       </div>
 
       {/* Content */}
