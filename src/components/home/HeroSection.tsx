@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Cubes from "@/components/Cubes";
 
 interface HeroSectionProps {
   badgeText?: string;
@@ -25,27 +26,18 @@ export const HeroSection = ({
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full gradient-radial blur-orb" />
       </div>
 
-      {/* Topographic pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="topo" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path
-                d="M0 50 Q 25 25, 50 50 T 100 50"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="0.5"
-              />
-              <path
-                d="M0 75 Q 25 50, 50 75 T 100 75"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="0.5"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#topo)" />
-        </svg>
+      {/* Cubes overlay (replaces topographic SVG). Placed behind content but interactive. */}
+      <div className="absolute inset-0 z-0">
+        {/* Full-bleed interactive cubes background */}
+        <Cubes
+          gridSize={10}
+          maxAngle={15}
+          radius={5}
+          borderStyle={'2px dashed rgba(255,255,255,0.3)'}
+          faceColor={'rgba(14, 13, 12, 1)'}
+          autoAnimate={true}
+          rippleOnClick={false} 
+        />
       </div>
 
       {/* Content */}
@@ -85,6 +77,8 @@ export const HeroSection = ({
           </div>
         </div>
       </div>
+
+      {/* removed duplicate cubes block */}
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
