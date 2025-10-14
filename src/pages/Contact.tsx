@@ -11,15 +11,13 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import usePageTitle from "@/lib/usePageTitle";
-
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
   phone: z.string().trim().max(20).optional(),
   company: z.string().trim().max(100).optional(),
-  message: z.string().trim().min(1, "Message is required").max(1000),
+  message: z.string().trim().min(1, "Message is required").max(1000)
 });
-
 const Contact = () => {
   usePageTitle("Contact");
   useEffect(() => {
@@ -31,7 +29,6 @@ const Contact = () => {
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
-
       return () => {
         // cleanup: remove script if present
         try {
@@ -47,34 +44,31 @@ const Contact = () => {
     email: "",
     phone: "",
     company: "",
-    message: "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       const validated = contactSchema.parse(formData);
-
-      const { error } = await supabase.from("contact_submissions").insert({
+      const {
+        error
+      } = await supabase.from("contact_submissions").insert({
         name: validated.name,
         email: validated.email,
         phone: validated.phone || null,
         company: validated.company || null,
-        message: validated.message,
+        message: validated.message
       });
-
       if (error) throw error;
-
       toast.success("Message sent successfully! We'll get back to you soon.");
       setFormData({
         name: "",
         email: "",
         phone: "",
         company: "",
-        message: "",
+        message: ""
       });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
@@ -86,9 +80,7 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-32 pb-24">
@@ -109,47 +101,23 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Contact Form - embedded LeadConnector iframe */}
             <Card className="lg:col-span-2 p-0 overflow-hidden">
-              <div className="w-full h-full" style={{ minHeight: 500 }}>
+              <div className="w-full h-full" style={{
+              minHeight: 500
+            }}>
                 <div id="leadconnector-form-wrapper" className="w-full h-full">
-                  <iframe
-                    src="https://api.leadconnectorhq.com/widget/form/jKx3hSzkoiVBg6qHF8S2"
-                    style={{ width: '100%', height: '100%', border: 'none', borderRadius: 3 }}
-                    id="inline-jKx3hSzkoiVBg6qHF8S2"
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-trigger-value=""
-                    data-activation-type="alwaysActivated"
-                    data-activation-value=""
-                    data-deactivation-type="neverDeactivate"
-                    data-deactivation-value=""
-                    data-form-name="LevoAir Form - Site 2.0"
-                    data-height="1299"
-                    data-layout-iframe-id="inline-jKx3hSzkoiVBg6qHF8S2"
-                    data-form-id="jKx3hSzkoiVBg6qHF8S2"
-                    title="LevoAir Form - Site 2.0"
-                  />
+                  <iframe src="https://api.leadconnectorhq.com/widget/form/jKx3hSzkoiVBg6qHF8S2" style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                  borderRadius: 3
+                }} id="inline-jKx3hSzkoiVBg6qHF8S2" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="LevoAir Form - Site 2.0" data-height="1299" data-layout-iframe-id="inline-jKx3hSzkoiVBg6qHF8S2" data-form-id="jKx3hSzkoiVBg6qHF8S2" title="LevoAir Form - Site 2.0" />
                 </div>
               </div>
             </Card>
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <Card className="p-6 space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <a
-                      href="tel:9707760470"
-                      className="text-muted-foreground hover:text-primary"
-                    >
-                      (970) 776-0470
-                    </a>
-                  </div>
-                </div>
-              </Card>
+              
 
               <Card className="p-6 space-y-4">
                 <div className="flex items-start space-x-4">
@@ -158,10 +126,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <a
-                      href="mailto:info@levoair.com"
-                      className="text-muted-foreground hover:text-primary"
-                    >
+                    <a href="mailto:info@levoair.com" className="text-muted-foreground hover:text-primary">
                       info@levoair.com
                     </a>
                   </div>
@@ -187,8 +152,6 @@ const Contact = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
