@@ -41,7 +41,7 @@ export const HeroSection = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-4 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-6">
           {badgeText && (
             <div className="inline-block">
@@ -67,7 +67,7 @@ export const HeroSection = ({
             </p>
           )}
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 pointer-events-auto">
             <Link to={ctaLink}>
               <Button size="lg" className="gradient-primary font-semibold group">
                 {ctaText}
