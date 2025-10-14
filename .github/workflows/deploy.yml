@@ -3,7 +3,16 @@ name: Build and Deploy
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: 'Target environment (pages | custom)'
+        required: false
+        default: 'pages'
+      custom_domain:
+        description: 'Custom domain to add as CNAME (optional)'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -37,7 +46,17 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          # Set VITE_BASE for Pages or custom domain. 'pages' builds with the repo path,
+          # 'custom' builds for root (/) because a custom domain serves at the root.
+          if [ "${{ github.event.inputs.deploy_target || 'pages' }}" = "custom" ]; then
+            echo "VITE_BASE set to /"
+            export VITE_BASE=/
+          else
+            echo "VITE_BASE set to /levoair/"
+            export VITE_BASE=/levoair/
+          fi
+          npm run build
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v1
@@ -53,6 +72,16 @@ jobs:
       contents: read
 
     steps:
+      - name: Prepare artifact for Pages (SPA fallback + optional CNAME)
+        run: |
+          # Ensure SPA routes are handled by copying index.html to 404.html
+          cp -v dist/index.html dist/404.html || true
+          # If a custom domain was provided via workflow input, write it to dist/CNAME
+          if [ "${{ github.event.inputs.custom_domain }}" != "" ]; then
+            echo "${{ github.event.inputs.custom_domain }}" > dist/CNAME
+            echo "Added CNAME for ${{ github.event.inputs.custom_domain }}"
+          fi
+
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
 "# workflow disabled: moved to pages-deploy.yml"
