@@ -3,8 +3,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import DomeGallery from "@/components/DomeGallery";
+import usePageTitle from "@/lib/usePageTitle";
 
 const Portfolio = () => {
+  usePageTitle("Portfolio");
   const { data: images = [], isLoading: imagesLoading } = useQuery({
     queryKey: ["portfolio-images"],
     queryFn: async () => {

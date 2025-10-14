@@ -10,6 +10,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import usePageTitle from "@/lib/usePageTitle";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -20,6 +21,7 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
+  usePageTitle("Contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",

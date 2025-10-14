@@ -10,7 +10,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img
-                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/67bcfb2bea8e603b34b872f6.png"
+                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
                 alt="LEVOAIR Logo"
                 className="h-8 w-auto"
               />
