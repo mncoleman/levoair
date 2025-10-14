@@ -1,26 +1,22 @@
-name: Build and Deploy
+
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
     inputs:
-      deploy_target:
-        description: 'Target environment (pages | custom)'
+      base:
+        description: 'Vite base to use when building (e.g. / or /levoair/)'
         required: false
-        default: 'pages'
+        default: '/levoair/'
       custom_domain:
-        description: 'Custom domain to add as CNAME (optional)'
+        description: 'Optional custom domain to write into dist/CNAME'
         required: false
         default: ''
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,41 +43,27 @@ jobs:
 
       - name: Build
         run: |
-          # Set VITE_BASE for Pages or custom domain. 'pages' builds with the repo path,
-          # 'custom' builds for root (/) because a custom domain serves at the root.
-          if [ "${{ github.event.inputs.deploy_target || 'pages' }}" = "custom" ]; then
-            echo "VITE_BASE set to /"
-            export VITE_BASE=/
-          else
-            echo "VITE_BASE set to /levoair/"
-            export VITE_BASE=/levoair/
+          BASE_INPUT="${{ github.event.inputs.base }}"
+          if [ -z "$BASE_INPUT" ]; then
+            BASE_INPUT='/levoair/'
           fi
+          echo "Using VITE_BASE=$BASE_INPUT"
+          export VITE_BASE="$BASE_INPUT"
           npm run build
 
-      - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions: 
-      pages: write
-      id-token: write
-      contents: read
-
-    steps:
-      - name: Prepare artifact for Pages (SPA fallback + optional CNAME)
+      - name: Prepare dist (SPA fallback + optional CNAME)
         run: |
-          # Ensure SPA routes are handled by copying index.html to 404.html
           cp -v dist/index.html dist/404.html || true
-          # If a custom domain was provided via workflow input, write it to dist/CNAME
           if [ "${{ github.event.inputs.custom_domain }}" != "" ]; then
             echo "${{ github.event.inputs.custom_domain }}" > dist/CNAME
             echo "Added CNAME for ${{ github.event.inputs.custom_domain }}"
           fi
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
-"# workflow disabled: moved to pages-deploy.yml"
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          user_name: github-actions
+          user_email: github-actions@github.com

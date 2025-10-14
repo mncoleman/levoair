@@ -98,9 +98,9 @@ const Contact = () => {
               Take Your Project To New Heights
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Complete the form below to get a quote, or call us at{" "}
-              <a href="tel:9707760470" className="text-primary hover:underline">
-                (970) 776-0470
+              Complete the form below to get a quote, or email us at{" "}
+              <a href="mailto:info@levoair.com" className="text-primary hover:underline">
+                info@levoair.com
               </a>{" "}
               to speak directly with our drone experts.
             </p>
