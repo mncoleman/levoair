@@ -1,5 +1,5 @@
 import { Shield, Users, FileCheck, MessageSquare, LucideIcon } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 interface Feature {
   id: string;
   title: string;
@@ -33,7 +33,7 @@ export const FeaturesSection = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map(feature => {
           const Icon = iconMap[feature.icon_name] || Shield;
-          return <Card key={feature.id} className="p-6 bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:scale-105 group">
+          return <SpotlightCard key={feature.id} className="p-6 bg-card/50 backdrop-blur-sm border-border transition-all duration-300 hover:scale-105 group" spotlightColor="rgba(255, 215, 0, 0.2)">
                 <div className="flex flex-col items-center text-center space-y-4">
                   <div className="p-4 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <Icon className="h-8 w-8 text-primary" />
@@ -43,7 +43,7 @@ export const FeaturesSection = ({
                       {feature.description}
                     </p>}
                 </div>
-              </Card>;
+              </SpotlightCard>;
         })}
         </div>
 
