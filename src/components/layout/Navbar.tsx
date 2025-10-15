@@ -65,7 +65,7 @@ export const Navbar = () => {
         shouldAnimate ? 'h-12' : 'h-16'
       }`}>
         {/* Background and Border */}
-        <div className={`absolute inset-0 bg-background/90 backdrop-blur-lg border border-border shadow-lg rounded-lg transition-opacity duration-300 ease-in-out ${
+        <div className={`absolute inset-0 bg-background/50 backdrop-blur-lg border border-border shadow-lg rounded-lg transition-opacity duration-300 ease-in-out ${
           shouldAnimate ? 'opacity-0' : 'opacity-100'
         }`} />
 
