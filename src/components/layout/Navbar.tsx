@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
-import { StaggeredMenu } from "./StaggeredMenu";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,16 +102,30 @@ export const Navbar = () => {
             </div>
 
             {/* Mobile Menu */}
-            <div className="md:hidden">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-              <StaggeredMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
-            </div>
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px]">
+                <div className="flex flex-col space-y-4 mt-8">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <Button asChild className="gradient-primary font-semibold mt-4">
+                    <Link to="/contact" onClick={() => setIsOpen(false)}>Book a Flight</Link>
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
