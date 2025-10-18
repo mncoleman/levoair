@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import Particles from "@/components/layout/Particles";
 import { Card } from "@/components/ui/card";
 import { Shield, Target, Zap } from "lucide-react";
 import usePageTitle from "@/lib/usePageTitle";
@@ -7,10 +8,23 @@ import usePageTitle from "@/lib/usePageTitle";
 const About = () => {
   usePageTitle("About");
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      
-      <main className="pt-32 pb-24">
+    <>
+      {/* Particles Background - Full Viewport */}
+      <Particles
+        particleColors={['#ffffff', '#ffffff']}
+        particleCount={200}
+        particleSpread={10}
+        speed={0.1}
+        particleBaseSize={100}
+        moveParticlesOnHover={true}
+        alphaParticles={false}
+        disableRotation={false}
+      />
+
+      <div className="min-h-screen relative">
+        <Navbar />
+
+        <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4">
           {/* Hero */}
           <div className="text-center mb-16">
@@ -89,8 +103,11 @@ const About = () => {
         </div>
       </main>
 
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
+    </>
   );
 };
 
