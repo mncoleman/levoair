@@ -3,7 +3,7 @@ import { Linkedin } from "lucide-react";
 export const Footer = () => {
   return <footer className="border-t border-border bg-card">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="inline-block">
@@ -19,18 +19,8 @@ export const Footer = () => {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
                 <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Portfolio
                 </Link>
               </li>
               <li>
@@ -38,16 +28,6 @@ export const Footer = () => {
                   Contact
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">Custom Aerial Solutions</li>
-              <li className="text-sm text-muted-foreground">Construction Mapping</li>
-              <li className="text-sm text-muted-foreground">Land Assessment</li>
             </ul>
           </div>
 

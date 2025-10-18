@@ -3,7 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { CTASection } from "@/components/home/CTASection";
 import usePageTitle from "@/lib/usePageTitle";
@@ -26,20 +25,6 @@ const Home = () => {
         .select("*")
         .eq("page_id", page.id)
         .single();
-
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  const { data: services = [] } = useQuery({
-    queryKey: ["services"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("services")
-        .select("*")
-        .eq("is_published", true)
-        .order("display_order", { ascending: true });
 
       if (error) throw error;
       return data;
@@ -74,8 +59,6 @@ const Home = () => {
         />
 
         <FeaturesSection features={features} />
-        
-        <ServicesSection services={services} />
         
         <CTASection />
       </main>
