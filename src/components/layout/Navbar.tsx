@@ -51,9 +51,7 @@ export const Navbar = () => {
 
   const navLinks = [
     { href: "/", label: "HOME" },
-    { href: "/services", label: "SERVICES" },
     { href: "/about", label: "ABOUT US" },
-    { href: "/portfolio", label: "PORTFOLIO" },
     { href: "/contact", label: "CONTACT" },
   ];
 
