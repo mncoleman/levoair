@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import usePageTitle from "@/lib/usePageTitle";
+import { trackContactClick, trackEvent } from "@/lib/analytics";
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
@@ -91,7 +92,11 @@ const Contact = () => {
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Complete the form below to get a quote, or email us at{" "}
-              <a href="mailto:info@levoair.com" className="text-primary hover:underline">
+              <a
+                href="mailto:info@levoair.com"
+                className="text-primary hover:underline"
+                onClick={() => trackContactClick('email', 'info@levoair.com')}
+              >
                 info@levoair.com
               </a>{" "}
               to speak directly with our drone experts.
@@ -126,7 +131,11 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <a href="mailto:info@levoair.com" className="text-muted-foreground hover:text-primary">
+                    <a
+                      href="mailto:info@levoair.com"
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() => trackContactClick('email', 'info@levoair.com')}
+                    >
                       info@levoair.com
                     </a>
                   </div>
