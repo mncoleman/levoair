@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Cubes from "@/components/Cubes";
 import Squares from "@/components/Squares";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { trackCTAClick } from "@/lib/analytics";
 
 interface HeroSectionProps {
   badgeText?: string;
@@ -81,7 +82,7 @@ export const HeroSection = ({
           )}
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 pointer-events-auto">
-            <Link to={ctaLink}>
+            <Link to={ctaLink} onClick={() => trackCTAClick(ctaText, 'hero_section')}>
               <Button size="lg" className="gradient-primary font-semibold group">
                 {ctaText}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
