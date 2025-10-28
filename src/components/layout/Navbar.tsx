@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { StaggeredMenu } from "@/components/ui/StaggeredMenu";
+import type { StaggeredMenuItem } from "@/components/ui/StaggeredMenu";
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -53,6 +48,12 @@ export const Navbar = () => {
     { href: "/", label: "HOME" },
     { href: "/about", label: "ABOUT US" },
     { href: "/contact", label: "CONTACT" },
+  ];
+
+  const staggeredMenuItems: StaggeredMenuItem[] = [
+    { label: "Home", ariaLabel: "Go to home page", link: "/" },
+    { label: "About", ariaLabel: "Learn about us", link: "/about" },
+    { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
   ];
 
   const shouldAnimate = isScrolled && !isMobile;
@@ -100,34 +101,25 @@ export const Navbar = () => {
                 <Link to="/contact">Book a Flight</Link>
               </Button>
             </div>
-
-            {/* Mobile Menu */}
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px]">
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                  <Button asChild className="gradient-primary font-semibold mt-4">
-                    <Link to="/contact" onClick={() => setIsOpen(false)}>Book a Flight</Link>
-                  </Button>
-                </div>
-              </SheetContent>
-            </Sheet>
           </div>
         </div>
+      </div>
+
+      {/* Mobile Staggered Menu - Only visible on mobile */}
+      <div className="md:hidden fixed top-0 right-0 w-screen h-screen pointer-events-none z-[60]">
+        <StaggeredMenu
+          position="right"
+          items={staggeredMenuItems}
+          displaySocials={false}
+          displayItemNumbering={true}
+          menuButtonColor="hsl(40, 10%, 96%)"
+          openMenuButtonColor="hsl(40, 10%, 96%)"
+          changeMenuColorOnOpen={false}
+          colors={['hsl(0, 0%, 8%)', 'hsl(0, 0%, 12%)']}
+          logoUrl=""
+          accentColor="hsl(38, 90%, 50%)"
+          isFixed={false}
+        />
       </div>
     </header>
   );
