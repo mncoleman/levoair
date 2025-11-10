@@ -28,6 +28,11 @@ export const Footer = () => {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link to="/brand-kit" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Brand Kit
+                </Link>
+              </li>
             </ul>
           </div>
 
