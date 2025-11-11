@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -103,9 +103,28 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-8">
+            {/* Contact Email Info */}
+            <Card className="p-6">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-lg bg-primary/10">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Email</h3>
+                  <a
+                    href="mailto:info@levoair.com"
+                    className="text-muted-foreground hover:text-primary"
+                    onClick={() => trackContactClick('email', 'info@levoair.com')}
+                  >
+                    info@levoair.com
+                  </a>
+                </div>
+              </div>
+            </Card>
+
             {/* Contact Form - embedded LeadConnector iframe */}
-            <Card className="lg:col-span-2 p-0 overflow-hidden">
+            <Card className="p-0 overflow-hidden">
               <div className="w-full h-full" style={{
               minHeight: 500
             }}>
@@ -119,43 +138,6 @@ const Contact = () => {
                 </div>
               </div>
             </Card>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              
-
-              <Card className="p-6 space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
-                    <a
-                      href="mailto:info@levoair.com"
-                      className="text-muted-foreground hover:text-primary"
-                      onClick={() => trackContactClick('email', 'info@levoair.com')}
-                    >
-                      info@levoair.com
-                    </a>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-6 space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Service Area</h3>
-                    <p className="text-muted-foreground">
-                      Nationwide coverage across the United States
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
           </div>
         </div>
       </main>

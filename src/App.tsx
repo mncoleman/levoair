@@ -18,12 +18,17 @@ import { trackPageView } from "@/lib/analytics";
 const queryClient = new QueryClient();
 
 /**
- * Analytics wrapper component that tracks page views on route changes
+ * Analytics and scroll restoration wrapper component
+ * - Tracks page views on route changes
+ * - Scrolls to top on navigation
  */
 const AnalyticsTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Scroll to top of page on route change
+    window.scrollTo(0, 0);
+
     // Track page view whenever the route changes
     trackPageView(location.pathname, document.title);
   }, [location]);
