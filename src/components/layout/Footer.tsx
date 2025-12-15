@@ -33,6 +33,11 @@ export const Footer = () => {
                   Brand Kit
                 </Link>
               </li>
+              <li>
+                <a href="https://levoair.instatus.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  System Status
+                </a>
+              </li>
             </ul>
           </div>
 
