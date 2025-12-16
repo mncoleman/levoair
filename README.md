@@ -5,12 +5,10 @@
 **Professional Drone Data Collection Services**
 
 [![System Status](https://img.shields.io/badge/status-operational-brightgreen?style=for-the-badge&logo=statuspage)](https://levoair.instatus.com/)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4.20-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
 
-[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.17-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![shadcn/ui](https://img.shields.io/badge/shadcn/ui-Components-000000?style=flat-square&logo=shadcnui&logoColor=white)](https://ui.shadcn.com)
 [![GSAP](https://img.shields.io/badge/GSAP-Animations-88CE02?style=flat-square&logo=greensock&logoColor=white)](https://gsap.com)
@@ -31,7 +29,6 @@ LevoAir is a modern, high-performance web application built with cutting-edge te
 - **Scroll-Based Animations** - Intelligent navbar with GSAP-powered transitions
 - **Real-Time Analytics** - Google Analytics 4 with Web Vitals tracking
 - **Mobile-First Design** - Optimized for all screen sizes with responsive breakpoint at 768px
-- **Dynamic Content** - Services and features managed via Supabase backend
 
 ---
 
@@ -41,11 +38,6 @@ LevoAir is a modern, high-performance web application built with cutting-edge te
 ```
 React 18.3.1  •  TypeScript 5.8.3  •  Vite 5.4.20  •  React Router 6.30.1
 ```
-
-### Backend & Data
-- **Supabase** - Authentication, PostgreSQL database, real-time subscriptions
-- **React Query** (TanStack Query 5.83.0) - Server state management
-- **Zod** - Schema validation
 
 ### UI & Styling
 - **Tailwind CSS** 3.4.17 - Utility-first styling with HSL color system
@@ -75,7 +67,6 @@ React 18.3.1  •  TypeScript 5.8.3  •  Vite 5.4.20  •  React Router 6.30.1
 
 - **Node.js** 16+ and **npm** 9+
 - **Git** for version control
-- **Supabase Account** (for backend services)
 
 ### Installation
 
@@ -90,20 +81,12 @@ React 18.3.1  •  TypeScript 5.8.3  •  Vite 5.4.20  •  React Router 6.30.1
    npm install
    ```
 
-3. **Set up environment variables**
-
-   Create a `.env` file in the project root:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
-   ```
-
-4. **Start the development server**
+3. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Open in browser**
+4. **Open in browser**
 
    Navigate to [http://localhost:8080](http://localhost:8080)
 
@@ -145,8 +128,7 @@ levoair/
 │   │   ├── usePageTitle.ts  # SEO helper
 │   │   └── utils.ts
 │   ├── hooks/               # Custom React hooks
-│   ├── integrations/
-│   │   └── supabase/        # Supabase client & types
+│   ├── integrations/        # External service integrations
 │   ├── App.tsx              # Route definitions
 │   ├── main.tsx             # App entry point
 │   └── index.css            # Global styles
@@ -184,7 +166,6 @@ levoair/
 
 #### Contact Integration
 - LeadConnector embedded form
-- Supabase backup submission storage
 - Form validation with Zod
 - Success/error toast notifications
 
@@ -290,21 +271,9 @@ npm run build
 
 Output: `dist/` directory with optimized assets
 
-### Environment Variables (Production)
-
-Set these in your hosting platform:
-
-```env
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
-```
-
 ### Deployment Checklist
 
-- [ ] Set environment variables
 - [ ] Configure SPA redirects (all routes → `index.html`)
-- [ ] Verify Supabase connection
-- [ ] Test authentication flow
 - [ ] Confirm analytics tracking
 - [ ] Check Core Web Vitals
 
@@ -319,22 +288,11 @@ npx gh-pages -d dist
 
 ## External Integrations
 
-### Supabase Backend
-
-**Database Tables:**
-- `pages` - Page content management
-- `hero_sections` - Home hero data
-- `features` - Feature cards
-- `services` - Service offerings
-- `contact_submissions` - Form submissions
-- `user_roles` - Admin access control
-
 ### LeadConnector CRM
 
 Contact form integration:
 - Form ID: `jKx3hSzkoiVBg6qHF8S2`
 - Embedded iframe on Contact page
-- Fallback to Supabase for submissions
 
 ### Google Cloud Storage
 
@@ -387,40 +345,6 @@ const Component = () => {
 };
 ```
 
-### Data Fetching Pattern
-
-```typescript
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-
-// Fetch data
-const { data, isLoading, error } = useQuery({
-  queryKey: ["services"],
-  queryFn: async () => {
-    const { data, error } = await supabase
-      .from("services")
-      .select("*")
-      .order("display_order");
-    if (error) throw error;
-    return data;
-  },
-});
-
-// Mutate data
-const queryClient = useQueryClient();
-const mutation = useMutation({
-  mutationFn: async (newService) => {
-    const { error } = await supabase
-      .from("services")
-      .insert(newService);
-    if (error) throw error;
-  },
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ["services"] });
-  },
-});
-```
-
 ---
 
 ## Browser Support
@@ -455,12 +379,6 @@ const mutation = useMutation({
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## Resources
 
 - **Documentation**: [CLAUDE.md](CLAUDE.md) - Comprehensive development guide
@@ -476,6 +394,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [![Status](https://img.shields.io/badge/status-operational-brightgreen?style=flat-square)](https://levoair.instatus.com/)
 [![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react)](https://react.dev)
-[![Powered by Supabase](https://img.shields.io/badge/Powered%20by-Supabase-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com)
 
 </div>
