@@ -36,16 +36,13 @@ src/
 │   ├── home/            # Home page sections (HeroSection, FeaturesSection, CTASection)
 │   ├── Cubes.tsx        # 3D cube grid animation (desktop hero)
 │   ├── Squares.tsx      # Diagonal squares animation (mobile hero)
-│   ├── DomeGallery.tsx  # Interactive 3D portfolio viewer
 │   └── SpotlightCard.tsx # Card with spotlight hover effect
-├── pages/               # Route pages (8 total)
+├── pages/               # Route pages
 │   ├── Home.tsx         # Landing page
 │   ├── Services.tsx     # Services showcase
 │   ├── About.tsx        # Company info with particle effects
-│   ├── Portfolio.tsx    # 3D dome gallery
 │   ├── Contact.tsx      # Contact form with LeadConnector
 │   ├── Auth.tsx         # Admin authentication
-│   ├── Admin.tsx        # Gallery management dashboard
 │   ├── BrandKit.tsx     # Brand design system
 │   └── NotFound.tsx     # 404 page
 ├── lib/
@@ -68,10 +65,8 @@ src/
 | `/` | Home | Landing page with animated hero, features, CTA |
 | `/services` | Services | Dynamic service showcase from Supabase |
 | `/about` | About | Mission, values, particle effects |
-| `/portfolio` | Portfolio | Interactive 3D dome gallery |
 | `/contact` | Contact | LeadConnector iframe + Supabase backup |
 | `/auth` | Auth | Admin login/signup |
-| `/admin` | Admin | Gallery management (drag-to-reorder, settings) |
 | `/brand-kit` | BrandKit | Color system, typography, design assets |
 | `*` | NotFound | 404 catch-all |
 
@@ -95,7 +90,7 @@ import { trackEvent } from "@/lib/analytics";
 - **Layout components**: Shared across all pages (Navbar, Footer, Particles)
 - **Page-specific components**: Organized in subdirectories (e.g., `components/home/HeroSection.tsx`)
 - **UI components**: Auto-generated shadcn/ui primitives in `components/ui/`
-- **Shared utilities**: Cubes, Squares, DomeGallery, SpotlightCard in `components/`
+- **Shared utilities**: Cubes, Squares, SpotlightCard in `components/`
 
 #### Data Fetching Pattern
 Pages use React Query with Supabase for all data operations:
@@ -167,8 +162,6 @@ The Navbar (`src/components/layout/Navbar.tsx`) implements scroll-based animatio
   - `hero_sections` - Home hero data
   - `features` - Home features grid
   - `services` - Services page content
-  - `gallery_images` - Portfolio images (URL, alt, order, grayscale)
-  - `gallery_settings` - 3D dome configuration
   - `contact_submissions` - Form submissions
   - `user_roles` - Admin access control
 
@@ -177,27 +170,12 @@ The Navbar (`src/components/layout/Navbar.tsx`) implements scroll-based animatio
 - Configured in `src/lib/analytics.ts`
 - **Event tracking**: Custom events throughout app
   - Navigation clicks, CTA clicks, form submissions
-  - Gallery interactions, service views
-  - Social media clicks, file downloads
-  - Scroll depth tracking
+  - Service views, social media clicks
+  - File downloads, scroll depth tracking
 - **Web Vitals**: Core Web Vitals monitoring in `src/lib/webVitals.ts`
   - LCP, FCP, CLS, TTFB, INP
   - Automatically reported to GA4
 - **Production only**: Analytics disabled in development
-
-#### Admin Features
-Located in `src/pages/Admin.tsx`:
-- **Authentication**: Role-based access via Supabase auth
-- **Gallery Management**:
-  - Add/edit/delete images with URL validation
-  - Drag-to-reorder with @dnd-kit (display_order field)
-  - Alt text and grayscale toggle
-- **Gallery Settings**:
-  - Fit parameter (object-fit)
-  - Min/max radius for dome
-  - Segments count
-  - Drag dampening
-  - Vertical rotation limits
 
 ## Adding shadcn/ui Components
 
@@ -280,17 +258,6 @@ Features:
 - Mobile hero background
 - Pure CSS animations
 - Lightweight alternative to 3D cubes
-
-### DomeGallery Component
-Located in `src/components/DomeGallery.tsx`, interactive 3D portfolio viewer.
-
-Features:
-- Images arranged in hemisphere dome
-- Gesture-based navigation (@use-gesture)
-- Enlarge/zoom on click
-- Settings: fit, radius, segments, dampening, rotation limits
-- Grayscale mode support
-- Escape key to close zoom
 
 ### GSAP Animations
 GSAP is available globally for:

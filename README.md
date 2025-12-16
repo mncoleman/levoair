@@ -23,16 +23,15 @@
 
 ## Overview
 
-LevoAir is a modern, high-performance web application built with cutting-edge technologies to showcase professional drone services. Featuring an immersive 3D portfolio gallery, WebGL particle effects, and smooth GSAP animations, the site delivers a premium user experience across all devices.
+LevoAir is a modern, high-performance web application built with cutting-edge technologies to showcase professional drone services. Featuring WebGL particle effects, smooth GSAP animations, and an intelligent navigation system, the site delivers a premium user experience across all devices.
 
 ### Key Highlights
 
-- **Interactive 3D Portfolio** - Gesture-controlled dome gallery with 100+ images
 - **WebGL Particle Effects** - Immersive backgrounds using OGL rendering
 - **Scroll-Based Animations** - Intelligent navbar with GSAP-powered transitions
 - **Real-Time Analytics** - Google Analytics 4 with Web Vitals tracking
-- **Admin Dashboard** - Full gallery management with drag-to-reorder
 - **Mobile-First Design** - Optimized for all screen sizes with responsive breakpoint at 768px
+- **Dynamic Content** - Services and features managed via Supabase backend
 
 ---
 
@@ -129,18 +128,15 @@ levoair/
 │   │   ├── ui/              # shadcn/ui components (50+)
 │   │   ├── layout/          # Navbar, Footer, Particles
 │   │   ├── home/            # Home page sections
-│   │   ├── Cubes.tsx        # 3D cube grid (desktop hero)
+│   │   ├── Cubes.tsx        # Cube grid animation (desktop hero)
 │   │   ├── Squares.tsx      # Diagonal squares (mobile hero)
-│   │   ├── DomeGallery.tsx  # Interactive 3D gallery
 │   │   └── SpotlightCard.tsx
-│   ├── pages/               # Route components (8 pages)
+│   ├── pages/               # Route components
 │   │   ├── Home.tsx
 │   │   ├── Services.tsx
 │   │   ├── About.tsx
-│   │   ├── Portfolio.tsx
 │   │   ├── Contact.tsx
 │   │   ├── Auth.tsx
-│   │   ├── Admin.tsx
 │   │   ├── BrandKit.tsx
 │   │   └── NotFound.tsx
 │   ├── lib/
@@ -168,13 +164,6 @@ levoair/
 
 ### Public Features
 
-#### Interactive 3D Portfolio
-- Gesture-based navigation with touch and mouse support
-- Images arranged in a hemisphere dome
-- Click to enlarge with smooth transitions
-- Configurable radius, segments, and rotation limits
-- Optional grayscale mode
-
 #### WebGL Particle Effects
 - 50+ particles with configurable colors
 - Mouse hover interactions
@@ -182,7 +171,7 @@ levoair/
 - Used on About page for immersive backgrounds
 
 #### Animated Hero Section
-- **Desktop**: 3D rotating cube grid with GSAP
+- **Desktop**: Rotating cube grid with GSAP
 - **Mobile**: Diagonal moving squares (lightweight)
 - Gradient blur orbs
 - Responsive animations at 768px breakpoint
@@ -199,28 +188,6 @@ levoair/
 - Form validation with Zod
 - Success/error toast notifications
 
-### Admin Features
-
-#### Authentication
-- Supabase email/password auth
-- Role-based access control
-- Persistent sessions with localStorage
-- Secure admin-only routes
-
-#### Gallery Management
-- Add/edit/delete portfolio images
-- Drag-to-reorder with visual feedback
-- URL validation for images
-- Alt text for accessibility
-- Grayscale toggle per image
-
-#### Gallery Settings
-- Fit parameter (cover, contain, etc.)
-- Min/max radius adjustment
-- Segments count (dome resolution)
-- Drag dampening for smoothness
-- Vertical rotation limits
-
 ---
 
 ## Analytics & Performance
@@ -230,7 +197,7 @@ levoair/
 Custom event tracking throughout the application:
 
 - **Navigation**: Page views, link clicks, route changes
-- **Engagement**: CTA clicks, service views, gallery interactions
+- **Engagement**: CTA clicks, service views
 - **Conversions**: Form submissions, contact method clicks
 - **Social**: LinkedIn, email, phone clicks
 - **Downloads**: File download tracking
@@ -359,8 +326,6 @@ npx gh-pages -d dist
 - `hero_sections` - Home hero data
 - `features` - Feature cards
 - `services` - Service offerings
-- `gallery_images` - Portfolio images (URL, alt, order, grayscale)
-- `gallery_settings` - 3D dome configuration
 - `contact_submissions` - Form submissions
 - `user_roles` - Admin access control
 
