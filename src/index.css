@@ -70,6 +70,23 @@ All colors MUST be HSL.
     padding: 0;
     overflow-x: hidden;
   }
+
+  /* Only hide cursor on devices that support hover (desktop/mouse) */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none;
+    }
+
+    a,
+    button,
+    [role="button"],
+    input,
+    label,
+    select,
+    textarea {
+      cursor: none;
+    }
+  }
 }
 
 /* Prevent scrolling when dome gallery is enlarged */
@@ -85,7 +102,7 @@ body.dg-scroll-lock {
   .gradient-primary {
     background: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-via)), hsl(var(--gradient-to)));
   }
-  
+
   .gradient-radial {
     background: radial-gradient(circle at center, hsl(var(--gradient-from) / 0.2), transparent 70%);
   }

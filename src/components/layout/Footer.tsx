@@ -111,7 +111,7 @@ export const Footer = () => {
         <img
           src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
           alt="LEVOAIR"
-          className="w-full h-auto max-w-[1400px] mx-auto filter grayscale opacity-20 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
+          className="w-full h-auto max-w-[1400px] mx-auto filter grayscale opacity-20 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
         />
       </div>
     </div>
