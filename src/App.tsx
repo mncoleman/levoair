@@ -16,6 +16,8 @@ import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import { trackPageView } from "@/lib/analytics";
+import CustomCursor from "@/components/ui/CustomCursor";
+import ClickBurst from "@/components/ui/ClickBurst";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +45,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <CustomCursor />
+      <ClickBurst />
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
         <Routes>
