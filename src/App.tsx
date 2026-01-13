@@ -13,6 +13,8 @@ import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import BrandKit from "./pages/BrandKit";
 import NotFound from "./pages/NotFound";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import { trackPageView } from "@/lib/analytics";
 
 const queryClient = new QueryClient();
@@ -41,7 +43,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-  <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -52,6 +54,8 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/brand-kit" element={<BrandKit />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

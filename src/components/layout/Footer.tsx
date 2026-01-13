@@ -103,9 +103,9 @@ export const Footer = () => {
     <div className="w-full overflow-hidden pt-12 pb-8 px-4 md:px-8">
       <div
         ref={logoRef}
-        className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform ${isVisible
-          ? "opacity-100 translate-y-0 skew-y-0 scale-100"
-          : "opacity-0 translate-y-20 skew-y-6 scale-95"
+        className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-12"
           }`}
       >
         <img
