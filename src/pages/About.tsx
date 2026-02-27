@@ -1,15 +1,37 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Particles from "@/components/layout/Particles";
-import { Card } from "@/components/ui/card";
 import { Shield, Target, Zap } from "lucide-react";
 import usePageTitle from "@/lib/usePageTitle";
+import GlassCube from "@/components/ui/GlassCube";
+import ScrollFloat from "@/components/ScrollFloat";
+import { BlurText } from "@/components/ui/BlurText";
+
+const values = [
+  {
+    icon: Shield,
+    title: "Safety First",
+    description:
+      "Stringent safety measures and FAA-certified pilots ensure every mission is executed flawlessly",
+  },
+  {
+    icon: Target,
+    title: "Precision Data",
+    description:
+      "Aviation-grade equipment and experienced pilots deliver data that meets strict engineering standards",
+  },
+  {
+    icon: Zap,
+    title: "Full Support",
+    description:
+      "Comprehensive systems, abundant resources, and constant communication throughout your project",
+  },
+];
 
 const About = () => {
   usePageTitle("About");
   return (
     <>
-      {/* Particles Background - Full Viewport */}
       <Particles
         particleColors={['#ffffff', '#ffffff']}
         particleCount={200}
@@ -25,88 +47,102 @@ const About = () => {
         <Navbar />
 
         <main className="pt-32 pb-24 relative z-10">
-        <div className="container mx-auto px-4">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">About LevoAir</h1>
-            <p className="text-2xl text-gradient max-w-3xl mx-auto">
-              Pioneering Reality Data-Capturing Technology
-            </p>
-          </div>
+          <div className="container mx-auto px-4 max-w-5xl">
 
-          {/* Mission Statement */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <Card className="p-12 bg-card/50 backdrop-blur-sm">
-              <p className="text-xl text-center leading-relaxed">
-                We stand for unbound progress – unlocking the full potential of drone 
-                technology and executing complex challenges across America. We live at 
-                the forefront of technology and industry – piloting towards a limitless future.
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-4 block">
+                OUR STORY
+              </span>
+              <ScrollFloat
+                containerClassName="mb-4"
+                textClassName="text-5xl md:text-6xl font-bold"
+              >
+                About LevoAir
+              </ScrollFloat>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <BlurText
+                  text="Pioneering Reality Data-Capturing Technology"
+                  delay={400}
+                  duration={1000}
+                  className="text-gradient"
+                />
               </p>
-            </Card>
-          </div>
+            </div>
 
-          {/* Why LevoAir */}
-          <div className="mb-20">
-            <h2 className="text-4xl font-bold text-center mb-12">Why LevoAir</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <Card className="p-8 text-center space-y-4 bg-card hover:shadow-xl transition-shadow">
-                <div className="flex justify-center">
-                  <div className="p-4 rounded-full bg-primary/10">
-                    <Shield className="h-10 w-10 text-primary" />
-                  </div>
+            {/* Mission Statement */}
+            <div className="max-w-3xl mx-auto mb-20">
+              <GlassCube className="w-full" wobbleAngle={0.5}>
+                <div className="p-12">
+                  <p className="text-lg text-center leading-relaxed text-foreground/90">
+                    We stand for unbound progress – unlocking the full potential of drone
+                    technology and executing complex challenges across America. We live at
+                    the forefront of technology and industry – piloting towards a limitless future.
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold">Safety First</h3>
-                <p className="text-muted-foreground">
-                  Stringent safety measures and FAA-certified pilots ensure every mission 
-                  is executed flawlessly
-                </p>
-              </Card>
+              </GlassCube>
+            </div>
 
-              <Card className="p-8 text-center space-y-4 bg-card hover:shadow-xl transition-shadow">
-                <div className="flex justify-center">
-                  <div className="p-4 rounded-full bg-primary/10">
-                    <Target className="h-10 w-10 text-primary" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold">Precision Data</h3>
-                <p className="text-muted-foreground">
-                  Aviation-grade equipment and experienced pilots deliver data that meets 
-                  strict engineering standards
-                </p>
-              </Card>
+            {/* Why LevoAir */}
+            <div className="mb-20">
+              <div className="text-center mb-12">
+                <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
+                  OUR VALUES
+                </span>
+                <ScrollFloat
+                  containerClassName="mb-0"
+                  textClassName="text-4xl font-bold"
+                >
+                  Why LevoAir
+                </ScrollFloat>
+              </div>
 
-              <Card className="p-8 text-center space-y-4 bg-card hover:shadow-xl transition-shadow">
-                <div className="flex justify-center">
-                  <div className="p-4 rounded-full bg-primary/10">
-                    <Zap className="h-10 w-10 text-primary" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold">Full Support</h3>
-                <p className="text-muted-foreground">
-                  Comprehensive systems, abundant resources, and constant communication 
-                  throughout your project
-                </p>
-              </Card>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {values.map((value, i) => (
+                  <GlassCube
+                    key={value.title}
+                    className="min-h-[240px]"
+                    wobbleAngle={(i / 3) * Math.PI * 2}
+                  >
+                    <div className="p-8 flex flex-col items-center text-center space-y-4 min-h-[240px] justify-center">
+                      <div className="p-4 rounded-full bg-primary/10">
+                        <value.icon className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-bold">{value.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {value.description}
+                      </p>
+                    </div>
+                  </GlassCube>
+                ))}
+              </div>
+            </div>
+
+            {/* Experience */}
+            <div className="max-w-3xl mx-auto text-center">
+              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
+                EXPERTISE
+              </span>
+              <ScrollFloat
+                containerClassName="mb-6"
+                textClassName="text-4xl font-bold"
+              >
+                Our Experience
+              </ScrollFloat>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Our comprehensive systems, abundant resources, experienced pilots, and stringent
+                safety measures fully equip us to execute any mission successfully. We make
+                super-complex projects appear simple while delivering the highest quality data
+                for your critical decisions.
+              </p>
             </div>
           </div>
+        </main>
 
-          {/* Experience */}
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Our Experience</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Our comprehensive systems, abundant resources, experienced pilots, and stringent 
-              safety measures fully equip us to execute any mission successfully. We make 
-              super-complex projects appear simple while delivering the highest quality data 
-              for your critical decisions.
-            </p>
-          </div>
+        <div className="relative z-10">
+          <Footer />
         </div>
-      </main>
-
-      <div className="relative z-10">
-        <Footer />
       </div>
-    </div>
     </>
   );
 };

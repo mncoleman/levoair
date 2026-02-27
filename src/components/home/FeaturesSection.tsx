@@ -1,5 +1,7 @@
 import { Shield, Users, FileCheck, MessageSquare, LucideIcon } from "lucide-react";
-import SpotlightCard from "@/components/ui/SpotlightCard";
+import GlassCube from "@/components/ui/GlassCube";
+import ScrollFloat from "@/components/ScrollFloat";
+
 interface Feature {
   id: string;
   title: string;
@@ -9,46 +11,61 @@ interface Feature {
 interface FeaturesSectionProps {
   features: Feature[];
 }
+
 const iconMap: Record<string, LucideIcon> = {
   Shield,
   Users,
   FileCheck,
   MessageSquare
 };
-export const FeaturesSection = ({
-  features
-}: FeaturesSectionProps) => {
-  return <section className="py-24 relative">
-      <div className="container mx-auto px-4">
+
+export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
+  return (
+    <section className="py-24 relative">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
+            WHY LEVOAIR
+          </span>
+          <ScrollFloat
+            containerClassName="mb-4"
+            textClassName="text-4xl md:text-5xl font-bold"
+          >
             THE REAL DIFFERENCE
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Your projects need accurate data—collected safely and professionally. 
+          </ScrollFloat>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Your projects need accurate data—collected safely and professionally.
             With years in aviation, we know what it takes to deliver precision.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map(feature => {
-          const Icon = iconMap[feature.icon_name] || Shield;
-          return <SpotlightCard key={feature.id} className="p-6 bg-card/50 backdrop-blur-sm border-border transition-all duration-300 hover:scale-105 group" spotlightColor="rgba(255, 215, 0, 0.2)">
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="p-4 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Icon className="h-8 w-8 text-primary" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {features.map((feature, i) => {
+            const Icon = iconMap[feature.icon_name] || Shield;
+            return (
+              <GlassCube
+                key={feature.id}
+                className="min-h-[220px]"
+                wobbleAngle={(i / Math.max(features.length, 1)) * Math.PI * 2}
+              >
+                <div className="p-6 flex flex-col h-full justify-between min-h-[220px] group">
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-xl bg-primary/10 w-fit group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-base">{feature.title}</h3>
+                    {feature.description && (
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
+                    )}
                   </div>
-                  <h3 className="font-semibold text-lg">{feature.title}</h3>
-                  {feature.description && <p className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>}
                 </div>
-              </SpotlightCard>;
-        })}
+              </GlassCube>
+            );
+          })}
         </div>
-
-        {/* Industry Standards */}
-        
       </div>
-    </section>;
+    </section>
+  );
 };
