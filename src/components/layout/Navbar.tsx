@@ -27,7 +27,6 @@ export const Navbar = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // Hide if scrolling down past the threshold, show if scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -95,7 +94,6 @@ export const Navbar = () => {
 
           {/* CTA and Mobile Menu Container */}
           <div className="flex items-center space-x-2 z-10">
-            {/* CTA Button */}
             <div className="hidden md:block">
               <Button asChild className="gradient-primary font-semibold text-sm whitespace-nowrap">
                 <Link to="/contact">Book a Flight</Link>

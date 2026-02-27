@@ -5,6 +5,9 @@ import Cubes from "@/components/Cubes";
 import Squares from "@/components/Squares";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackCTAClick } from "@/lib/analytics";
+import { BlurText } from "@/components/ui/BlurText";
+import { FallInText } from "@/components/ui/FallInText";
+import { TextType } from "@/components/ui/TextType";
 
 interface HeroSectionProps {
   badgeText?: string;
@@ -23,19 +26,17 @@ export const HeroSection = ({
 }: HeroSectionProps) => {
   const isMobile = useIsMobile();
 
+  const headlineParts = headline.split('.');
+  const firstPart = headlineParts[0] + (headlineParts.length > 1 ? '.' : '');
+  const secondPart = headlineParts.slice(1).join('.').trim();
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full gradient-radial blur-orb" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full gradient-radial blur-orb" />
-      </div>
-
-      {/* Background overlay - Cubes for desktop, Squares for mobile */}
+      {/* Background - Cubes for desktop, Squares for mobile */}
       <div className="absolute inset-0 z-0">
         {isMobile ? (
-          <Squares 
-            speed={0.1} 
+          <Squares
+            speed={0.1}
             squareSize={50}
             direction='diagonal'
             borderColor='rgba(255,255,255,0.3)'
@@ -49,35 +50,41 @@ export const HeroSection = ({
             borderStyle={'2px dashed rgba(255,255,255,0.3)'}
             faceColor={'rgba(14, 13, 12, 1)'}
             autoAnimate={true}
-            rippleOnClick={false} 
+            rippleOnClick={false}
           />
         )}
       </div>
 
+      {/* Radial gradient overlay */}
+      <div className="absolute inset-0 z-[1]" style={{
+        background: 'radial-gradient(ellipse at center, transparent 30%, hsl(0 0% 5% / 0.7) 100%)'
+      }} />
+
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-6">
+
           {badgeText && (
             <div className="inline-block">
-              <span className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wider">
-                {badgeText}
+              <span className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-[0.2em] uppercase">
+                <TextType text={badgeText} delay={200} speed={40} />
               </span>
             </div>
           )}
 
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            {headline.split('.').map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && '.'}
-                {i === 0 && <br />}
-              </span>
-            ))}
+            <FallInText text={firstPart} delay={600} duration={900} />
+            {secondPart && (
+              <>
+                <br />
+                <FallInText text={secondPart} delay={900} duration={900} />
+              </>
+            )}
           </h1>
 
           {subheadline && (
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-              {subheadline}
+              <BlurText text={subheadline} delay={1200} duration={1000} />
             </p>
           )}
 
@@ -92,10 +99,8 @@ export const HeroSection = ({
         </div>
       </div>
 
-      {/* removed duplicate cubes block */}
-
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
         </div>
