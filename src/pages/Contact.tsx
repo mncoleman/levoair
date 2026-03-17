@@ -75,7 +75,7 @@ const Contact = () => {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
       } else {
-        toast.error(error.message || "Failed to send message");
+        toast.error("Something went wrong. Please try again.");
       }
     } finally {
       setIsSubmitting(false);

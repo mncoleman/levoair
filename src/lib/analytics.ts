@@ -72,15 +72,13 @@ export const trackEvent = (
   params?: EventParams
 ): void => {
   if (!isAnalyticsAvailable()) {
-    console.warn('[Analytics] Google Analytics not loaded, event not tracked:', eventName);
     return;
   }
 
   try {
     window.gtag!('event', eventName, params);
-    console.log('[Analytics] Event tracked:', eventName, params);
   } catch (error) {
-    console.error('[Analytics] Error tracking event:', error);
+    // silently fail in production
   }
 };
 
@@ -104,9 +102,8 @@ export const trackPageView = (path: string, title?: string): void => {
       page_title: title || document.title,
       page_location: window.location.href
     });
-    console.log('[Analytics] Page view tracked:', path, title);
   } catch (error) {
-    console.error('[Analytics] Error tracking page view:', error);
+    // silently fail in production
   }
 };
 
@@ -293,9 +290,8 @@ export const setUserProperties = (properties: Record<string, any>): void => {
 
   try {
     window.gtag!('set', 'user_properties', properties);
-    console.log('[Analytics] User properties set:', properties);
   } catch (error) {
-    console.error('[Analytics] Error setting user properties:', error);
+    // silently fail in production
   }
 };
 

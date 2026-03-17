@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   // Always use root-relative paths for production
   base: "/",
   server: {
-    host: "::",
+    host: "localhost",
     port: 8080,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
