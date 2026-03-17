@@ -50,6 +50,7 @@ const ScrollFloat = ({
     });
 
     const animateIn = () => {
+      if (hasPlayedRef.current) return;
       tweenRef.current?.kill();
       hasPlayedRef.current = true;
       tweenRef.current = gsap.to(charElements, {
@@ -61,20 +62,7 @@ const ScrollFloat = ({
         scaleX: 1,
         stagger,
       });
-    };
-
-    const animateOut = () => {
-      tweenRef.current?.kill();
-      hasPlayedRef.current = false;
-      tweenRef.current = gsap.to(charElements, {
-        duration: animationDuration,
-        ease,
-        opacity: 0,
-        yPercent: 120,
-        scaleY: 2.3,
-        scaleX: 0.7,
-        stagger,
-      });
+      observer.disconnect();
     };
 
     const observeTarget = triggerRef?.current || el;
@@ -84,8 +72,6 @@ const ScrollFloat = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             animateIn();
-          } else if (hasPlayedRef.current) {
-            animateOut();
           }
         });
       },
@@ -101,8 +87,8 @@ const ScrollFloat = ({
   }, [triggerRef, animationDuration, ease, stagger, threshold]);
 
   return (
-    <h2 ref={containerRef} className={`overflow-hidden ${containerClassName}`}>
-      <span className={`inline-block leading-[1.2] ${textClassName}`}>{splitText}</span>
+    <h2 ref={containerRef} className={`overflow-hidden pb-2 ${containerClassName}`}>
+      <span className={`inline-block leading-[1.3] ${textClassName}`}>{splitText}</span>
     </h2>
   );
 };

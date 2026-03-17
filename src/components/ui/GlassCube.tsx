@@ -155,7 +155,7 @@ export default function GlassCube({
               inset: 0,
               borderRadius: `${r}px`,
               background: 'transparent',
-              border: '1px solid rgba(255, 215, 0, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
               transform: `translateZ(${z}px)`,
               backfaceVisibility: 'hidden',
             }}
@@ -171,7 +171,7 @@ export default function GlassCube({
             background: 'rgba(255, 255, 255, 0.02)',
             backdropFilter: 'blur(12px) saturate(1.4)',
             WebkitBackdropFilter: 'blur(12px) saturate(1.4)',
-            border: '1px solid rgba(255, 215, 0, 0.12)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
             transform: `translateZ(${depth}px)`,
           }}
         >
