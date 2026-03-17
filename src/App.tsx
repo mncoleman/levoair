@@ -9,8 +9,6 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
 import Contact from "./pages/Contact";
-import Auth from "./pages/Auth";
-import Admin from "./pages/Admin";
 import BrandKit from "./pages/BrandKit";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
@@ -55,8 +53,6 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/brand-kit" element={<BrandKit />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />

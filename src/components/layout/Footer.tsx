@@ -86,12 +86,7 @@ export const Footer = () => {
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">info@levoair.com</li>
-              <li>
-                <Link to="/auth" className="text-sm text-muted-foreground hover:text-primary transition-colors opacity-50">
-                  Admin Login
-                </Link>
-              </li>
+              <li><a href="mailto:info@levoair.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">info@levoair.com</a></li>
             </ul>
           </div>
         </div>
