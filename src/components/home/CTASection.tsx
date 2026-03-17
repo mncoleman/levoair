@@ -13,7 +13,7 @@ export const CTASection = () => {
             background: 'rgba(255, 255, 255, 0.02)',
             backdropFilter: 'blur(16px) saturate(1.4)',
             WebkitBackdropFilter: 'blur(16px) saturate(1.4)',
-            border: '1px solid rgba(255, 215, 0, 0.15)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
           }}
         >
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block">
