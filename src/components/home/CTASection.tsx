@@ -24,20 +24,19 @@ export const CTASection = () => {
             containerClassName="mb-0"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            Take Your Project Higher
+            Need a Pilot on Your Next Job?
           </ScrollFloat>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            No matter where your project is—urban, rural, or remote—we're ready to
-            deploy skilled pilots and capture the data you need. With FAA-certified
-            professionals and strict safety standards, we ensure every flight delivers
-            reliable, high-quality results.
+            Whether it's a one-off mission or ongoing contract work, we plug into
+            your operation and handle the flying. FAA-certified, regulation-ready,
+            and equipped to run the full operation from planning to execution.
           </p>
 
           <div className="pt-2">
             <Link to="/contact">
               <Button size="lg" className="gradient-primary font-semibold group">
-                Book a Flight Today
+                Get in Touch
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

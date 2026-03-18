@@ -56,7 +56,7 @@ export const HeroSection = ({
       </div>
 
       {/* Radial gradient overlay */}
-      <div className="absolute inset-0 z-[1]" style={{
+      <div className="absolute inset-0 z-[1] pointer-events-none" style={{
         background: 'radial-gradient(ellipse at center, transparent 30%, hsl(0 0% 5% / 0.7) 100%)'
       }} />
 

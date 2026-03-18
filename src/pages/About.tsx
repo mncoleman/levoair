@@ -12,19 +12,19 @@ const values = [
     icon: Shield,
     title: "Safety First",
     description:
-      "Stringent safety measures and FAA-certified pilots ensure every mission is executed flawlessly",
+      "FAA Part 107 certified with strict safety protocols on every flight. We take compliance seriously so you don't have to worry.",
   },
   {
     icon: Target,
-    title: "Precision Data",
+    title: "Operational Precision",
     description:
-      "Aviation-grade equipment and experienced pilots deliver data that meets strict engineering standards",
+      "Thorough flight planning, airspace authorization, and disciplined execution on every mission we fly",
   },
   {
     icon: Zap,
-    title: "Full Support",
+    title: "Ready to Deploy",
     description:
-      "Comprehensive systems, abundant resources, and constant communication throughout your project",
+      "We integrate with your team quickly and handle the full operation from pre-flight planning to wheels up",
   },
 ];
 
@@ -62,7 +62,7 @@ const About = () => {
               </ScrollFloat>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 <BlurText
-                  text="Pioneering Reality Data-Capturing Technology"
+                  text="Contract Drone Pilots for the Industry"
                   delay={400}
                   duration={1000}
                   className="text-gradient"
@@ -75,9 +75,9 @@ const About = () => {
               <GlassCube className="w-full" wobbleAngle={0.5}>
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
-                    We stand for unbound progress – unlocking the full potential of drone
-                    technology and executing complex challenges across America. We live at
-                    the forefront of technology and industry – piloting towards a limitless future.
+                    LevoAir provides FAA-certified contract drone pilots to companies that need
+                    skilled operators. We fly your drones, run your operations, and handle the
+                    regulatory side so your team can focus on delivering results to your clients.
                   </p>
                 </div>
               </GlassCube>
@@ -130,10 +130,9 @@ const About = () => {
                 Our Experience
               </ScrollFloat>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Our comprehensive systems, abundant resources, experienced pilots, and stringent
-                safety measures fully equip us to execute any mission successfully. We make
-                super-complex projects appear simple while delivering the highest quality data
-                for your critical decisions.
+                From construction sites to land surveys, we've flown operations across a range
+                of industries. Our pilots understand airspace regulations, LAANC authorizations,
+                and the operational discipline it takes to get the job done right the first time.
               </p>
             </div>
           </div>
