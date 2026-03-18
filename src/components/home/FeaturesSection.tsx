@@ -34,8 +34,8 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
             THE REAL DIFFERENCE
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your projects need accurate data—collected safely and professionally.
-            With years in aviation, we know what it takes to deliver precision.
+            You need reliable pilots who can show up and execute. With years
+            in aviation, we handle the flight so you can focus on the results.
           </p>
         </div>
 
