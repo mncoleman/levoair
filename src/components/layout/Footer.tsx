@@ -70,6 +70,11 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/drone-license-guide" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Drone License Guide
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://levoair.instatus.com/"
                   target="_blank"
