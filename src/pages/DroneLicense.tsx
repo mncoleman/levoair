@@ -48,7 +48,7 @@ const newPilotSteps: Step[] = [
   {
     icon: ShieldCheck,
     title: "Confirm You're Eligible",
-    duration: "5 minutes",
+    duration: "1 minute",
     cost: "Free",
     description:
       "Make sure you meet the FAA's basic requirements before investing time and money in the process.",
@@ -734,6 +734,83 @@ const DroneLicense = () => {
                 </GlassCube>
               ))}
             </div>
+          </div>
+
+          {/* Test Prep Courses */}
+          <div className="max-w-4xl mx-auto mb-24">
+            <div className="text-center mb-10">
+              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
+                Test Prep Courses
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                Recommended Training Providers
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                The FAA study guide is free and sufficient, but a paid course
+                speeds things up and usually comes with a pass guarantee.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  url: "https://pilotinstitute.com/courses/part-107/",
+                  label: "Pilot Institute",
+                  desc: "Most popular Part 107 course. Greg Reverdiau is a former FAA instructor. Pass guarantee.",
+                },
+                {
+                  url: "https://www.dronepilotgroundschool.com/",
+                  label: "Drone Pilot Ground School",
+                  desc: "From UAV Coach. One of the longest-running Part 107 prep programs with strong support.",
+                },
+                {
+                  url: "https://dronelaunchacademy.com/courses/part-107/",
+                  label: "Drone Launch Academy",
+                  desc: "Concise video course taught by a commercial pilot and CFI. Pass guarantee included.",
+                },
+                {
+                  url: "https://www.kingschools.com/courses/faa-part-107-drone-pilot-test-prep",
+                  label: "King Schools",
+                  desc: "Legacy aviation training brand. Familiar format if you've done other FAA written tests.",
+                },
+                {
+                  url: "https://www.gleim.com/aviation/drone/",
+                  label: "Gleim Aviation",
+                  desc: "Test-bank heavy approach. Good if you learn best by drilling practice questions.",
+                },
+                {
+                  url: "https://thedroneu.com/",
+                  label: "Drone U",
+                  desc: "Part 107 prep plus an active community and continuing-education content for working pilots.",
+                },
+              ].map((r) => (
+                <a
+                  key={r.url}
+                  href={r.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackOutboundLink(r.url, r.label)}
+                  className="group block p-5 rounded-xl border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold mb-1 group-hover:text-primary transition-colors">
+                        {r.label}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {r.desc}
+                      </div>
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <p className="text-xs text-muted-foreground/70 text-center mt-6 max-w-2xl mx-auto">
+              LevoAir is not affiliated with any of these providers and does
+              not receive compensation for these listings.
+            </p>
           </div>
 
           {/* Resources */}
