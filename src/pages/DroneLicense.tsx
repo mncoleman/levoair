@@ -736,6 +736,74 @@ const DroneLicense = () => {
             </div>
           </div>
 
+          {/* Resources */}
+          <div className="max-w-4xl mx-auto mb-24">
+            <div className="text-center mb-10">
+              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
+                Official Resources
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Bookmark These
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  url: "https://www.faa.gov/uas",
+                  label: "FAA UAS (Drones)",
+                  desc: "Official starting point for everything Part 107.",
+                },
+                {
+                  url: "https://www.ecfr.gov/",
+                  label: "eCFR",
+                  desc: "Search 14 CFR Part 107 — the full regulation, always up to date.",
+                },
+                {
+                  url: "https://iacra.faa.gov/",
+                  label: "IACRA",
+                  desc: "Where you create your FTN and submit Form 8710-13.",
+                },
+                {
+                  url: "https://faadronezone-access.faa.gov/",
+                  label: "FAA DroneZone",
+                  desc: "Register your drones and request waivers.",
+                },
+                {
+                  url: "https://www.faasafety.gov/",
+                  label: "FAASafety.gov",
+                  desc: "Home of the free ALC-451 and ALC-515 courses.",
+                },
+                {
+                  url: "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation",
+                  label: "FAA Handbooks & Manuals",
+                  desc: "Includes the free Remote Pilot Study Guide and related references.",
+                },
+              ].map((r) => (
+                <a
+                  key={r.url}
+                  href={r.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackOutboundLink(r.url, r.label)}
+                  className="group block p-5 rounded-xl border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold mb-1 group-hover:text-primary transition-colors">
+                        {r.label}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {r.desc}
+                      </div>
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
           {/* Test Prep Courses */}
           <div className="max-w-4xl mx-auto mb-24">
             <div className="text-center mb-10">
@@ -754,7 +822,7 @@ const DroneLicense = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 {
-                  url: "https://pilotinstitute.com/courses/part-107/",
+                  url: "https://pilotinstitute.com/",
                   label: "Pilot Institute",
                   desc: "Most popular Part 107 course. Greg Reverdiau is a former FAA instructor. Pass guarantee.",
                 },
@@ -764,17 +832,17 @@ const DroneLicense = () => {
                   desc: "From UAV Coach. One of the longest-running Part 107 prep programs with strong support.",
                 },
                 {
-                  url: "https://dronelaunchacademy.com/courses/part-107/",
+                  url: "https://dronelaunchacademy.com/",
                   label: "Drone Launch Academy",
                   desc: "Concise video course taught by a commercial pilot and CFI. Pass guarantee included.",
                 },
                 {
-                  url: "https://www.kingschools.com/courses/faa-part-107-drone-pilot-test-prep",
+                  url: "https://www.kingschools.com/",
                   label: "King Schools",
                   desc: "Legacy aviation training brand. Familiar format if you've done other FAA written tests.",
                 },
                 {
-                  url: "https://www.gleim.com/aviation/drone/",
+                  url: "https://www.gleim.com/",
                   label: "Gleim Aviation",
                   desc: "Test-bank heavy approach. Good if you learn best by drilling practice questions.",
                 },
@@ -811,74 +879,6 @@ const DroneLicense = () => {
               LevoAir is not affiliated with any of these providers and does
               not receive compensation for these listings.
             </p>
-          </div>
-
-          {/* Resources */}
-          <div className="max-w-4xl mx-auto mb-24">
-            <div className="text-center mb-10">
-              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-                Official Resources
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Bookmark These
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                {
-                  url: "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot",
-                  label: "FAA: Become a Certificated Remote Pilot",
-                  desc: "Official starting point for everything Part 107.",
-                },
-                {
-                  url: "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107",
-                  label: "14 CFR Part 107 (eCFR)",
-                  desc: "The full regulation, always up to date.",
-                },
-                {
-                  url: "https://iacra.faa.gov/IACRA/",
-                  label: "IACRA",
-                  desc: "Where you create your FTN and submit Form 8710-13.",
-                },
-                {
-                  url: "https://faadronezone-access.faa.gov/",
-                  label: "FAA DroneZone",
-                  desc: "Register your drones and request waivers.",
-                },
-                {
-                  url: "https://www.faasafety.gov/",
-                  label: "FAASafety.gov",
-                  desc: "Home of the free ALC-451 and ALC-515 courses.",
-                },
-                {
-                  url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/remote_pilot_study_guide.pdf",
-                  label: "FAA Remote Pilot Study Guide",
-                  desc: "The free PDF that covers most of the test.",
-                },
-              ].map((r) => (
-                <a
-                  key={r.url}
-                  href={r.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackOutboundLink(r.url, r.label)}
-                  className="group block p-5 rounded-xl border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                        {r.label}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {r.desc}
-                      </div>
-                    </div>
-                    <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
-                  </div>
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* CTA */}
