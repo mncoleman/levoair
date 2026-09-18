@@ -26,11 +26,20 @@ const ScrollFloat = ({
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const hasPlayedRef = useRef(false);
 
+  // Characters are animated individually, but grouped per word so that
+  // line wrapping only happens at spaces (never mid-word on narrow screens).
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : '';
-    return text.split('').map((char, index) => (
-      <span className="inline-block word" key={index}>
-        {char === ' ' ? '\u00A0' : char}
+    return text.split(' ').map((word, wordIndex, words) => (
+      <span className="inline-block whitespace-nowrap" key={wordIndex}>
+        {word.split('').map((char, charIndex) => (
+          <span className="inline-block sf-char" key={charIndex}>
+            {char}
+          </span>
+        ))}
+        {wordIndex < words.length - 1 && (
+          <span className="inline-block sf-char">{'\u00A0'}</span>
+        )}
       </span>
     ));
   }, [children]);
@@ -39,7 +48,7 @@ const ScrollFloat = ({
     const el = containerRef.current;
     if (!el) return;
 
-    const charElements = el.querySelectorAll('.inline-block');
+    const charElements = el.querySelectorAll('.sf-char');
 
     gsap.set(charElements, {
       opacity: 0,

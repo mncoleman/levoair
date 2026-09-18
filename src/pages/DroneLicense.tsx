@@ -881,6 +881,33 @@ const DroneLicense = () => {
             </p>
           </div>
 
+          {/* Related guide */}
+          <div className="max-w-4xl mx-auto mb-24">
+            <Link
+              to="/drone-registration-guide"
+              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-all duration-300"
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-lg bg-primary/10">
+                  <Plane className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground block mb-1">
+                    Related Guide
+                  </span>
+                  <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
+                    Drone Registration, Remote ID & Recurrent Training
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    The certificate covers you. This covers the aircraft and
+                    keeping both current.
+                  </p>
+                </div>
+              </div>
+              <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+            </Link>
+          </div>
+
           {/* CTA */}
           <div className="max-w-3xl mx-auto">
             <Card className="p-10 md:p-14 text-center border-primary/20 bg-card/60 backdrop-blur-md">
