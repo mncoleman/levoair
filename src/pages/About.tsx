@@ -18,7 +18,7 @@ const values = [
     icon: Target,
     title: "Consistency at Scale",
     description:
-      "Same aircraft, same flight plans, same standards on every site, whether it's one visit or a recurring program",
+      "The same flight plans and standards on every site, whether it's one visit or a recurring program",
   },
   {
     icon: Zap,
@@ -76,8 +76,8 @@ const About = () => {
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
                     LevoAir runs drone capture programs for construction, mapping, and inspection.
-                    We own and maintain our aircraft, fly them with FAA-certified pilots, and deliver
-                    consistent data on the schedule your projects run on. We work directly with
+                    Our FAA-certified pilots fly every site to the same plan and deliver consistent
+                    data on the schedule your projects run on. We work directly with
                     builders and as a dedicated operator inside larger programs, under the standards
                     of the platform or prime contractor we fly for.
                   </p>

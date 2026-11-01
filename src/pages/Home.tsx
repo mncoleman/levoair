@@ -10,8 +10,8 @@ import usePageTitle from "@/lib/usePageTitle";
 const features = [
   {
     id: "1",
-    title: "Our fleet, standardized",
-    description: "One fleet with matched sensors and settings, so every capture lines up with the last",
+    title: "One accountable operator",
+    description: "One team owns your capture schedule, so you stop coordinating freelancers site by site",
     icon_name: "Plane",
   },
   {
@@ -44,8 +44,8 @@ const Home = () => {
       <main className="pt-16">
         <HeroSection
           badgeText="DRONE OPERATIONS AT SCALE"
-          headline="Our Drones. Your Data on Schedule."
-          subheadline="Recurring drone capture for construction, mapping, and inspection programs. We own the aircraft, fly the missions, and deliver the data."
+          headline="Stop Chasing Pilots. Get Data on Schedule."
+          subheadline="Recurring drone capture for construction, mapping, and inspection programs. We plan the flights, fly every site the same way, and deliver the data on your cadence."
           ctaText="Plan a Program"
           ctaLink="/contact"
         />

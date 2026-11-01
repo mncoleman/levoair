@@ -915,12 +915,12 @@ const DroneLicense = () => {
                 Need a Site Flown?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Skip the Process. Use Our Fleet.
+                Skip the Process. Let Us Fly It.
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                 If you need sites captured rather than going through
-                certification yourself, LevoAir flies our own aircraft with FAA
-                Part 107 certified pilots, for one job or a recurring program.
+                certification yourself, LevoAir's FAA Part 107 certified pilots
+                fly it for you, for one job or a recurring program.
               </p>
               <Button
                 asChild

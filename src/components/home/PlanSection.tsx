@@ -10,7 +10,7 @@ const steps = [
   {
     number: "02",
     title: "We fly on schedule",
-    description: "Our pilots fly our aircraft on the cadence you set, with LAANC and site coordination handled.",
+    description: "Our pilots fly every site on the cadence you set, with LAANC and site coordination handled.",
   },
   {
     number: "03",

@@ -36,8 +36,8 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We've flown construction, mapping, and survey work, and we know what a
-            capture program needs: the same aircraft, the same flight plans, and the
-            same standards on every visit.
+            capture program needs: the same flight plans and standards on every
+            visit, with one team accountable for the schedule.
           </p>
         </div>
 

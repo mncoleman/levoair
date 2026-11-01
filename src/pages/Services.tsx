@@ -15,7 +15,7 @@ const services = [
     id: "1",
     title: "Recurring Site Capture",
     icon_name: "Plane",
-    short_description: "Scheduled flights on our aircraft across one site or a full portfolio, flown to the same plan every visit for clean progress comparisons",
+    short_description: "Scheduled flights across one site or a full portfolio, flown to the same plan every visit for clean progress comparisons",
   },
   {
     id: "2",
@@ -44,7 +44,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">What We Do</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We bring the aircraft, the pilots, and the plan. You get the data.
+              We handle the flying. You get the data.
             </p>
           </div>
 

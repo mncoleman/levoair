@@ -1326,11 +1326,11 @@ const DroneRegistration = () => {
                 Rather Not Manage Any of This?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Our Fleet Is Registered, Current, and Insured.
+                Our Operations Are Registered, Current, and Insured.
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                LevoAir flies our own registered, Remote ID compliant aircraft
-                with pilots current on Part 107 recurrent training. You get the
+                LevoAir flies registered, Remote ID compliant aircraft with
+                pilots current on Part 107 recurrent training. You get the
                 footage and the data. We handle the FAA.
               </p>
               <Button
