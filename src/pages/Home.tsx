@@ -12,26 +12,26 @@ import { SITE, organizationSchema } from "@/lib/site";
 const features = [
   {
     id: "1",
-    title: "Your protocol, your app",
-    description: "We fly the missions you build, in the app you use, to the altitude, overlap, and ground control on your spec sheet",
+    title: "Your protocol. Exactly.",
+    description: "We fly the missions you build, in the app you already use. Altitude, overlap, ground control. All to spec.",
     icon_name: "FileCheck",
   },
   {
     id: "2",
-    title: "Flown on the flight day",
-    description: "Each site gets a fixed day. If weather moves a flight, you hear from us with the new date before your customer asks",
+    title: "On the day. Every time.",
+    description: "Every site gets a fixed flight day. If the weather moves it, you'll know before your customer does.",
     icon_name: "Plane",
   },
   {
     id: "3",
-    title: "Checked before we leave",
-    description: "We review coverage on site before packing up, so the upload clears your QA and you don't pay for a reflight",
+    title: "Right the first time.",
+    description: "We check coverage before we leave the site. So the upload clears QA, and nobody flies it twice.",
     icon_name: "Shield",
   },
   {
     id: "4",
-    title: "Capacity in one contract",
-    description: "Add sites without onboarding another pilot. One contact and one invoice, directly or through the flight partner you already use",
+    title: "Room to grow.",
+    description: "Add sites without adding pilots. One team, one contact, one invoice. Directly or through the partner you already use.",
     icon_name: "Users",
   },
 ];
@@ -61,9 +61,9 @@ const Home = () => {
 
       <main className="pt-16">
         <HeroSection
-          badgeText="FLIGHT OPERATIONS PARTNER"
-          headline="Flight Capacity You Don't Have to Recruit"
-          subheadline="LevoAir flies capture missions for drone data platforms and flight programs. We fly your protocol in your app, upload the same day, and take on new sites without you hiring another pilot."
+          badgeText="FLIGHT OPERATIONS"
+          headline="Sell the sites. We'll fly them."
+          subheadline="LevoAir flies capture missions for drone data platforms and flight programs. Your protocol. Your app. Uploaded the same day."
           ctaText="Book a Test Flight"
           ctaLink="/contact"
         />

@@ -5,22 +5,21 @@ export const ProblemSection = () => {
     <section className="py-24 relative">
       <div className="container mx-auto px-4 max-w-3xl text-center">
         <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-          THE PROBLEM
+          THE PILOT PROBLEM
         </span>
         <ScrollFloat
           containerClassName="mb-6"
           textClassName="text-4xl md:text-5xl font-bold"
         >
-          Contract Pilots Don't Grow With Your Sales
+          Growth shouldn't wait on a pilot.
         </ScrollFloat>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          You sign a builder with forty sites and the flights land on a list of
-          contract pilots. One can't make Tuesday. One flies the wrong overlap.
-          One uploads three days late. Your QA team catches it, your ops team
-          reschedules, and you're recruiting again before the next market opens.
+          Every new customer means more flights. More flights mean more contract
+          pilots to find, vet, and train. And when one of them misses a day,
+          it's your phone that rings.
         </p>
         <p className="text-lg text-foreground/90 mt-6 font-medium">
-          Your customer signed with you, so every missed flight is yours to explain.
+          We built LevoAir so it doesn't.
         </p>
       </div>
     </section>

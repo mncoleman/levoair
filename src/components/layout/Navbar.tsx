@@ -82,14 +82,14 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-8 transition-opacity duration-300 ease-in-out ${
+          <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-5 lg:space-x-8 transition-opacity duration-300 ease-in-out ${
             shouldAnimate ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>

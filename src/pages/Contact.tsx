@@ -7,9 +7,9 @@ import { Seo } from "@/components/Seo";
 import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 
 const nextSteps = [
-  "We read your flight protocol, sites, and deliverable spec.",
-  "We check the airspace and schedule a test flight on one site.",
-  "Your QA team grades the upload, then we set flight days for the rest.",
+  "We review your protocol, sites, and deliverables.",
+  "We check the airspace and schedule a test flight.",
+  "Your QA team grades the upload. Then we set flight days for the rest.",
 ];
 import { trackContactClick } from "@/lib/analytics";
 
@@ -54,8 +54,8 @@ const Contact = () => {
               Book a Test Flight
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Send one site and your flight protocol, or tell us about the program
-              you need covered.
+              Send us one site and your protocol. Or tell us about the program you
+              need covered.
             </p>
           </div>
 
@@ -63,7 +63,7 @@ const Contact = () => {
             <div className="space-y-6">
               {/* What happens next */}
               <Card className="p-6">
-                <h2 className="font-semibold text-lg mb-4">What happens after you submit</h2>
+                <h2 className="font-semibold text-lg mb-4">What happens next</h2>
                 <ol className="space-y-4">
                   {nextSteps.map((step, i) => (
                     <li key={step} className="flex gap-3">

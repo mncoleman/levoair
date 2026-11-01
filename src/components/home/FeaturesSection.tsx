@@ -32,11 +32,10 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
             containerClassName="mb-4"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            BUILT FOR PLATFORM WORK
+            Made for the way you fly.
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            What your flight ops team checks before handing over a site, covered
-            before the first mission.
+            Everything your ops team asks of a pilot. Handled before the first flight.
           </p>
         </div>
 

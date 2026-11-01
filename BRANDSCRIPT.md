@@ -6,6 +6,10 @@ StoryBrand BrandScript behind the site copy on `copy/brandscript-scale-positioni
 
 LevoAir is the flight operations partner a drone data platform or flight program hands sites to when its contract pilot roster can't keep up. The buyer already knows capture has to be repeatable; that's their product. What they lack is flight capacity that shows up on the day, flies their protocol and passes their QA without them recruiting, vetting and training another pilot. No platform is named. The copy keeps "directly or through the flight partner you already use" so the primes we fly for read us as a partner they can grow with, not a competitor.
 
+## Voice
+
+apple.com: short declarative lines, sentence-case headlines with periods, plain words, second person, one idea per sentence. Fragments are fine in headlines and card titles, full sentences in body copy.
+
 ## What platforms need from pilots (research, 2026-11-01)
 
 - **TraceAir** ([Fly for us](https://traceair.net/company/drone-pilot)): Part 107, area mapping experience, DroneDeploy or DJI Ground Station, RTK aircraft and base station preferred, at least four batteries, $1M liability insurance, the same site on the same day every week, fly their protocol and upload right after the flight, no processing. Values accuracy, reliability, punctuality and clear communication.
@@ -56,4 +60,4 @@ Sold sites go on the schedule the week they're sold, and uploads clear QA the fi
 
 ## One-liner
 
-LevoAir flies capture missions for drone data platforms and flight programs. We fly your protocol in your app, upload the same day and take on new sites without you hiring another pilot.
+LevoAir flies capture missions for drone data platforms and flight programs. Your protocol. Your app. Uploaded the same day.

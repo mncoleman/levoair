@@ -11,21 +11,21 @@ import { BlurText } from "@/components/ui/BlurText";
 const values = [
   {
     icon: Shield,
-    title: "Safety First",
+    title: "Safety first.",
     description:
-      "FAA Part 107 certified with strict safety protocols on every flight. We take compliance seriously so you don't have to worry.",
+      "FAA Part 107 certified, with LAANC and safety protocols on every flight. Compliance is our job, not yours.",
   },
   {
     icon: Target,
-    title: "On the Flight Day",
+    title: "On the day.",
     description:
-      "A site's flight day only moves when the weather does, and you hear about it from us first",
+      "A flight day moves only when the weather does. And you'll hear about it from us first.",
   },
   {
     icon: Zap,
-    title: "Room to Grow",
+    title: "Room to grow.",
     description:
-      "New sites go on our schedule without a new pilot to recruit, vet, and train on your side",
+      "New sites go on our schedule. No new pilot to recruit, vet, or train on your side.",
   },
 ];
 
@@ -74,7 +74,7 @@ const About = () => {
               </ScrollFloat>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 <BlurText
-                  text="Drone Operations Built to Scale"
+                  text="Drone operations, built to scale."
                   delay={400}
                   duration={1000}
                   className="text-gradient"
@@ -87,11 +87,11 @@ const About = () => {
               <GlassCube className="w-full" wobbleAngle={0.5}>
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
-                    LevoAir flies drone capture missions for data platforms, flight programs, and
-                    the builders they serve. We fly the client's protocol in the client's app, upload
-                    the same day, and add sites without the client recruiting another pilot. We work
-                    directly with builders and as a dedicated operator inside larger programs, under
-                    the standards of the platform or prime contractor we fly for.
+                    LevoAir flies capture missions for drone data platforms, flight programs, and
+                    the builders they serve. We fly your protocol in your app and upload the same day.
+                    When you add sites, we add flights, not paperwork. We work directly with builders
+                    and as a dedicated operator inside larger programs, always to the standards of the
+                    platform or prime we fly for.
                   </p>
                 </div>
               </GlassCube>
@@ -144,9 +144,8 @@ const About = () => {
                 Our Experience
               </ScrollFloat>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                From construction sites to land surveys, we've flown operations across a range
-                of industries. Our pilots understand airspace regulations, LAANC authorizations,
-                and the operational discipline it takes to capture a site right the first time.
+                Construction sites. Land surveys. Inspections. We know the airspace, we know
+                LAANC, and we know what it takes to capture a site right the first time.
               </p>
             </div>
           </div>

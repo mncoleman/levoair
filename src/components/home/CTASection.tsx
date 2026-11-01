@@ -24,12 +24,12 @@ export const CTASection = () => {
             containerClassName="mb-0"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            Hand Us One Site
+            One site. Then the next ten.
           </ScrollFloat>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Send a site and your flight protocol. We'll fly it, upload it, and let
-            your QA team decide whether we get the next ten.
+            Send us a site and your protocol. We'll fly it, upload it, and let the
+            data make the case.
           </p>
 
           <div className="pt-2">
