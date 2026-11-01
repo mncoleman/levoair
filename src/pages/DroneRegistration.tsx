@@ -32,12 +32,13 @@ import {
   Weight,
   ArrowRight,
 } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
 import GlassCube from "@/components/ui/GlassCube";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { trackEvent, trackOutboundLink } from "@/lib/analytics";
+import { trackEvent, trackOutboundLink, trackCTAClick } from "@/lib/analytics";
 
 type FlyerType = "recreational" | "part107";
 
@@ -501,6 +502,24 @@ const officialResources = [
     label: "FAA: Registering Drones Over 55 lb",
     desc: "The Part 47 paper process, forms, and affidavit requirements.",
   },
+];
+
+const registrationSeo = [
+  {
+    "@type": "Article",
+    headline: "FAA Drone Registration, Remote ID & Recurrency Guide",
+    description:
+      "FAA drone registration, Remote ID, TRUST, and Part 107 recurrent training explained.",
+    url: `${SITE.url}/drone-registration-guide`,
+    image: SITE.defaultImage,
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+  organizationSchema,
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Drone Registration Guide", path: "/drone-registration-guide" },
+  ]),
 ];
 
 const FlyerToggle = ({
@@ -980,7 +999,6 @@ const CurrencyCard = ({
 };
 
 const DroneRegistration = () => {
-  usePageTitle("Drone Registration & Recurrency Guide");
   const [flyer, setFlyer] = useState<FlyerType>("recreational");
 
   const steps = flyer === "recreational" ? recreationalSteps : part107Steps;
@@ -988,6 +1006,13 @@ const DroneRegistration = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="FAA Drone Registration, Remote ID & Recurrency Guide | LevoAir"
+        description="How to register a drone with the FAA, meet Remote ID, pass TRUST, and stay current with Part 107 recurrent training. Costs, links, and deadlines."
+        path="/drone-registration-guide"
+        type="article"
+        jsonLd={registrationSeo}
+      />
 
       {/* Ambient background orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-0">
@@ -1009,10 +1034,11 @@ const DroneRegistration = () => {
               Registration & Recurrency Guide
             </span>
             <ScrollFloat
+              as="h1"
               containerClassName="mb-4"
               textClassName="text-5xl md:text-6xl font-bold"
             >
-              Stay Legal, Stay Current
+              Drone Registration &amp; Recurrency
             </ScrollFloat>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               <BlurText
@@ -1323,22 +1349,23 @@ const DroneRegistration = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="p-10 md:p-14 text-center border-primary/20 bg-card/60 backdrop-blur-md">
               <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-                Rather Not Manage Any of This?
+                Running Drones Across a Team?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Our Operations Are Registered, Current, and Insured.
+                Hand Off the Paperwork With the Flying.
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                LevoAir flies registered, Remote ID compliant aircraft with
-                pilots current on Part 107 recurrent training. You get the
-                footage and the data. We handle the FAA.
+                Registration renewals, Remote ID, and recurrent training add up
+                fast across several pilots. LevoAir flies registered, Remote ID
+                compliant aircraft with pilots current on Part 107 recurrent
+                training. You get the data. We handle the FAA.
               </p>
               <Button
                 asChild
                 className="gradient-primary font-semibold"
                 size="lg"
               >
-                <Link to="/contact">Plan a Program</Link>
+                <Link to="/contact" onClick={() => trackCTAClick("Hand Off Your Flights", "registration_guide")}>Hand Off Your Flights</Link>
               </Button>
             </Card>
           </div>

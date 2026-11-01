@@ -1,13 +1,17 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
 
 const Privacy = () => {
-    usePageTitle("Privacy Policy");
 
     return (
         <div className="min-h-screen bg-background">
             <Navbar />
+      <Seo
+        title="Privacy Policy | LevoAir"
+        description="How LevoAir collects, uses, and protects your information."
+        path="/privacy"
+      />
 
             <main className="pt-32 pb-24">
                 <div className="container mx-auto px-4 max-w-4xl">

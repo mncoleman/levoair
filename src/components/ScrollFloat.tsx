@@ -10,6 +10,7 @@ interface ScrollFloatProps {
   ease?: string;
   stagger?: number;
   threshold?: number;
+  as?: "h1" | "h2";
 }
 
 const ScrollFloat = ({
@@ -21,6 +22,7 @@ const ScrollFloat = ({
   ease = 'back.inOut(2)',
   stagger = 0.03,
   threshold = 0.01,
+  as: Tag = "h2",
 }: ScrollFloatProps) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
@@ -96,9 +98,9 @@ const ScrollFloat = ({
   }, [triggerRef, animationDuration, ease, stagger, threshold]);
 
   return (
-    <h2 ref={containerRef} className={`overflow-hidden pb-2 ${containerClassName}`}>
+    <Tag ref={containerRef} className={`overflow-hidden pb-2 ${containerClassName}`}>
       <span className={`inline-block leading-[1.3] ${textClassName}`}>{splitText}</span>
-    </h2>
+    </Tag>
   );
 };
 

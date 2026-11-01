@@ -25,12 +25,13 @@ import {
   Calendar,
   Sparkles,
 } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
 import GlassCube from "@/components/ui/GlassCube";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { trackEvent, trackOutboundLink } from "@/lib/analytics";
+import { trackEvent, trackOutboundLink, trackCTAClick } from "@/lib/analytics";
 
 type PathType = "new" | "part61";
 
@@ -352,6 +353,24 @@ const sharedRequirements = [
   },
 ];
 
+const licenseSeo = [
+  {
+    "@type": "Article",
+    headline: "How to Get a Part 107 Drone License: Step-by-Step Guide",
+    description:
+      "The complete path to your FAA Part 107 Remote Pilot Certificate: eligibility, FTN, test prep, the knowledge test, and IACRA.",
+    url: `${SITE.url}/drone-license-guide`,
+    image: SITE.defaultImage,
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+  organizationSchema,
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Drone License Guide", path: "/drone-license-guide" },
+  ]),
+];
+
 const PathToggle = ({
   selected,
   onChange,
@@ -613,7 +632,6 @@ const PathSummary = ({ path }: { path: PathType }) => {
 };
 
 const DroneLicense = () => {
-  usePageTitle("How to Get Your Drone Pilot License");
   const [path, setPath] = useState<PathType>("new");
   const stepsRef = useRef<HTMLDivElement>(null);
 
@@ -622,6 +640,13 @@ const DroneLicense = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="How to Get a Part 107 Drone License (Step-by-Step) | LevoAir"
+        description="The complete path to your FAA Part 107 Remote Pilot Certificate: eligibility, FTN, test prep, the knowledge test, IACRA, and what it costs."
+        path="/drone-license-guide"
+        type="article"
+        jsonLd={licenseSeo}
+      />
 
       {/* Ambient background orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-0">
@@ -643,10 +668,11 @@ const DroneLicense = () => {
               Pilot Certification Guide
             </span>
             <ScrollFloat
+              as="h1"
               containerClassName="mb-4"
               textClassName="text-5xl md:text-6xl font-bold"
             >
-              Earn Your Wings
+              Get Your Part 107 Drone License
             </ScrollFloat>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               <BlurText
@@ -912,22 +938,23 @@ const DroneLicense = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="p-10 md:p-14 text-center border-primary/20 bg-card/60 backdrop-blur-md">
               <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-                Need a Site Flown?
+                Weighing It for Your Team?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Skip the Process. Let Us Fly It.
+                Need Sites Flown Before Anyone Is Certified?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                If you need sites captured rather than going through
-                certification yourself, LevoAir's FAA Part 107 certified pilots
-                fly it for you, for one job or a recurring program.
+                Getting a pilot certified means weeks of study, a proctored exam,
+                and recurrent training every 24 months. If the work can't wait,
+                our Part 107 pilots fly your sites now, for one job or a
+                recurring program.
               </p>
               <Button
                 asChild
                 className="gradient-primary font-semibold"
                 size="lg"
               >
-                <Link to="/contact">Plan a Program</Link>
+                <Link to="/contact" onClick={() => trackCTAClick("Get Sites Flown", "license_guide")}>Get Sites Flown</Link>
               </Button>
             </Card>
           </div>

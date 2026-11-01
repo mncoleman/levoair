@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { industries } from "@/lib/industries";
+import { SITE } from "@/lib/site";
 
 export const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +27,7 @@ export const Footer = () => {
   return (
     <footer className="border-t border-border bg-card/80 backdrop-blur-md">
       <div className="container mx-auto px-6 py-10 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-3">
             <Link to="/" className="inline-block">
@@ -50,10 +52,34 @@ export const Footer = () => {
             </div>
           </div>
 
+          {/* Services */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Services</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  All Services
+                </Link>
+              </li>
+              {industries.map((i) => (
+                <li key={i.path}>
+                  <Link to={i.path} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {i.headline}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Quick Links */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Quick Links</h3>
             <ul className="space-y-2">
+              <li>
+                <Link to="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Portfolio
+                </Link>
+              </li>
               <li>
                 <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   About Us
@@ -96,7 +122,10 @@ export const Footer = () => {
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li><a href="mailto:info@levoair.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">info@levoair.com</a></li>
+              <li><a href={`mailto:${SITE.email}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">{SITE.email}</a></li>
+              {SITE.phone && (
+                <li><a href={`tel:${SITE.phone.replace(/[^\d+]/g, "")}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">{SITE.phone}</a></li>
+              )}
             </ul>
           </div>
         </div>

@@ -2,7 +2,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Particles from "@/components/layout/Particles";
 import { Shield, Target, Zap } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { organizationSchema, breadcrumbSchema } from "@/lib/site";
 import GlassCube from "@/components/ui/GlassCube";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
@@ -28,8 +29,12 @@ const values = [
   },
 ];
 
+const aboutSeo = [
+  organizationSchema,
+  breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }]),
+];
+
 const About = () => {
-  usePageTitle("About");
   return (
     <>
       <Particles
@@ -45,6 +50,12 @@ const About = () => {
 
       <div className="min-h-screen relative">
         <Navbar />
+      <Seo
+          title="About LevoAir | FAA Part 107 Drone Operations"
+          description="LevoAir runs drone capture programs for construction, mapping, and inspection, flying every site to the same plan with FAA-certified pilots."
+          path="/about"
+          jsonLd={aboutSeo}
+        />
 
         <main className="pt-32 pb-24 relative z-10">
           <div className="container mx-auto px-4 max-w-5xl">
@@ -55,6 +66,7 @@ const About = () => {
                 OUR STORY
               </span>
               <ScrollFloat
+                as="h1"
                 containerClassName="mb-4"
                 textClassName="text-5xl md:text-6xl font-bold"
               >

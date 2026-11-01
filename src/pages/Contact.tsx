@@ -2,12 +2,23 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card } from "@/components/ui/card";
-import { Mail } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Mail, Phone } from "lucide-react";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
+
+const nextSteps = [
+  "We read your sites, cadence, and deliverables.",
+  "We check the airspace and come back with a flight plan and a quote.",
+  "Once you approve, your first flight goes on the calendar.",
+];
 import { trackContactClick } from "@/lib/analytics";
 
+const contactSeo = [
+  organizationSchema,
+  breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]),
+];
+
 const Contact = () => {
-  usePageTitle("Contact");
   useEffect(() => {
     const src = "https://link.msgsndr.com/js/form_embed.js";
     if (!document.querySelector(`script[src="${src}"]`)) {
@@ -29,45 +40,78 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="Plan a Drone Capture Program | Contact LevoAir"
+        description="Tell us your sites, cadence, and deliverables. LevoAir reviews the airspace and comes back with a flight plan and quote."
+        path="/contact"
+        jsonLd={contactSeo}
+      />
 
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Let's Talk
+              Plan Your Program
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Planning a capture program or need a site flown? Fill out the form below or reach us at{" "}
-              <a
-                href="mailto:info@levoair.com"
-                className="text-primary hover:underline"
-                onClick={() => trackContactClick('email', 'info@levoair.com')}
-              >
-                info@levoair.com
-              </a>
-              .
+              Planning a capture program or need a site flown? Tell us about your
+              sites and we'll come back with a plan.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-8">
-            {/* Contact Email Info */}
-            <Card className="p-6">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-lg bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-8 items-start">
+            <div className="space-y-6">
+              {/* What happens next */}
+              <Card className="p-6">
+                <h2 className="font-semibold text-lg mb-4">What happens after you submit</h2>
+                <ol className="space-y-4">
+                  {nextSteps.map((step, i) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm text-muted-foreground leading-relaxed pt-1">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Card>
+
+              {/* Direct contact */}
+              <Card className="p-6 space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <Mail className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() => trackContactClick('email', SITE.email)}
+                    >
+                      {SITE.email}
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <a
-                    href="mailto:info@levoair.com"
-                    className="text-muted-foreground hover:text-primary"
-                    onClick={() => trackContactClick('email', 'info@levoair.com')}
-                  >
-                    info@levoair.com
-                  </a>
-                </div>
-              </div>
-            </Card>
+                {SITE.phone && (
+                  <div className="flex items-start space-x-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Phone className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Phone</h3>
+                      <a
+                        href={`tel:${SITE.phone.replace(/[^\d+]/g, "")}`}
+                        className="text-muted-foreground hover:text-primary"
+                        onClick={() => trackContactClick('phone', SITE.phone)}
+                      >
+                        {SITE.phone}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </Card>
+            </div>
 
             {/* Contact Form - embedded LeadConnector iframe */}
             <Card className="p-0 overflow-hidden">

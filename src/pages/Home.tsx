@@ -5,7 +5,9 @@ import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { CTASection } from "@/components/home/CTASection";
 import { ProblemSection } from "@/components/home/ProblemSection";
 import { PlanSection } from "@/components/home/PlanSection";
-import usePageTitle from "@/lib/usePageTitle";
+import { ProofSection } from "@/components/home/ProofSection";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema } from "@/lib/site";
 
 const features = [
   {
@@ -34,12 +36,28 @@ const features = [
   },
 ];
 
+const homeSeo = [
+  organizationSchema,
+  {
+    "@type": "WebSite",
+    "@id": `${SITE.url}/#website`,
+    url: SITE.url,
+    name: SITE.name,
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+];
+
 const Home = () => {
-  usePageTitle("Home");
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="LevoAir | Recurring Drone Capture for Construction & Mapping"
+        description="LevoAir runs recurring drone capture for construction, mapping, and inspection programs. FAA Part 107 pilots fly every site the same way and deliver data on schedule."
+        path="/"
+        jsonLd={homeSeo}
+      />
 
       <main className="pt-16">
         <HeroSection
@@ -53,6 +71,8 @@ const Home = () => {
         <ProblemSection />
 
         <FeaturesSection features={features} />
+
+        <ProofSection />
 
         <PlanSection />
 
