@@ -16,15 +16,15 @@ const values = [
   },
   {
     icon: Target,
-    title: "Operational Precision",
+    title: "Consistency at Scale",
     description:
-      "Thorough flight planning, airspace authorization, and disciplined execution on every mission we fly",
+      "Same aircraft, same flight plans, same standards on every site, whether it's one visit or a recurring program",
   },
   {
     icon: Zap,
     title: "Ready to Deploy",
     description:
-      "We integrate with your team quickly and handle the full operation from pre-flight planning to wheels up",
+      "We stand up new sites quickly and run the full operation, from airspace planning to data delivery",
   },
 ];
 
@@ -62,7 +62,7 @@ const About = () => {
               </ScrollFloat>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 <BlurText
-                  text="Contract Drone Pilots for the Industry"
+                  text="Drone Operations Built to Scale"
                   delay={400}
                   duration={1000}
                   className="text-gradient"
@@ -75,9 +75,11 @@ const About = () => {
               <GlassCube className="w-full" wobbleAngle={0.5}>
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
-                    LevoAir provides FAA-certified contract drone pilots to companies that need
-                    skilled operators. We fly your drones, run your operations, and handle the
-                    regulatory side so your team can focus on delivering results to your clients.
+                    LevoAir runs drone capture programs for construction, mapping, and inspection.
+                    We own and maintain our aircraft, fly them with FAA-certified pilots, and deliver
+                    consistent data on the schedule your projects run on. We work directly with
+                    builders and as a dedicated operator inside larger programs, under the standards
+                    of the platform or prime contractor we fly for.
                   </p>
                 </div>
               </GlassCube>
@@ -132,7 +134,8 @@ const About = () => {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 From construction sites to land surveys, we've flown operations across a range
                 of industries. Our pilots understand airspace regulations, LAANC authorizations,
-                and the operational discipline it takes to get the job done right the first time.
+                and the operational discipline it takes to capture a site right the first time,
+                then do it again the same way next week.
               </p>
             </div>
           </div>

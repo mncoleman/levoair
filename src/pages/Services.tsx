@@ -13,21 +13,21 @@ const iconMap: Record<string, LucideIcon> = {
 const services = [
   {
     id: "1",
-    title: "Contract Pilot Services",
+    title: "Recurring Site Capture",
     icon_name: "Plane",
-    short_description: "Certified pilots available for single missions or ongoing contracts, flying your equipment on your schedule",
+    short_description: "Scheduled flights on our aircraft across one site or a full portfolio, flown to the same plan every visit for clean progress comparisons",
   },
   {
     id: "2",
     title: "Construction & Infrastructure",
     icon_name: "Building2",
-    short_description: "Experienced in construction site operations, progress documentation, and infrastructure inspection flights",
+    short_description: "Progress documentation, earthwork tracking, and infrastructure inspection flights built around active job sites",
   },
   {
     id: "3",
     title: "Mapping & Survey Operations",
     icon_name: "Map",
-    short_description: "Skilled in photogrammetry, orthomosaic, and survey-grade flight planning for land and site assessment projects",
+    short_description: "Photogrammetry, orthomosaics, and survey-grade flight planning for land and site assessment, delivered in the format your team processes",
   },
 ];
 
@@ -44,7 +44,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">What We Do</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We provide the pilots. You keep running your business.
+              We bring the aircraft, the pilots, and the plan. You get the data.
             </p>
           </div>
 

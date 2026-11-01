@@ -1,4 +1,4 @@
-import { Shield, Users, FileCheck, MessageSquare, LucideIcon } from "lucide-react";
+import { Shield, Users, FileCheck, MessageSquare, Plane, LucideIcon } from "lucide-react";
 import GlassCube from "@/components/ui/GlassCube";
 import ScrollFloat from "@/components/ScrollFloat";
 
@@ -16,7 +16,8 @@ const iconMap: Record<string, LucideIcon> = {
   Shield,
   Users,
   FileCheck,
-  MessageSquare
+  MessageSquare,
+  Plane
 };
 
 export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
@@ -31,11 +32,12 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
             containerClassName="mb-4"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            THE REAL DIFFERENCE
+            BUILT FOR REPEAT CAPTURE
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            You need reliable pilots who can show up and execute. With years
-            in aviation, we handle the flight so you can focus on the results.
+            We've flown construction, mapping, and survey work, and we know what a
+            capture program needs: the same aircraft, the same flight plans, and the
+            same standards on every visit.
           </p>
         </div>
 

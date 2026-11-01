@@ -37,7 +37,7 @@ const Contact = () => {
               Let's Talk
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Need a pilot for an upcoming job? Fill out the form below or reach us at{" "}
+              Planning a capture program or need a site flown? Fill out the form below or reach us at{" "}
               <a
                 href="mailto:info@levoair.com"
                 className="text-primary hover:underline"

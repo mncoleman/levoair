@@ -36,7 +36,7 @@ export const Footer = () => {
               />
             </Link>
             <p className="text-sm text-muted-foreground">
-              Contract drone pilots for the industry
+              Recurring drone capture for construction and mapping
             </p>
             <div className="flex space-x-3 pt-1">
               <a

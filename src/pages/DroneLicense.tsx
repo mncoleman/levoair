@@ -912,22 +912,22 @@ const DroneLicense = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="p-10 md:p-14 text-center border-primary/20 bg-card/60 backdrop-blur-md">
               <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-                Need a Pilot Now?
+                Need a Site Flown?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Skip the Process. Hire One of Ours.
+                Skip the Process. Use Our Fleet.
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                If you need certified pilots for an upcoming job rather than
-                going through certification yourself, LevoAir provides FAA Part
-                107 certified contract pilots ready to deploy.
+                If you need sites captured rather than going through
+                certification yourself, LevoAir flies our own aircraft with FAA
+                Part 107 certified pilots, for one job or a recurring program.
               </p>
               <Button
                 asChild
                 className="gradient-primary font-semibold"
                 size="lg"
               >
-                <Link to="/contact">Hire a Pilot</Link>
+                <Link to="/contact">Plan a Program</Link>
               </Button>
             </Card>
           </div>

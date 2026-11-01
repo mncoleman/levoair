@@ -3,32 +3,34 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { CTASection } from "@/components/home/CTASection";
+import { ProblemSection } from "@/components/home/ProblemSection";
+import { PlanSection } from "@/components/home/PlanSection";
 import usePageTitle from "@/lib/usePageTitle";
 
 const features = [
   {
     id: "1",
-    title: "FAA Part 107 certified and regulation-ready",
-    description: "LAANC authorizations, airspace waivers, and full regulatory compliance handled for you",
-    icon_name: "Shield",
+    title: "Our fleet, standardized",
+    description: "One fleet with matched sensors and settings, so every capture lines up with the last",
+    icon_name: "Plane",
   },
   {
     id: "2",
-    title: "Pilots who integrate with your team",
-    description: "We show up, learn your workflow, and operate like an extension of your crew",
-    icon_name: "Users",
-  },
-  {
-    id: "3",
-    title: "Operational precision on every flight",
-    description: "Thorough flight planning, safety protocols, and mission execution you can count on",
+    title: "Repeatable flight plans",
+    description: "Saved missions flown the same way every visit, so progress data compares cleanly week over week",
     icon_name: "FileCheck",
   },
   {
+    id: "3",
+    title: "Compliance handled",
+    description: "FAA Part 107 certified, with LAANC authorizations, airspace waivers, and safety protocols on every flight",
+    icon_name: "Shield",
+  },
+  {
     id: "4",
-    title: "Clear communication from start to finish",
-    description: "Coordination and updates throughout every operation so you always know the status",
-    icon_name: "MessageSquare",
+    title: "Built to fit your program",
+    description: "We work inside your standards, reporting, and delivery format, directly or within your existing flight partner's program",
+    icon_name: "Users",
   },
 ];
 
@@ -41,14 +43,18 @@ const Home = () => {
 
       <main className="pt-16">
         <HeroSection
-          badgeText="CONTRACT DRONE PILOTS"
-          headline="Your Drones. Our Pilots."
-          subheadline="FAA-certified contract pilots ready to fly your fleet and run your operations"
-          ctaText="Hire a Pilot"
+          badgeText="DRONE OPERATIONS AT SCALE"
+          headline="Our Drones. Your Data on Schedule."
+          subheadline="Recurring drone capture for construction, mapping, and inspection programs. We own the aircraft, fly the missions, and deliver the data."
+          ctaText="Plan a Program"
           ctaLink="/contact"
         />
 
+        <ProblemSection />
+
         <FeaturesSection features={features} />
+
+        <PlanSection />
 
         <CTASection />
       </main>
