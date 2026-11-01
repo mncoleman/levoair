@@ -27,3 +27,10 @@ export const proofStats: ProofStat[] = [
 ];
 
 export const proofProjects: ProofProject[] = [];
+
+/**
+ * What platform pilot checklists screen for, shown as a row of tags.
+ * TODO(Matthew): add only what is true today, e.g. "$1M liability insurance",
+ * "RTK aircraft", "RTK base station on site", "Mavic 3 Enterprise RTK".
+ */
+export const proofCredentials: string[] = [];

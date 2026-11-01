@@ -11,17 +11,16 @@ export const ProblemSection = () => {
           containerClassName="mb-6"
           textClassName="text-4xl md:text-5xl font-bold"
         >
-          Scale Breaks Pilot Networks
+          Contract Pilots Don't Grow With Your Sales
         </ScrollFloat>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          One flight is easy to staff. Dozens of sites on a weekly cadence is not.
-          When every mission depends on a different freelancer with different gear,
-          captures arrive late, overlaps miss, and the data your team builds
-          schedules on stops lining up. You end up managing pilots instead of
-          delivering results.
+          You sign a builder with forty sites and the flights land on a list of
+          contract pilots. One can't make Tuesday. One flies the wrong overlap.
+          One uploads three days late. Your QA team catches it, your ops team
+          reschedules, and you're recruiting again before the next market opens.
         </p>
         <p className="text-lg text-foreground/90 mt-6 font-medium">
-          The data you make decisions on shouldn't depend on who showed up that day.
+          Your customer signed with you, so every missed flight is yours to explain.
         </p>
       </div>
     </section>

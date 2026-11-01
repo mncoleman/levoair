@@ -16,11 +16,11 @@ const iconMap: Record<string, LucideIcon> = {
 const services = [
   {
     id: "1",
-    title: "Recurring Site Capture",
+    title: "Platform & Program Flights",
     icon_name: "Plane",
-    short_description: "Scheduled flights across one site or a full portfolio, flown to the same plan every visit for clean progress comparisons",
+    short_description: "Contract capture for drone data platforms and flight programs: your protocol, your app, fixed flight days, and same-day uploads",
     link: "/contact",
-    linkText: "Plan a program",
+    linkText: "Book a test flight",
   },
   {
     id: "2",
@@ -34,7 +34,7 @@ const services = [
     id: "3",
     title: "Mapping & Survey Operations",
     icon_name: "Map",
-    short_description: "Photogrammetry, orthomosaics, and survey-grade flight planning for land and site assessment, delivered in the format your team processes",
+    short_description: "Photogrammetry and orthomosaic flights planned to your overlap, altitude, and ground control spec, delivered in the format your team processes",
     link: "/drone-mapping-services",
     linkText: "Drone mapping services",
   },
@@ -67,7 +67,7 @@ const Services = () => {
       <Navbar />
       <Seo
         title="Drone Services: Site Capture, Mapping & Inspection | LevoAir"
-        description="Recurring drone site capture, construction progress flights, photogrammetry mapping, and inspection by FAA Part 107 certified pilots. Plan a program with LevoAir."
+        description="Contract drone flights for data platforms and flight programs, plus construction, mapping, and inspection capture by FAA Part 107 pilots. Book a test flight."
         path="/services"
         jsonLd={servicesSeo}
       />
@@ -78,7 +78,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">What We Do</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We handle the flying. You get the data.
+              Capture missions flown to your spec, for platforms, flight programs, and the builders they serve.
             </p>
           </div>
 

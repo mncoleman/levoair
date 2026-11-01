@@ -1,11 +1,11 @@
 import ScrollFloat from "@/components/ScrollFloat";
 import GlassCube from "@/components/ui/GlassCube";
-import { proofStats, proofProjects } from "@/lib/proof";
+import { proofStats, proofProjects, proofCredentials } from "@/lib/proof";
 
 /** Renders only the proof that has been filled in. Hidden entirely when empty. */
 export const ProofSection = () => {
   const stats = proofStats.filter((s) => s.value);
-  if (!stats.length && !proofProjects.length) return null;
+  if (!stats.length && !proofProjects.length && !proofCredentials.length) return null;
 
   return (
     <section className="py-24 relative">
@@ -34,6 +34,19 @@ export const ProofSection = () => {
               </div>
             ))}
           </dl>
+        )}
+
+        {proofCredentials.length > 0 && (
+          <ul className="flex flex-wrap justify-center gap-3 mb-12">
+            {proofCredentials.map((item) => (
+              <li
+                key={item}
+                className="rounded-full border border-border bg-card/60 px-4 py-2 text-sm text-foreground/90"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         )}
 
         {proofProjects.length > 0 && (

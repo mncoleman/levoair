@@ -17,15 +17,15 @@ const values = [
   },
   {
     icon: Target,
-    title: "Consistency at Scale",
+    title: "On the Flight Day",
     description:
-      "The same flight plans and standards on every site, whether it's one visit or a recurring program",
+      "A site's flight day only moves when the weather does, and you hear about it from us first",
   },
   {
     icon: Zap,
-    title: "Ready to Deploy",
+    title: "Room to Grow",
     description:
-      "We stand up new sites quickly and run the full operation, from airspace planning to data delivery",
+      "New sites go on our schedule without a new pilot to recruit, vet, and train on your side",
   },
 ];
 
@@ -52,7 +52,7 @@ const About = () => {
         <Navbar />
       <Seo
           title="About LevoAir | FAA Part 107 Drone Operations"
-          description="LevoAir runs drone capture programs for construction, mapping, and inspection, flying every site to the same plan with FAA-certified pilots."
+          description="LevoAir flies drone capture missions for data platforms, flight programs, and builders, with FAA Part 107 pilots, fixed flight days, and same-day uploads."
           path="/about"
           jsonLd={aboutSeo}
         />
@@ -87,11 +87,11 @@ const About = () => {
               <GlassCube className="w-full" wobbleAngle={0.5}>
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
-                    LevoAir runs drone capture programs for construction, mapping, and inspection.
-                    Our FAA-certified pilots fly every site to the same plan and deliver consistent
-                    data on the schedule your projects run on. We work directly with
-                    builders and as a dedicated operator inside larger programs, under the standards
-                    of the platform or prime contractor we fly for.
+                    LevoAir flies drone capture missions for data platforms, flight programs, and
+                    the builders they serve. We fly the client's protocol in the client's app, upload
+                    the same day, and add sites without the client recruiting another pilot. We work
+                    directly with builders and as a dedicated operator inside larger programs, under
+                    the standards of the platform or prime contractor we fly for.
                   </p>
                 </div>
               </GlassCube>
@@ -146,8 +146,7 @@ const About = () => {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 From construction sites to land surveys, we've flown operations across a range
                 of industries. Our pilots understand airspace regulations, LAANC authorizations,
-                and the operational discipline it takes to capture a site right the first time,
-                then do it again the same way next week.
+                and the operational discipline it takes to capture a site right the first time.
               </p>
             </div>
           </div>

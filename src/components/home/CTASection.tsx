@@ -17,26 +17,25 @@ export const CTASection = () => {
           }}
         >
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block">
-            READY TO SCALE
+            ADD CAPACITY
           </span>
 
           <ScrollFloat
             containerClassName="mb-0"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            Put Your Sites on a Schedule
+            Hand Us One Site
           </ScrollFloat>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A missed capture is a gap in the record you can't fly back and fill.
-            We keep every site on cadence, flown the same way, so your team works
-            from complete data. Start with one site or a full portfolio.
+            Send a site and your flight protocol. We'll fly it, upload it, and let
+            your QA team decide whether we get the next ten.
           </p>
 
           <div className="pt-2">
             <Link to="/contact">
               <Button size="lg" className="gradient-primary font-semibold group">
-                Plan a Program
+                Book a Test Flight
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

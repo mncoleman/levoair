@@ -7,9 +7,9 @@ import { Seo } from "@/components/Seo";
 import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 
 const nextSteps = [
-  "We read your sites, cadence, and deliverables.",
-  "We check the airspace and come back with a flight plan and a quote.",
-  "Once you approve, your first flight goes on the calendar.",
+  "We read your flight protocol, sites, and deliverable spec.",
+  "We check the airspace and schedule a test flight on one site.",
+  "Your QA team grades the upload, then we set flight days for the rest.",
 ];
 import { trackContactClick } from "@/lib/analytics";
 
@@ -41,8 +41,8 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Seo
-        title="Plan a Drone Capture Program | Contact LevoAir"
-        description="Tell us your sites, cadence, and deliverables. LevoAir reviews the airspace and comes back with a flight plan and quote."
+        title="Book a Test Flight | Contact LevoAir"
+        description="Send LevoAir one site and your flight protocol. We fly it, upload it, and your QA team grades the data before you hand over more."
         path="/contact"
         jsonLd={contactSeo}
       />
@@ -51,11 +51,11 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Plan Your Program
+              Book a Test Flight
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Planning a capture program or need a site flown? Tell us about your
-              sites and we'll come back with a plan.
+              Send one site and your flight protocol, or tell us about the program
+              you need covered.
             </p>
           </div>
 

@@ -4,18 +4,18 @@ import ScrollFloat from "@/components/ScrollFloat";
 const steps = [
   {
     number: "01",
-    title: "Scope the program",
-    description: "Tell us your sites, cadence, and deliverables. We map the airspace and build the flight plans.",
+    title: "Send the spec",
+    description: "Share your flight protocol, deliverable spec, and the sites you need covered. We check the airspace on each one.",
   },
   {
     number: "02",
-    title: "We fly on schedule",
-    description: "Our pilots fly every site on the cadence you set, with LAANC and site coordination handled.",
+    title: "We fly a test site",
+    description: "We fly one site to your protocol, in your app, so your QA team can grade the upload before handing over more.",
   },
   {
     number: "03",
-    title: "Data lands in your format",
-    description: "Every visit uploads in the format your team processes, ready to compare against the last one.",
+    title: "Hand over the schedule",
+    description: "Sites go on fixed flight days. LAANC requests, site contacts, and uploads are ours to handle.",
   },
 ];
 
@@ -25,13 +25,13 @@ export const PlanSection = () => {
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="text-center mb-16">
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-            HOW IT WORKS
+            HOW WE START
           </span>
           <ScrollFloat
             containerClassName="mb-0"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            From Scope to Scheduled Capture
+            From Test Flight to Full Schedule
           </ScrollFloat>
         </div>
 

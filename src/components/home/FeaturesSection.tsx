@@ -32,12 +32,11 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
             containerClassName="mb-4"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            BUILT FOR REPEAT CAPTURE
+            BUILT FOR PLATFORM WORK
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We've flown construction, mapping, and survey work, and we know what a
-            capture program needs: the same flight plans and standards on every
-            visit, with one team accountable for the schedule.
+            What your flight ops team checks before handing over a site, covered
+            before the first mission.
           </p>
         </div>
 

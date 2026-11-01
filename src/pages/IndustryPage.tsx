@@ -63,9 +63,9 @@ const IndustryPage = ({ path }: { path: string }) => {
           </nav>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">{industry.headline}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">{industry.intro}</p>
-          <Link to="/contact" onClick={() => trackCTAClick("Plan a Program", `industry_${industry.name}`)}>
+          <Link to="/contact" onClick={() => trackCTAClick("Book a Test Flight", `industry_${industry.name}`)}>
             <Button size="lg" className="gradient-primary font-semibold group">
-              Plan a Program
+              Book a Test Flight
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>

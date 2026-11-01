@@ -12,26 +12,26 @@ import { SITE, organizationSchema } from "@/lib/site";
 const features = [
   {
     id: "1",
-    title: "One accountable operator",
-    description: "One team owns your capture schedule, so you stop coordinating freelancers site by site",
-    icon_name: "Plane",
-  },
-  {
-    id: "2",
-    title: "Repeatable flight plans",
-    description: "Saved missions flown the same way every visit, so progress data compares cleanly week over week",
+    title: "Your protocol, your app",
+    description: "We fly the missions you build, in the app you use, to the altitude, overlap, and ground control on your spec sheet",
     icon_name: "FileCheck",
   },
   {
+    id: "2",
+    title: "Flown on the flight day",
+    description: "Each site gets a fixed day. If weather moves a flight, you hear from us with the new date before your customer asks",
+    icon_name: "Plane",
+  },
+  {
     id: "3",
-    title: "Compliance handled",
-    description: "FAA Part 107 certified, with LAANC authorizations, airspace waivers, and safety protocols on every flight",
+    title: "Checked before we leave",
+    description: "We review coverage on site before packing up, so the upload clears your QA and you don't pay for a reflight",
     icon_name: "Shield",
   },
   {
     id: "4",
-    title: "Built to fit your program",
-    description: "We work inside your standards, reporting, and delivery format, directly or within your existing flight partner's program",
+    title: "Capacity in one contract",
+    description: "Add sites without onboarding another pilot. One contact and one invoice, directly or through the flight partner you already use",
     icon_name: "Users",
   },
 ];
@@ -53,18 +53,18 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Seo
-        title="LevoAir | Recurring Drone Capture for Construction & Mapping"
-        description="LevoAir runs recurring drone capture for construction, mapping, and inspection programs. FAA Part 107 pilots fly every site the same way and deliver data on schedule."
+        title="LevoAir | Contract Drone Flight Operations for Capture Programs"
+        description="LevoAir flies drone capture missions for data platforms, flight programs, and builders. Your protocol, fixed flight days, same-day uploads, FAA Part 107 pilots."
         path="/"
         jsonLd={homeSeo}
       />
 
       <main className="pt-16">
         <HeroSection
-          badgeText="DRONE OPERATIONS AT SCALE"
-          headline="Stop Chasing Pilots. Get Data on Schedule."
-          subheadline="Recurring drone capture for construction, mapping, and inspection programs. We plan the flights, fly every site the same way, and deliver the data on your cadence."
-          ctaText="Plan a Program"
+          badgeText="FLIGHT OPERATIONS PARTNER"
+          headline="Flight Capacity You Don't Have to Recruit"
+          subheadline="LevoAir flies capture missions for drone data platforms and flight programs. We fly your protocol in your app, upload the same day, and take on new sites without you hiring another pilot."
+          ctaText="Book a Test Flight"
           ctaLink="/contact"
         />
 
