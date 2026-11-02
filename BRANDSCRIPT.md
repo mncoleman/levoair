@@ -8,7 +8,7 @@ LevoAir is the flight operations partner a drone data platform or flight program
 
 ## Voice
 
-apple.com: short declarative lines, sentence-case headlines with periods, plain words, second person, one idea per sentence. Fragments are fine in headlines and card titles, full sentences in body copy.
+apple.com clarity (plain words, sentence-case headlines, second person), filtered through the hub's `marketing/dovito-voice` tells: no fragment pairs or staccato runs, no tricolons or anaphora, no genre labels like "THE PROBLEM", no aphoristic closers, a person in every lede, contractions on, warm and hospitable (section 10d).
 
 ## What platforms need from pilots (research, 2026-11-01)
 
@@ -60,4 +60,4 @@ Sold sites go on the schedule the week they're sold, and uploads clear QA the fi
 
 ## One-liner
 
-LevoAir flies capture missions for drone data platforms and flight programs. Your protocol. Your app. Uploaded the same day.
+LevoAir flies capture missions for drone data platforms and flight programs. We fly your protocol in the app you already use, and we upload the same day.

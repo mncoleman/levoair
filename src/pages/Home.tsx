@@ -12,26 +12,26 @@ import { SITE, organizationSchema } from "@/lib/site";
 const features = [
   {
     id: "1",
-    title: "Your protocol. Exactly.",
-    description: "We fly the missions you build, in the app you already use. Altitude, overlap, ground control. All to spec.",
+    title: "We fly your protocol",
+    description: "You build the mission, and we fly it in your app at the altitude, overlap, and ground control on your spec sheet.",
     icon_name: "FileCheck",
   },
   {
     id: "2",
-    title: "On the day. Every time.",
-    description: "Every site gets a fixed flight day. If the weather moves it, you'll know before your customer does.",
+    title: "Every site has a flight day",
+    description: "If weather moves a flight, we'll tell you the new date before your customer asks about it.",
     icon_name: "Plane",
   },
   {
     id: "3",
-    title: "Right the first time.",
-    description: "We check coverage before we leave the site. So the upload clears QA, and nobody flies it twice.",
+    title: "We check coverage before leaving",
+    description: "Our pilots review the capture on site, so the upload clears your QA and nobody drives back out for a reflight.",
     icon_name: "Shield",
   },
   {
     id: "4",
-    title: "Room to grow.",
-    description: "Add sites without adding pilots. One team, one contact, one invoice. Directly or through the partner you already use.",
+    title: "New sites go on our schedule",
+    description: "You won't need to onboard another pilot. We work with you directly or through the flight partner you already use, with one contact either way.",
     icon_name: "Users",
   },
 ];
@@ -54,16 +54,16 @@ const Home = () => {
       <Navbar />
       <Seo
         title="LevoAir | Contract Drone Flight Operations for Capture Programs"
-        description="LevoAir flies drone capture missions for data platforms, flight programs, and builders. Your protocol, fixed flight days, same-day uploads, FAA Part 107 pilots."
+        description="LevoAir flies drone capture missions for data platforms, flight programs, and builders, with FAA Part 107 pilots, a fixed flight day for every site, and same-day uploads."
         path="/"
         jsonLd={homeSeo}
       />
 
       <main className="pt-16">
         <HeroSection
-          badgeText="FLIGHT OPERATIONS"
-          headline="Sell the sites. We'll fly them."
-          subheadline="LevoAir flies capture missions for drone data platforms and flight programs. Your protocol. Your app. Uploaded the same day."
+          badgeText="FOR DRONE DATA PLATFORMS"
+          headline="You sell the sites, and we'll fly them."
+          subheadline="We fly capture missions for drone data platforms and flight programs, using your protocol in the app you already use, and we upload the same day."
           ctaText="Book a Test Flight"
           ctaLink="/contact"
         />

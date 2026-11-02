@@ -9,7 +9,7 @@ import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 const nextSteps = [
   "We review your protocol, sites, and deliverables.",
   "We check the airspace and schedule a test flight.",
-  "Your QA team grades the upload. Then we set flight days for the rest.",
+  "Once your QA team has graded the upload, we set flight days for the rest.",
 ];
 import { trackContactClick } from "@/lib/analytics";
 
@@ -54,8 +54,8 @@ const Contact = () => {
               Book a Test Flight
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Send us one site and your protocol. Or tell us about the program you
-              need covered.
+              We'd love to hear about your program! Send us one site and your
+              protocol, or tell us how many sites you need covered and where.
             </p>
           </div>
 

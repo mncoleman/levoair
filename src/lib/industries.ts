@@ -35,10 +35,10 @@ export const industries: Industry[] = [
       "Recurring drone capture for active job sites. Progress, earthwork, and mapping flights flown to the same plan every visit by FAA Part 107 pilots.",
     headline: "Construction Drone Services",
     intro:
-      "Scheduled drone capture for active job sites. Every visit is flown to the same plan, so progress, earthwork, and site conditions compare cleanly week to week.",
+      "Scheduled drone capture for active job sites. We fly every visit to the same plan, so you can compare progress and earthwork week to week.",
     problemHeading: "Progress Data Only Works If It's Consistent",
     problem:
-      "A missed week, or a flight flown at a different altitude, leaves a gap your schedule and your stakeholders feel. Recurring capture needs the same plan, the same standards, and a team that shows up on the date.",
+      "When a week gets missed or a flight runs at a different altitude, your team ends up with a gap in the record that nobody can fly back and fill. We keep each site on a fixed flight day and fly it to the saved plan every time.",
     captures: [
       "Repeat mapping flights for orthomosaics and surface models",
       "Progress photo and video sets for owner and lender updates",
@@ -66,7 +66,7 @@ export const industries: Industry[] = [
       "Photogrammetry flights planned for the deliverable you need. Overlap, altitude, and ground sample distance are set up front and flown the same way every time.",
     problemHeading: "Bad Flight Plans Mean Reflying the Site",
     problem:
-      "Mapping data falls apart when the flight isn't planned for it. Thin overlap, shifting altitude, or missed coverage means reprocessing, or sending someone back out to fly it again.",
+      "If the overlap runs thin or the altitude drifts, your team either reprocesses the data or sends someone back out to fly the site again. We plan the flight around your deliverable before anyone drives out.",
     captures: [
       "Nadir photogrammetry flights for orthomosaics",
       "Surface and terrain model capture",
@@ -94,10 +94,10 @@ export const industries: Industry[] = [
       "Drone inspection of roofs, facades, structures, and infrastructure without lifts or crews at height. Repeat inspections flown from saved positions.",
     headline: "Drone Inspection Services",
     intro:
-      "Close-range drone inspection of roofs, facades, structures, and infrastructure, without lifts, scaffolding, or crews working at height.",
+      "Close-range drone inspection of roofs, facades, and infrastructure, so your crew can stay on the ground.",
     problemHeading: "Getting Eyes Up There Is Slow and Risky",
     problem:
-      "A look at a roof, facade, or structure usually means equipment rental, people at height, and lost time. A drone flight gets the same view faster, and a saved flight gets it again next time from the same angles.",
+      "Getting a close look at a roof or facade usually means renting a lift and putting someone at height. We get the same view with a drone in less time, and we save each position so the next inspection matches the first.",
     captures: [
       "Roof and facade inspection imagery",
       "Infrastructure and structure documentation",

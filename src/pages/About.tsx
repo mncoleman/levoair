@@ -11,21 +11,21 @@ import { BlurText } from "@/components/ui/BlurText";
 const values = [
   {
     icon: Shield,
-    title: "Safety first.",
+    title: "Safety and compliance",
     description:
-      "FAA Part 107 certified, with LAANC and safety protocols on every flight. Compliance is our job, not yours.",
+      "Our pilots are FAA Part 107 certified, and we file LAANC requests and run safety protocols on every flight.",
   },
   {
     icon: Target,
-    title: "On the day.",
+    title: "We keep the flight day",
     description:
-      "A flight day moves only when the weather does. And you'll hear about it from us first.",
+      "We'll only move a flight for weather, and you'll hear about it from us first.",
   },
   {
     icon: Zap,
-    title: "Room to grow.",
+    title: "Room to grow",
     description:
-      "New sites go on our schedule. No new pilot to recruit, vet, or train on your side.",
+      "New sites go on our schedule, so there's no new pilot for you to recruit or train.",
   },
 ];
 
@@ -88,8 +88,8 @@ const About = () => {
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
                     LevoAir flies capture missions for drone data platforms, flight programs, and
-                    the builders they serve. We fly your protocol in your app and upload the same day.
-                    When you add sites, we add flights, not paperwork. We work directly with builders
+                    the builders they serve. We fly your protocol in your app and upload the same day,
+                    and when you add sites, we put them on our schedule. We work directly with builders
                     and as a dedicated operator inside larger programs, always to the standards of the
                     platform or prime we fly for.
                   </p>
@@ -144,8 +144,9 @@ const About = () => {
                 Our Experience
               </ScrollFloat>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Construction sites. Land surveys. Inspections. We know the airspace, we know
-                LAANC, and we know what it takes to capture a site right the first time.
+                We've flown construction sites, land surveys, and inspections. Our pilots handle
+                airspace and LAANC themselves and know what it takes to capture a site right the
+                first time.
               </p>
             </div>
           </div>

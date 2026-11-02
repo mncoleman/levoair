@@ -74,9 +74,6 @@ const IndustryPage = ({ path }: { path: string }) => {
         {/* Problem */}
         <section className="py-16">
           <div className="container mx-auto px-4 max-w-3xl text-center">
-            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-              THE PROBLEM
-            </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">{industry.problemHeading}</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">{industry.problem}</p>
           </div>

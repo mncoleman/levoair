@@ -26,16 +26,16 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-            WHY LEVOAIR
+            HOW WE FLY
           </span>
           <ScrollFloat
             containerClassName="mb-4"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            Made for the way you fly.
+            We fly to your spec
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything your ops team asks of a pilot. Handled before the first flight.
+            Your ops team has a checklist for every pilot it brings on, and we'll cover it before the first flight.
           </p>
         </div>
 

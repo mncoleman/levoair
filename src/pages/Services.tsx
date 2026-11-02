@@ -18,7 +18,7 @@ const services = [
     id: "1",
     title: "Platform & Program Flights",
     icon_name: "Plane",
-    short_description: "Contract capture for drone data platforms and flight programs. Your protocol, your app, a fixed flight day, and same-day uploads.",
+    short_description: "We fly contract capture for drone data platforms and flight programs, in your app and to your protocol, with a fixed flight day for every site and uploads the same day.",
     link: "/contact",
     linkText: "Book a test flight",
   },
@@ -26,7 +26,7 @@ const services = [
     id: "2",
     title: "Construction",
     icon_name: "Building2",
-    short_description: "Progress, earthwork, and site capture for active job sites.",
+    short_description: "Progress, earthwork, and site capture flights for active job sites.",
     link: "/construction-drone-services",
     linkText: "Construction drone services",
   },
@@ -34,7 +34,7 @@ const services = [
     id: "3",
     title: "Mapping & Survey Operations",
     icon_name: "Map",
-    short_description: "Photogrammetry and orthomosaics, flown to your overlap, altitude, and ground control spec.",
+    short_description: "Photogrammetry and orthomosaic flights, planned to the overlap, altitude, and ground control your deliverable needs.",
     link: "/drone-mapping-services",
     linkText: "Drone mapping services",
   },
@@ -42,7 +42,7 @@ const services = [
     id: "4",
     title: "Inspection",
     icon_name: "ScanSearch",
-    short_description: "Roofs, facades, structures, and infrastructure. No lifts. No crews at height. Saved positions for every return visit.",
+    short_description: "Roof, facade, and infrastructure inspection without lifts or crews at height. We save each position so return visits match the first one.",
     link: "/drone-inspection-services",
     linkText: "Drone inspection services",
   },
@@ -78,7 +78,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">What We Do</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Capture flown to your spec. For platforms, programs, and the builders they serve.
+              We fly capture to your spec for drone data platforms, flight programs, and the builders they serve.
             </p>
           </div>
 
