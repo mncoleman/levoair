@@ -40,11 +40,10 @@ import { Seo } from "@/components/Seo";
 import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
-import GlassCube from "@/components/ui/GlassCube";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { trackEvent, trackOutboundLink } from "@/lib/analytics";
 
-type Purpose = "recreational" | "part107" | "unsure";
+type Purpose = "recreational" | "part107";
 type Verdict = "required" | "not-required" | "gray";
 
 const ecfr = (section: string) =>
@@ -409,17 +408,6 @@ const purposeContent: Record<
       { label: "Remote ID", required: true, text: "Every drone" },
     ],
   },
-  unsure: {
-    title: "Not Clearly Recreational",
-    intro:
-      "The no-license option only covers flights that are purely for fun. A practical task, like checking your own roof or gutters, is not clearly covered. The safe choice is to fly under Part 107 with a licensed pilot, or confirm with the FAA's User Identification Tool.",
-    needs: [
-      { label: "Pilot license", required: true, text: "Safest: Part 107 certificate" },
-      { label: "Knowledge test", required: true, text: "About $175, once" },
-      { label: "Registration", required: true, text: "Every drone, any weight" },
-      { label: "Remote ID", required: true, text: "Every drone" },
-    ],
-  },
 };
 
 const verdictStyle: Record<
@@ -518,7 +506,14 @@ interface SurveyQuestion {
   /** Shown with the result: "Because {reason}." */
   yesReason?: string;
   noReason?: string;
+  /** Hint tag on each answer button; the deciding answer's tag becomes the result headline. */
+  yesTag: string;
+  noTag: string;
 }
+
+const LICENSE_TAG = "Needs a license";
+const RECREATIONAL_TAG = "Probably recreational";
+const isLicenseTag = (tag: string) => /license needed|needs a license/i.test(tag) && !/no license/i.test(tag);
 
 const surveyQuestions: SurveyQuestion[] = [
   {
@@ -526,6 +521,8 @@ const surveyQuestions: SurveyQuestion[] = [
     q: "Will you get anything in return for this flight?",
     help: "Money, a discount, free products, a trade, or a favor all count. It does not matter who pays or how much.",
     yes: "part107",
+    yesTag: LICENSE_TAG,
+    noTag: RECREATIONAL_TAG,
     yesReason: "you are getting something in return for the flight",
   },
   {
@@ -533,6 +530,8 @@ const surveyQuestions: SurveyQuestion[] = [
     q: "Is the flight connected to a business or job?",
     help: "Yours, your employer's, or a client's. Think inspections, estimates, listings, job sites, or marketing, even if nobody pays for the drone part.",
     yes: "part107",
+    yesTag: LICENSE_TAG,
+    noTag: RECREATIONAL_TAG,
     yesReason: "the flight supports a business or job",
   },
   {
@@ -540,6 +539,8 @@ const surveyQuestions: SurveyQuestion[] = [
     q: "Are you flying for an organization?",
     help: "A church, nonprofit, school, HOA, club, or volunteer group, even if you are not paid.",
     yes: "part107",
+    yesTag: LICENSE_TAG,
+    noTag: RECREATIONAL_TAG,
     yesReason: "you are flying on behalf of an organization",
   },
   {
@@ -547,6 +548,8 @@ const surveyQuestions: SurveyQuestion[] = [
     q: "Will the photos or video be used to earn money or promote something?",
     help: "A monetized channel, selling footage, ads, or promoting a business or brand.",
     yes: "part107",
+    yesTag: LICENSE_TAG,
+    noTag: RECREATIONAL_TAG,
     yesReason: "the footage will earn money or promote something",
   },
   {
@@ -554,18 +557,20 @@ const surveyQuestions: SurveyQuestion[] = [
     q: "Is the flight just for fun?",
     help: "Practicing, sightseeing, or filming for yourself, friends, and family. Not a chore or a task you need done.",
     yes: "recreational",
-    no: "unsure",
+    no: "part107",
+    yesTag: "Recreational, no license needed",
+    noTag: "Commercial, license needed",
     yesReason:
       "the flight is just for fun, with no payment, business, or organization involved",
     noReason:
-      "the flight has a practical purpose, even though no business is involved",
+      "the flight has a practical purpose, so it does not qualify as recreational",
   },
 ];
 
 const PurposeSurvey = ({
   onResult,
 }: {
-  onResult: (purpose: Purpose, reason: string) => void;
+  onResult: (purpose: Purpose, reason: string, headline: string) => void;
 }) => {
   const [step, setStep] = useState(0);
   const question = surveyQuestions[step];
@@ -584,7 +589,8 @@ const PurposeSurvey = ({
       });
       onResult(
         result,
-        (value === "yes" ? question.yesReason : question.noReason) ?? ""
+        (value === "yes" ? question.yesReason : question.noReason) ?? "",
+        value === "yes" ? question.yesTag : question.noTag
       );
     } else {
       setStep(step + 1);
@@ -625,15 +631,28 @@ const PurposeSurvey = ({
           {question.help}
         </p>
         <div className="grid grid-cols-2 gap-3">
-          {(["yes", "no"] as const).map((v) => (
-            <button
-              key={v}
-              onClick={() => answer(v)}
-              className="min-h-[56px] rounded-xl border-2 border-border bg-card/50 text-base font-semibold hover:border-primary hover:bg-primary/10 active:scale-[0.98] transition-all"
-            >
-              {v === "yes" ? "Yes" : "No"}
-            </button>
-          ))}
+          {(["yes", "no"] as const).map((v) => {
+            const tag = v === "yes" ? question.yesTag : question.noTag;
+            const license = isLicenseTag(tag);
+            return (
+              <button
+                key={v}
+                onClick={() => answer(v)}
+                className="flex flex-col items-stretch gap-2 rounded-xl border-2 border-border bg-card/50 p-3 text-left hover:border-primary hover:bg-primary/10 active:scale-[0.98] transition-all"
+              >
+                <span
+                  className={`self-end text-right rounded-md px-2 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider leading-tight ${
+                    license ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {tag}
+                </span>
+                <span className="px-1 pb-1 text-lg font-semibold">
+                  {v === "yes" ? "Yes" : "No"}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -643,26 +662,24 @@ const PurposeSurvey = ({
 const PurposeSummary = ({
   purpose,
   reason,
+  headline,
   onRestart,
 }: {
   purpose: Purpose;
   reason: string;
+  headline: string;
   onRestart: () => void;
 }) => {
   const content = purposeContent[purpose];
   return (
     <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <GlassCube className="w-full" wobbleAngle={purpose === "recreational" ? 0 : 1.5}>
+      <div className={`w-full rounded-2xl border bg-card/60 ${purpose === "recreational" ? "border-border" : "border-primary/40"}`}>
         <div className="p-6 md:p-8">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-2 block">
             Your Result
           </span>
-          <h3 className="text-2xl md:text-3xl font-bold text-gradient mb-3">
-            {purpose === "recreational"
-              ? "No License Needed"
-              : purpose === "part107"
-                ? "You Need a Licensed Pilot"
-                : "Play It Safe: Use a Licensed Pilot"}
+          <h3 className="text-3xl md:text-4xl font-bold text-gradient mb-3 leading-tight">
+            {headline}
           </h3>
           <p className="text-sm text-foreground/80 mb-4">
             Because {reason}.
@@ -719,7 +736,7 @@ const PurposeSummary = ({
             )}
           </div>
         </div>
-      </GlassCube>
+      </div>
     </div>
   );
 };
@@ -829,7 +846,7 @@ const FaqSection = ({ group }: { group: FaqGroup }) => (
 );
 
 const DroneLicenseRequirements = () => {
-  const [result, setResult] = useState<{ purpose: Purpose; reason: string } | null>(null);
+  const [result, setResult] = useState<{ purpose: Purpose; reason: string; headline: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -888,11 +905,12 @@ const DroneLicenseRequirements = () => {
               <PurposeSummary
                 purpose={result.purpose}
                 reason={result.reason}
+                headline={result.headline}
                 onRestart={() => setResult(null)}
               />
             ) : (
               <PurposeSurvey
-                onResult={(purpose, reason) => setResult({ purpose, reason })}
+                onResult={(purpose, reason, headline) => setResult({ purpose, reason, headline })}
               />
             )}
           </div>
