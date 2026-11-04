@@ -23,7 +23,7 @@ export const ProofSection = () => {
         </div>
 
         {stats.length > 0 && (
-          <dl className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <dl className={`grid gap-5 mb-12 ${stats.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"}`}>
             {stats.map((stat) => (
               <div
                 key={stat.label}

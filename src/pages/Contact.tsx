@@ -8,7 +8,7 @@ import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 
 const nextSteps = [
   "We review your protocol, sites, and deliverables.",
-  "We check the airspace and schedule a test flight.",
+  "We check the airspace and, where it allows, schedule a preliminary flight.",
   "Once your QA team has graded the upload, we set flight days for the rest.",
 ];
 import { trackContactClick } from "@/lib/analytics";
@@ -41,7 +41,7 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Seo
-        title="Book a Test Flight | Contact LevoAir"
+        title="Book a Preliminary Flight | Contact LevoAir"
         description="Send LevoAir one site and your flight protocol. We fly it, upload it, and your QA team grades the data before you hand over more."
         path="/contact"
         jsonLd={contactSeo}
@@ -51,7 +51,7 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Book a Test Flight
+              Book a Preliminary Flight
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We'd love to hear about your program! Send us one site and your

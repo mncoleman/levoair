@@ -20,7 +20,7 @@ const services = [
     icon_name: "Plane",
     short_description: "We fly contract capture for drone data platforms and flight programs, in your app and to your protocol, with a fixed flight day for every site and uploads the same day.",
     link: "/contact",
-    linkText: "Book a test flight",
+    linkText: "Book a preliminary flight",
   },
   {
     id: "2",
@@ -67,7 +67,7 @@ const Services = () => {
       <Navbar />
       <Seo
         title="Drone Services: Site Capture, Mapping & Inspection | LevoAir"
-        description="Contract drone flights for data platforms and flight programs, plus construction, mapping, and inspection capture by FAA Part 107 pilots. Book a test flight."
+        description="Contract drone flights for data platforms and flight programs, plus construction, mapping, and inspection capture by FAA Part 107 pilots. Book a preliminary flight."
         path="/services"
         jsonLd={servicesSeo}
       />

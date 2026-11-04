@@ -6,10 +6,10 @@ export const SITE = {
   name: "LevoAir",
   url: "https://levoair.com",
   email: "info@levoair.com",
-  // TODO(Matthew): business phone, e.g. "(970) 555-0123". Shown on Contact and in the footer once set.
-  phone: "",
-  // TODO(Matthew): area you fly, e.g. "Northern Colorado and the Front Range". Used in schema once set.
-  areaServed: "",
+  // Shown on Contact and in the footer. Empty hides it.
+  phone: "(970) 670-7048",
+  // Used in structured data for local search.
+  areaServed: "Colorado",
   linkedin: "https://www.linkedin.com/company/levoair/",
   logo: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png",
   defaultImage: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/6915203a93f9db10714de5da.gif",

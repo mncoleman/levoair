@@ -64,7 +64,7 @@ const Home = () => {
           badgeText="FOR DRONE DATA PLATFORMS"
           headline="You sell the sites, and we'll fly them."
           subheadline="We fly capture missions for drone data platforms and flight programs, using your protocol in the app you already use, and we upload the same day."
-          ctaText="Book a Test Flight"
+          ctaText="Book a Preliminary Flight"
           ctaLink="/contact"
         />
 

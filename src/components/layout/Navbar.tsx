@@ -102,7 +102,7 @@ export const Navbar = () => {
           <div className="flex items-center space-x-2 z-10">
             <div className="hidden md:block">
               <Button asChild className="gradient-primary font-semibold text-sm whitespace-nowrap">
-                <Link to="/contact">Book a Test Flight</Link>
+                <Link to="/contact">Book a Preliminary Flight</Link>
               </Button>
             </div>
           </div>
