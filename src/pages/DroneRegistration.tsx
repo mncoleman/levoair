@@ -178,7 +178,7 @@ const part107Steps: Step[] = [
       "When in doubt, the FAA's guidance is to assume Part 107",
     ],
     link: {
-      url: "/drone-license-guide",
+      url: "/a/drone-license-guide",
       label: "Need the certificate first? Read our license guide",
     },
   },
@@ -989,18 +989,6 @@ const DroneRegistration = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Ambient background orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-0">
-        <div
-          className="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full blur-orb"
-          style={{ background: "hsl(43 84% 55% / 0.15)" }}
-        />
-        <div
-          className="absolute bottom-[20%] left-[5%] w-[500px] h-[500px] rounded-full blur-orb"
-          style={{ background: "hsl(38 90% 50% / 0.10)" }}
-        />
-      </div>
-
       <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Hero */}
@@ -1296,7 +1284,7 @@ const DroneRegistration = () => {
           {/* Related guide */}
           <div className="max-w-4xl mx-auto mb-24">
             <Link
-              to="/drone-license-guide"
+              to="/a/drone-license-guide"
               className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-all duration-300"
             >
               <div className="flex items-center gap-4">

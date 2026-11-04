@@ -46,12 +46,14 @@ export const Navbar = () => {
   const navLinks = [
     { href: "/", label: "HOME" },
     { href: "/about", label: "ABOUT US" },
+    { href: "/articles", label: "ARTICLES" },
     { href: "/contact", label: "CONTACT" },
   ];
 
   const staggeredMenuItems: StaggeredMenuItem[] = [
     { label: "Home", ariaLabel: "Go to home page", link: "/" },
     { label: "About", ariaLabel: "Learn about us", link: "/about" },
+    { label: "Articles", ariaLabel: "Read our drone guides", link: "/articles" },
     { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
   ];
 

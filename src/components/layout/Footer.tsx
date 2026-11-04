@@ -70,18 +70,8 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/drone-license-guide" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Drone License Guide
-                </Link>
-              </li>
-              <li>
-                <Link to="/do-i-need-a-drone-license" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Do I Need a Drone License?
-                </Link>
-              </li>
-              <li>
-                <Link to="/drone-registration-guide" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Drone Registration Guide
+                <Link to="/articles" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Articles
                 </Link>
               </li>
               <li>

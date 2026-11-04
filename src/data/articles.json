@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "do-i-need-a-drone-license",
+    "title": "Do I Need a Drone License?",
+    "eyebrow": "Drone License Requirements",
+    "description": "When the FAA requires a drone license and when it does not, in plain English. Business vs. personal use, flying over houses, and common questions answered.",
+    "image": "/og/do-i-need-a-drone-license.png",
+    "imageTitle": "Do I Need a *Drone License?*",
+    "imageSub": "Business vs. personal flying, flying over houses, and the rules in plain English"
+  },
+  {
+    "slug": "drone-license-guide",
+    "title": "How to Get Your Drone Pilot License",
+    "eyebrow": "Part 107 License Guide",
+    "description": "Step-by-step guide to earning your FAA Part 107 Remote Pilot Certificate: eligibility, the knowledge test, costs, and timeline.",
+    "image": "/og/drone-license-guide.png",
+    "imageTitle": "Get Your *Drone Pilot* License",
+    "imageSub": "The complete path to your FAA Part 107 Remote Pilot Certificate"
+  },
+  {
+    "slug": "drone-registration-guide",
+    "title": "Drone Registration & Recurrency Guide",
+    "eyebrow": "Registration & Recurrency",
+    "description": "FAA drone registration, Remote ID, TRUST, and Part 107 recurrent training explained for recreational and commercial flyers.",
+    "image": "/og/drone-registration-guide.png",
+    "imageTitle": "Stay Legal, *Stay Current*",
+    "imageSub": "FAA registration, Remote ID, TRUST, and recurrent training explained"
+  }
+]

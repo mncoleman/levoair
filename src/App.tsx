@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -15,6 +15,7 @@ import Privacy from "./pages/Privacy";
 import DroneLicense from "./pages/DroneLicense";
 import DroneRegistration from "./pages/DroneRegistration";
 import DroneLicenseRequirements from "./pages/DroneLicenseRequirements";
+import Articles from "./pages/Articles";
 import { trackPageView } from "@/lib/analytics";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ClickBurst from "@/components/ui/ClickBurst";
@@ -47,9 +48,14 @@ const App = () => (
         <Route path="/brand-kit" element={<BrandKit />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/drone-license-guide" element={<DroneLicense />} />
-        <Route path="/drone-registration-guide" element={<DroneRegistration />} />
-        <Route path="/do-i-need-a-drone-license" element={<DroneLicenseRequirements />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/a/drone-license-guide" element={<DroneLicense />} />
+        <Route path="/a/drone-registration-guide" element={<DroneRegistration />} />
+        <Route path="/a/do-i-need-a-drone-license" element={<DroneLicenseRequirements />} />
+        {/* Old article URLs, kept so shared links still work */}
+        <Route path="/drone-license-guide" element={<Navigate to="/a/drone-license-guide" replace />} />
+        <Route path="/drone-registration-guide" element={<Navigate to="/a/drone-registration-guide" replace />} />
+        <Route path="/do-i-need-a-drone-license" element={<Navigate to="/a/do-i-need-a-drone-license" replace />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

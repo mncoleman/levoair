@@ -17,11 +17,9 @@ import {
   CheckCircle2,
   XCircle,
   HelpCircle,
-  ChevronRight,
   AlertCircle,
   ArrowRight,
-  Briefcase,
-  Gamepad2,
+  RotateCcw,
   Home as HomeIcon,
   Camera,
   Building2,
@@ -45,7 +43,7 @@ import GlassCube from "@/components/ui/GlassCube";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { trackEvent, trackOutboundLink } from "@/lib/analytics";
 
-type Purpose = "recreational" | "part107";
+type Purpose = "recreational" | "part107" | "unsure";
 type Verdict = "required" | "not-required" | "gray";
 
 const ecfr = (section: string) =>
@@ -82,7 +80,6 @@ interface FaqGroup {
 
 interface Limit {
   icon: typeof Plane;
-  value: string;
   label: string;
   text: string;
   reg: RegLink;
@@ -312,44 +309,38 @@ const faqGroups: FaqGroup[] = [
 const limits: Limit[] = [
   {
     icon: Mountain,
-    value: "400 ft",
-    label: "Max altitude",
-    text: "Above ground level, unless near a taller structure.",
+    label: "Maximum Altitude",
+    text: "400 feet above ground level. Higher is allowed only within 400 feet of a taller structure, and no more than 400 feet above its top.",
     reg: { url: ecfr("107.51"), label: "107.51" },
   },
   {
     icon: Gauge,
-    value: "100 mph",
-    label: "Max speed",
-    text: "87 knots ground speed. Few drones get close.",
+    label: "Maximum Speed",
+    text: "100 miles per hour (87 knots) ground speed. Few consumer drones can reach it.",
     reg: { url: ecfr("107.51"), label: "107.51" },
   },
   {
     icon: Eye,
-    value: "In sight",
-    label: "Line of sight",
-    text: "Your own eyes on the drone the whole flight.",
+    label: "Visual Line of Sight",
+    text: "The pilot or a visual observer must be able to see the drone with their own eyes for the entire flight.",
     reg: { url: ecfr("107.31"), label: "107.31" },
   },
   {
     icon: Users,
-    value: "Not over",
-    label: "Open-air crowds",
-    text: "People outdoors need protection or approval.",
+    label: "Flying Over People",
+    text: "Not over people outdoors who are not part of the operation, unless the drone qualifies for an FAA category that allows it.",
     reg: { url: ecfr("107.39"), label: "107.39" },
   },
   {
     icon: MapPinned,
-    value: "Ask first",
-    label: "Near airports",
-    text: "Controlled airspace needs FAA authorization.",
+    label: "Airspace Near Airports",
+    text: "Controlled airspace requires FAA authorization before takeoff, often granted instantly through LAANC.",
     reg: { url: ecfr("107.41"), label: "107.41" },
   },
   {
     icon: Moon,
-    value: "Lit up",
-    label: "Night flights",
-    text: "Lights visible for 3 miles and current training.",
+    label: "Night Operations",
+    text: "Allowed with anti-collision lighting visible for 3 statute miles and current FAA training.",
     reg: { url: ecfr("107.29"), label: "107.29" },
   },
 ];
@@ -417,6 +408,17 @@ const purposeContent: Record<
       { label: "Remote ID", required: true, text: "Every drone" },
     ],
   },
+  unsure: {
+    title: "Not Clearly Recreational",
+    intro:
+      "The no-license option only covers flights that are purely for fun. A practical task, like checking your own roof or gutters, is not clearly covered. The safe choice is to fly under Part 107 with a licensed pilot, or confirm with the FAA's User Identification Tool.",
+    needs: [
+      { label: "Pilot license", required: true, text: "Safest: Part 107 certificate" },
+      { label: "Knowledge test", required: true, text: "About $175, once" },
+      { label: "Registration", required: true, text: "Every drone, any weight" },
+      { label: "Remote ID", required: true, text: "Every drone" },
+    ],
+  },
 };
 
 const verdictStyle: Record<
@@ -475,97 +477,166 @@ const RegLinkChip = ({ reg }: { reg: RegLink }) => (
   </a>
 );
 
-const PurposeToggle = ({
-  selected,
-  onChange,
+interface SurveyQuestion {
+  id: string;
+  q: string;
+  help: string;
+  /** Result when the answer is "Yes". Unset means "Yes" moves to the next question. */
+  yes?: Purpose;
+  /** Result when the answer is "No". Unset means "No" moves to the next question. */
+  no?: Purpose;
+  /** Shown with the result: "Because {reason}." */
+  yesReason?: string;
+  noReason?: string;
+}
+
+const surveyQuestions: SurveyQuestion[] = [
+  {
+    id: "paid",
+    q: "Will you get anything in return for this flight?",
+    help: "Money, a discount, free products, a trade, or a favor all count. It does not matter who pays or how much.",
+    yes: "part107",
+    yesReason: "you are getting something in return for the flight",
+  },
+  {
+    id: "business",
+    q: "Is the flight connected to a business or job?",
+    help: "Yours, your employer's, or a client's. Think inspections, estimates, listings, job sites, or marketing, even if nobody pays for the drone part.",
+    yes: "part107",
+    yesReason: "the flight supports a business or job",
+  },
+  {
+    id: "organization",
+    q: "Are you flying for an organization?",
+    help: "A church, nonprofit, school, HOA, club, or volunteer group, even if you are not paid.",
+    yes: "part107",
+    yesReason: "you are flying on behalf of an organization",
+  },
+  {
+    id: "content",
+    q: "Will the photos or video be used to earn money or promote something?",
+    help: "A monetized channel, selling footage, ads, or promoting a business or brand.",
+    yes: "part107",
+    yesReason: "the footage will earn money or promote something",
+  },
+  {
+    id: "fun",
+    q: "Is the flight just for fun?",
+    help: "Practicing, sightseeing, or filming for yourself, friends, and family. Not a chore or a task you need done.",
+    yes: "recreational",
+    no: "unsure",
+    yesReason:
+      "the flight is just for fun, with no payment, business, or organization involved",
+    noReason:
+      "the flight has a practical purpose, even though no business is involved",
+  },
+];
+
+const PurposeSurvey = ({
+  onResult,
 }: {
-  selected: Purpose;
-  onChange: (p: Purpose) => void;
+  onResult: (purpose: Purpose, reason: string) => void;
 }) => {
-  const handleSelect = (purpose: Purpose) => {
-    onChange(purpose);
-    trackEvent("drone_license_requirements_purpose_select", {
+  const [step, setStep] = useState(0);
+  const question = surveyQuestions[step];
+  const total = surveyQuestions.length;
+
+  const answer = (value: "yes" | "no") => {
+    trackEvent("drone_license_requirements_survey_answer", {
       event_category: "engagement",
-      event_label: purpose,
-      purpose,
+      event_label: `${question.id}:${value}`,
     });
+    const result = value === "yes" ? question.yes : question.no;
+    if (result) {
+      trackEvent("drone_license_requirements_survey_result", {
+        event_category: "engagement",
+        event_label: result,
+      });
+      onResult(
+        result,
+        (value === "yes" ? question.yesReason : question.noReason) ?? ""
+      );
+    } else {
+      setStep(step + 1);
+    }
   };
 
-  const options: {
-    key: Purpose;
-    icon: typeof Plane;
-    eyebrow: string;
-    title: string;
-    text: string;
-  }[] = [
-    {
-      key: "recreational",
-      icon: Gamepad2,
-      eyebrow: "Personal",
-      title: "Just for Fun",
-      text: "Hobby flying, family videos, and personal enjoyment with no business purpose.",
-    },
-    {
-      key: "part107",
-      icon: Briefcase,
-      eyebrow: "Business",
-      title: "For Work",
-      text: "Inspections, marketing, client work, or any flight that helps a business.",
-    },
-  ];
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-      {options.map((opt) => {
-        const active = selected === opt.key;
-        const Icon = opt.icon;
-        return (
+    <div className="max-w-2xl mx-auto rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 sm:p-8">
+      <div className="flex items-center justify-between gap-4 mb-3">
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+          Question {step + 1} of {total}
+        </span>
+        {step > 0 && (
           <button
-            key={opt.key}
-            onClick={() => handleSelect(opt.key)}
-            aria-pressed={active}
-            className={`group relative text-left p-5 md:p-6 rounded-2xl border-2 transition-all duration-300 ${
-              active
-                ? "border-primary bg-primary/10"
-                : "border-border bg-card/50 hover:border-primary/40"
-            }`}
+            onClick={() => setStep(step - 1)}
+            className="text-xs font-semibold text-primary hover:text-accent transition-colors"
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div
-                    className={`p-2 rounded-lg ${
-                      active ? "bg-primary/20" : "bg-primary/10"
-                    }`}
-                  >
-                    <Icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                    {opt.eyebrow}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold mb-1">{opt.title}</h3>
-                <p className="text-sm text-muted-foreground">{opt.text}</p>
-              </div>
-              <ChevronRight
-                className={`h-5 w-5 transition-all ${
-                  active ? "text-primary translate-x-1" : "text-muted-foreground"
-                }`}
-              />
-            </div>
+            Back
           </button>
-        );
-      })}
+        )}
+      </div>
+      <div className="flex gap-1.5 mb-6" aria-hidden="true">
+        {surveyQuestions.map((sq, i) => (
+          <div
+            key={sq.id}
+            className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
+              i <= step ? "bg-primary" : "bg-muted"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div key={question.id} className="animate-in fade-in slide-in-from-right-4 duration-300">
+        <h3 className="text-xl sm:text-2xl font-bold mb-2 leading-snug">
+          {question.q}
+        </h3>
+        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+          {question.help}
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          {(["yes", "no"] as const).map((v) => (
+            <button
+              key={v}
+              onClick={() => answer(v)}
+              className="min-h-[56px] rounded-xl border-2 border-border bg-card/50 text-base font-semibold hover:border-primary hover:bg-primary/10 active:scale-[0.98] transition-all"
+            >
+              {v === "yes" ? "Yes" : "No"}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-const PurposeSummary = ({ purpose }: { purpose: Purpose }) => {
+const PurposeSummary = ({
+  purpose,
+  reason,
+  onRestart,
+}: {
+  purpose: Purpose;
+  reason: string;
+  onRestart: () => void;
+}) => {
   const content = purposeContent[purpose];
   return (
-    <div className="max-w-4xl mx-auto mb-24">
+    <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <GlassCube className="w-full" wobbleAngle={purpose === "recreational" ? 0 : 1.5}>
         <div className="p-6 md:p-8">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-2 block">
+            Your Result
+          </span>
+          <h3 className="text-2xl md:text-3xl font-bold text-gradient mb-3">
+            {purpose === "recreational"
+              ? "No License Needed"
+              : purpose === "part107"
+                ? "You Need a Licensed Pilot"
+                : "Play It Safe: Use a Licensed Pilot"}
+          </h3>
+          <p className="text-sm text-foreground/80 mb-4">
+            Because {reason}.
+          </p>
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3 block">
             {content.title}
           </span>
@@ -589,6 +660,33 @@ const PurposeSummary = ({ purpose }: { purpose: Purpose }) => {
                 )}
               </div>
             ))}
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mt-6">
+            <button
+              onClick={onRestart}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors"
+            >
+              <RotateCcw className="h-3.5 w-3.5" />
+              Start over
+            </button>
+            {purpose !== "recreational" && (
+              <Link
+                to="/a/drone-license-guide"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors"
+              >
+                How to get licensed
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
+            {purpose === "recreational" && (
+              <Link
+                to="/a/drone-registration-guide"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors"
+              >
+                Register and take TRUST
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
           </div>
         </div>
       </GlassCube>
@@ -702,23 +800,11 @@ const FaqSection = ({ group }: { group: FaqGroup }) => (
 
 const DroneLicenseRequirements = () => {
   usePageTitle("Do I Need a Drone License?");
-  const [purpose, setPurpose] = useState<Purpose>("part107");
+  const [result, setResult] = useState<{ purpose: Purpose; reason: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
-
-      {/* Ambient background orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-0">
-        <div
-          className="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full blur-orb"
-          style={{ background: "hsl(43 84% 55% / 0.15)" }}
-        />
-        <div
-          className="absolute bottom-[20%] left-[5%] w-[500px] h-[500px] rounded-full blur-orb"
-          style={{ background: "hsl(38 90% 50% / 0.10)" }}
-        />
-      </div>
 
       <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -748,23 +834,31 @@ const DroneLicenseRequirements = () => {
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               The short answer: it depends on <em>why</em> you fly, not what
               you fly. A drone flown for fun needs no license. The exact same
-              drone flown to inspect a roof for a customer does. Pick a purpose
-              below to see what applies, then scroll for real-world examples
-              and answers to the questions we hear most.
+              drone flown to inspect a roof for a customer does. Not sure which
+              one you are? Answer a few quick questions below, then scroll for
+              real-world examples and answers to the questions we hear most.
             </p>
           </div>
 
-          {/* Purpose toggle */}
-          <div className="mb-10">
+          {/* Survey */}
+          <div className="mb-24">
             <div className="text-center mb-6">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Why Are You Flying?
+                Find Out in Under a Minute
               </span>
             </div>
-            <PurposeToggle selected={purpose} onChange={setPurpose} />
+            {result ? (
+              <PurposeSummary
+                purpose={result.purpose}
+                reason={result.reason}
+                onRestart={() => setResult(null)}
+              />
+            ) : (
+              <PurposeSurvey
+                onResult={(purpose, reason) => setResult({ purpose, reason })}
+              />
+            )}
           </div>
-
-          <PurposeSummary purpose={purpose} />
 
           {/* Scenarios */}
           <div className="mb-24">
@@ -842,11 +936,10 @@ const DroneLicenseRequirements = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-              {limits.map((l, i) => (
-                <GlassCube
+              {limits.map((l) => (
+                <div
                   key={l.label}
-                  className="h-full"
-                  wobbleAngle={(i / 6) * Math.PI * 2}
+                  className="rounded-2xl border border-border bg-card/60 h-full"
                 >
                   <div className="p-6 flex flex-col h-full">
                     <div className="flex items-center justify-between mb-4">
@@ -864,17 +957,12 @@ const DroneLicenseRequirements = () => {
                         <ExternalLink className="h-3 w-3" />
                       </a>
                     </div>
-                    <div className="text-3xl font-bold text-gradient mb-1">
-                      {l.value}
-                    </div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
-                      {l.label}
-                    </div>
-                    <p className="text-sm text-foreground/80 leading-relaxed mt-auto">
+                    <h3 className="text-lg font-bold mb-2">{l.label}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {l.text}
                     </p>
                   </div>
-                </GlassCube>
+                </div>
               ))}
             </div>
 
@@ -930,13 +1018,13 @@ const DroneLicenseRequirements = () => {
           <div className="max-w-4xl mx-auto mb-24 space-y-4">
             {[
               {
-                to: "/drone-license-guide",
+                to: "/a/drone-license-guide",
                 icon: BookOpen,
                 title: "How to Get Your Part 107 Remote Pilot Certificate",
                 text: "Need the license? Here is the step-by-step path.",
               },
               {
-                to: "/drone-registration-guide",
+                to: "/a/drone-registration-guide",
                 icon: Plane,
                 title: "Drone Registration, Remote ID & Recurrent Training",
                 text: "The pilot is licensed. Now get the aircraft legal.",
