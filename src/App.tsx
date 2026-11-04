@@ -14,6 +14,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import DroneLicense from "./pages/DroneLicense";
 import DroneRegistration from "./pages/DroneRegistration";
+import DroneLicenseRequirements from "./pages/DroneLicenseRequirements";
 import { trackPageView } from "@/lib/analytics";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ClickBurst from "@/components/ui/ClickBurst";
@@ -48,6 +49,7 @@ const App = () => (
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/drone-license-guide" element={<DroneLicense />} />
         <Route path="/drone-registration-guide" element={<DroneRegistration />} />
+        <Route path="/do-i-need-a-drone-license" element={<DroneLicenseRequirements />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

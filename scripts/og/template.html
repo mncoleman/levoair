@@ -1,0 +1,75 @@
+<!doctype html>
+<!--
+  OG image template. Render at a 1200x630 viewport and screenshot.
+  Params: ?eyebrow=...&title=...&sub=...
+  Regenerate: serve this folder (python3 -m http.server 8090 -d scripts/og),
+  open each URL listed in scripts/og/pages.json, screenshot to public/og/<slug>.png.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="icon" href="data:," />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    position: relative; overflow: hidden;
+    background: #0d0d0d; color: #fafafa;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .orb.a { width: 560px; height: 560px; right: -140px; top: -200px; background: rgba(230,179,37,0.30); }
+  .orb.b { width: 480px; height: 480px; left: -200px; bottom: -260px; background: rgba(242,168,24,0.16); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 70% 30%, #000 10%, transparent 75%);
+  }
+  .frame {
+    position: absolute; inset: 28px; border-radius: 28px;
+    border: 1px solid rgba(230,179,37,0.22);
+    background: linear-gradient(160deg, rgba(20,20,20,0.75), rgba(13,13,13,0.4));
+  }
+  .content { position: absolute; inset: 28px; padding: 52px 72px; display: flex; flex-direction: column; }
+  .eyebrow {
+    font-size: 22px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #e6b325; margin-bottom: 22px; display: flex; align-items: center; gap: 16px;
+  }
+  .eyebrow::before { content: ""; width: 44px; height: 3px; border-radius: 2px; background: linear-gradient(90deg,#e6b325,#f2a818); }
+  h1 { font-size: 80px; line-height: 1.04; font-weight: 800; letter-spacing: -0.02em; max-width: 960px; }
+  h1 .g { background: linear-gradient(90deg,#e6b325,#f2a818); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { margin-top: 22px; font-size: 30px; line-height: 1.35; color: #a3a3a3; max-width: 860px; text-wrap: balance; }
+  .main { margin: auto 0; }
+  .foot { padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .foot img { height: 46px; }
+  .url { font-size: 24px; font-weight: 600; color: #d4d4d4; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+  <div class="orb a"></div><div class="orb b"></div><div class="grid"></div>
+  <div class="frame"></div>
+  <div class="content">
+    <div class="main">
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="title"></h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="foot">
+      <img src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png" alt="LevoAir" />
+      <span class="url">levoair.com</span>
+    </div>
+  </div>
+<script>
+  const p = new URLSearchParams(location.search);
+  document.getElementById("eyebrow").textContent = p.get("eyebrow") || "";
+  // Wrap *starred* words in the gold gradient
+  document.getElementById("title").innerHTML = (p.get("title") || "")
+    .replace(/[<>&]/g, "")
+    .replace(/\*(.+?)\*/g, '<span class="g">$1</span>');
+  document.getElementById("sub").textContent = p.get("sub") || "";
+</script>
+</body>
+</html>
