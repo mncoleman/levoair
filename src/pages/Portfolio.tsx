@@ -5,13 +5,13 @@ import { Seo } from "@/components/Seo";
 import { breadcrumbSchema } from "@/lib/site";
 
 const images = [
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954ffde474881915728fd6.jpeg", alt: "Aerial drone view of a highway interchange and nearby commercial development" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954821a30eaa411515557f.jpeg", alt: "Aerial drone view of rural acreage lots and farmland" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954fc6e6672f8c4a4e7e72.jpeg", alt: "Aerial drone view of snow-covered farmland with mountains on the horizon" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954effe474880ddf728f72.jpeg", alt: "Aerial drone view of a suburban residential neighborhood beside lakes" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68e5a4eace37be67454a35b0.jpeg", alt: "Aerial drone view of a new town center, church, and parking lot" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68e5a542416ab74b73836237.jpeg", alt: "Aerial drone view of a rural home on a snow-covered property" },
-  { src: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68e5a5552cc2613d34be7f98.jpeg", alt: "Aerial drone view of new townhome construction in a residential development" },
+  { src: "/portfolio/68954ffde474881915728fd6-sm.webp", full: "/portfolio/68954ffde474881915728fd6-lg.webp", alt: "Aerial drone view of a highway interchange and nearby commercial development" },
+  { src: "/portfolio/68954821a30eaa411515557f-sm.webp", full: "/portfolio/68954821a30eaa411515557f-lg.webp", alt: "Aerial drone view of rural acreage lots and farmland" },
+  { src: "/portfolio/68954fc6e6672f8c4a4e7e72-sm.webp", full: "/portfolio/68954fc6e6672f8c4a4e7e72-lg.webp", alt: "Aerial drone view of snow-covered farmland with mountains on the horizon" },
+  { src: "/portfolio/68954effe474880ddf728f72-sm.webp", full: "/portfolio/68954effe474880ddf728f72-lg.webp", alt: "Aerial drone view of a suburban residential neighborhood beside lakes" },
+  { src: "/portfolio/68e5a4eace37be67454a35b0-sm.webp", full: "/portfolio/68e5a4eace37be67454a35b0-lg.webp", alt: "Aerial drone view of a new town center, church, and parking lot" },
+  { src: "/portfolio/68e5a542416ab74b73836237-sm.webp", full: "/portfolio/68e5a542416ab74b73836237-lg.webp", alt: "Aerial drone view of a rural home on a snow-covered property" },
+  { src: "/portfolio/68e5a5552cc2613d34be7f98-sm.webp", full: "/portfolio/68e5a5552cc2613d34be7f98-lg.webp", alt: "Aerial drone view of new townhome construction in a residential development" },
 ];
 
 const portfolioSeo = [

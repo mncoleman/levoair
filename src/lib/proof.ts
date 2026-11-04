@@ -10,7 +10,7 @@ export interface ProofStat {
 }
 
 export interface ProofProject {
-  image: string; // full image URL
+  image: string; // image URL (resized copies live in public/portfolio)
   alt: string; // what the photo shows, for search and screen readers
   title: string; // e.g. "Weekly progress capture, 40-acre residential site"
   industry: string; // e.g. "Construction"
@@ -25,21 +25,21 @@ export const proofStats: ProofStat[] = [
 
 export const proofProjects: ProofProject[] = [
   {
-    image: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68e5a5552cc2613d34be7f98.jpeg",
+    image: "/portfolio/68e5a5552cc2613d34be7f98-lg.webp",
     alt: "Aerial drone view of new townhome construction in a residential development",
     title: "New townhome construction",
     industry: "Construction",
     summary: "Aerial capture of new townhome construction.",
   },
   {
-    image: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954ffde474881915728fd6.jpeg",
+    image: "/portfolio/68954ffde474881915728fd6-lg.webp",
     alt: "Aerial drone view of a highway interchange and nearby commercial development",
     title: "Highway interchange",
     industry: "Infrastructure",
     summary: "Aerial capture of a highway interchange and commercial development.",
   },
   {
-    image: "https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68954effe474880ddf728f72.jpeg",
+    image: "/portfolio/68954effe474880ddf728f72-lg.webp",
     alt: "Aerial drone view of a suburban residential neighborhood beside lakes",
     title: "Lakeside residential neighborhood",
     industry: "Residential",

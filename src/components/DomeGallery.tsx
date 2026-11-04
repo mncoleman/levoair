@@ -4,6 +4,8 @@ import './DomeGallery.css';
 
 interface ImageItem {
   src: string;
+  /** Larger version shown when a tile is enlarged. Falls back to src. */
+  full?: string;
   alt: string;
 }
 
@@ -52,6 +54,7 @@ interface ItemCoord {
   sizeX: number;
   sizeY: number;
   src: string;
+  full?: string;
   alt: string;
 }
 
@@ -88,6 +91,7 @@ function buildItems(pool: ImageItem[], seg: number): ItemCoord[] {
   return coords.map((c, i) => ({
     ...c,
     src: usedImages[i].src,
+    full: usedImages[i].full,
     alt: usedImages[i].alt
   }));
 }
@@ -421,7 +425,7 @@ export default function DomeGallery({
               <div
                 key={`${it.x},${it.y},${i}`}
                 className="item"
-                data-src={it.src}
+                data-src={it.full || it.src}
                 data-offset-x={it.x}
                 data-offset-y={it.y}
                 data-size-x={it.sizeX}
@@ -440,7 +444,7 @@ export default function DomeGallery({
                   aria-label={it.alt || 'Open image'}
                   onClick={onTileClick}
                 >
-                  {it.src && <img src={it.src} draggable={false} alt={it.alt} />}
+                  {it.src && <img src={it.src} draggable={false} alt={it.alt} decoding="async" />}
                 </div>
               </div>
             ))}

@@ -61,10 +61,10 @@ main.sphere-main {
   background-image: radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, #060010) 100%);
 }
 
+/* No backdrop-filter here: re-blurring the whole viewport every frame while the
+   sphere rotates was the main source of jank. The gradient overlay does the vignette. */
 .overlay--blur {
-  -webkit-mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
-  mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
-  backdrop-filter: blur(3px);
+  display: none;
 }
 
 .item {

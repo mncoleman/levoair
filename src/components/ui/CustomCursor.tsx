@@ -1,10 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useCursorPreference } from "@/lib/cursorPreference";
 
 const CustomCursor = () => {
+    const { fancy } = useCursorPreference();
+    return fancy ? <CursorFollower /> : null;
+};
+
+const CursorFollower = () => {
     const cursorDotRef = useRef<HTMLDivElement>(null);
     const cursorRingRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const visibleRef = useRef(false);
+    const show = (v: boolean) => {
+        if (visibleRef.current === v) return;
+        visibleRef.current = v;
+        setIsVisible(v);
+    };
 
     useEffect(() => {
         // Hide on touch devices or devices without hover
@@ -25,9 +37,14 @@ const CustomCursor = () => {
         // We'll trust the isVisible state to handle initial show
 
         const onMouseMove = (e: MouseEvent) => {
-            if (!isVisible) setIsVisible(true);
             mouseX = e.clientX;
             mouseY = e.clientY;
+            if (!visibleRef.current) {
+                // Start the ring on the pointer instead of flying in from the corner.
+                ringX = mouseX;
+                ringY = mouseY;
+                show(true);
+            }
 
             // Dot follows immediately
             dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
@@ -41,13 +58,8 @@ const CustomCursor = () => {
             ring.classList.remove("scale-75");
         };
 
-        const onMouseEnter = () => {
-            setIsVisible(true);
-        };
-
-        const onMouseLeave = () => {
-            setIsVisible(false);
-        };
+        const onMouseEnter = () => show(true);
+        const onMouseLeave = () => show(false);
 
         const animate = () => {
             // Lerp for ring
@@ -75,7 +87,7 @@ const CustomCursor = () => {
             document.removeEventListener("mouseleave", onMouseLeave);
             cancelAnimationFrame(requestRef);
         };
-    }, [isVisible]);
+    }, []);
 
     return (
         <>

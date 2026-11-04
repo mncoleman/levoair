@@ -2,6 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var v = localStorage.getItem("fancy-cursor");
+          document.documentElement.setAttribute("data-fancy-cursor", v === "off" ? "off" : "on");
+        } catch (e) {
+          document.documentElement.setAttribute("data-fancy-cursor", "on");
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LevoAir | Contract Drone Flight Operations for Capture Programs</title>
     <meta name="description" content="LevoAir flies drone capture missions for data platforms, flight programs, and builders, with FAA Part 107 pilots, a fixed flight day for every site, and same-day uploads." />

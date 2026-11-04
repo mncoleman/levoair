@@ -72,18 +72,16 @@ All colors MUST be HSL.
   }
 
   /* Only hide cursor on devices that support hover (desktop/mouse) */
+  /* ...and only while the visitor has it switched on (see CursorToggle). */
   @media (hover: hover) and (pointer: fine) {
-    body {
-      cursor: none;
-    }
-
-    a,
-    button,
-    [role="button"],
-    input,
-    label,
-    select,
-    textarea {
+    html[data-fancy-cursor="on"] body,
+    html[data-fancy-cursor="on"] a,
+    html[data-fancy-cursor="on"] button,
+    html[data-fancy-cursor="on"] [role="button"],
+    html[data-fancy-cursor="on"] input,
+    html[data-fancy-cursor="on"] label,
+    html[data-fancy-cursor="on"] select,
+    html[data-fancy-cursor="on"] textarea {
       cursor: none;
     }
   }
