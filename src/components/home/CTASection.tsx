@@ -17,26 +17,26 @@ export const CTASection = () => {
           }}
         >
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block">
-            READY TO FLY
+            ADD CAPACITY
           </span>
 
           <ScrollFloat
             containerClassName="mb-0"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            Need a Pilot on Your Next Job?
+            Let's fly your first site
           </ScrollFloat>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Whether it's a one-off mission or ongoing contract work, we plug into
-            your operation and handle the flying. FAA-certified, regulation-ready,
-            and equipped to run the full operation from planning to execution.
+            Send us a site and your protocol, and we'll fly it and upload it the
+            same day. If your QA team likes what it sees, we'd be glad to take the
+            next ten!
           </p>
 
           <div className="pt-2">
             <Link to="/contact">
               <Button size="lg" className="gradient-primary font-semibold group">
-                Get in Touch
+                Book a Test Flight
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

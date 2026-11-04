@@ -2,18 +2,31 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
 import { trackEvent } from "@/lib/analytics";
 import articles from "@/data/articles.json";
 
 const Articles = () => {
-  usePageTitle("Articles");
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
+      <Seo
+        title="Drone Rules, Explained: FAA Guides | LevoAir"
+        description="Plain-English guides to FAA drone licensing, registration, Remote ID, and flying legally."
+        path="/articles"
+        image={`${SITE.url}/og/articles.png`}
+        jsonLd={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Articles", path: "/articles" },
+          ]),
+        ]}
+      />
 
       <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl">

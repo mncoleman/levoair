@@ -25,12 +25,13 @@ import {
   Calendar,
   Sparkles,
 } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
 import GlassCube from "@/components/ui/GlassCube";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { trackEvent, trackOutboundLink } from "@/lib/analytics";
+import { trackEvent, trackOutboundLink, trackCTAClick } from "@/lib/analytics";
 
 type PathType = "new" | "part61";
 
@@ -69,7 +70,7 @@ const newPilotSteps: Step[] = [
     details: [
       "Visit IACRA and register as an Applicant",
       "Receive your FTN (FAA Tracking Number) by email",
-      "Save your FTN — you'll use it everywhere from here on",
+      "Save your FTN - you'll use it everywhere from here on",
     ],
     link: { url: "https://iacra.faa.gov/IACRA/", label: "Open IACRA" },
   },
@@ -97,11 +98,11 @@ const newPilotSteps: Step[] = [
     duration: "5 minutes to book",
     cost: "$175",
     description:
-      "Find a PSI Testing Center near you and book the Unmanned Aircraft General – Small (UAG) exam. Centers fill up fast in major metros — book early.",
+      "Find a PSI Testing Center near you and book the Unmanned Aircraft General – Small (UAG) exam. Centers fill up fast in major metros - book early.",
     details: [
       "60 multiple-choice questions, 2 hour time limit",
       "Passing score is 70% (42 of 60 correct)",
-      "Bring a government-issued photo ID — you will be turned away without it",
+      "Bring a government-issued photo ID - you will be turned away without it",
       "Roughly 22 questions on regulations, 28 on operations, 13 on airspace, plus weather and loading",
     ],
     link: {
@@ -117,7 +118,7 @@ const newPilotSteps: Step[] = [
     description:
       "You'll get your score immediately at the testing center. Failed it? You can retest after 14 days. Most candidates pass on the first try with proper preparation.",
     details: [
-      "Print the Airman Knowledge Test Report — you need it for the next step",
+      "Print the Airman Knowledge Test Report - you need it for the next step",
       "Your score posts to IACRA roughly 48 hours later",
       "Test results are valid for 24 calendar months",
     ],
@@ -128,7 +129,7 @@ const newPilotSteps: Step[] = [
     duration: "20 minutes",
     cost: "Free",
     description:
-      "Once your test score appears in IACRA, log back in and complete FAA Form 8710-13 — the Airman Certificate and/or Rating Application — to formally request your Remote Pilot Certificate.",
+      "Once your test score appears in IACRA, log back in and complete FAA Form 8710-13 - the Airman Certificate and/or Rating Application - to formally request your Remote Pilot Certificate.",
     details: [
       "Log into IACRA and start a new 8710-13 application",
       "Select 'Pilot' then 'Remote Pilot' as the certificate sought",
@@ -145,7 +146,7 @@ const newPilotSteps: Step[] = [
     description:
       "The TSA runs a background check automatically once your application is submitted. There's nothing for you to do here except wait for the email.",
     details: [
-      "Check your email — including spam — for FAA correspondence",
+      "Check your email - including spam - for FAA correspondence",
       "Most candidates clear in under a week",
       "Prior aviation incidents or unresolved warrants can delay or deny vetting",
     ],
@@ -173,7 +174,7 @@ const newPilotSteps: Step[] = [
     details: [
       "Register at FAA DroneZone under Part 107",
       "Each commercial drone needs its own registration",
-      "Most aircraft also need Remote ID — verify your model is compliant",
+      "Most aircraft also need Remote ID - verify your model is compliant",
     ],
     link: {
       url: "https://faadronezone-access.faa.gov/",
@@ -188,8 +189,8 @@ const newPilotSteps: Step[] = [
     description:
       "To keep your certificate active, complete the free online recurrent training (ALC-677) every 24 calendar months on FAASafety.gov. No retest, no testing center.",
     details: [
-      "Course: ALC-677 — Part 107 Small UAS Recurrent",
-      "Completion is automatic — no proctor required",
+      "Course: ALC-677 - Part 107 Small UAS Recurrent",
+      "Completion is automatic - no proctor required",
       "Save the completion certificate with your flight records",
     ],
     link: {
@@ -235,7 +236,7 @@ const part61PilotSteps: Step[] = [
       "Instead of paying $175 and sitting for a knowledge test at a PSI center, you complete a free online course on the FAA Safety Team site: 'Part 107 Small Unmanned Aircraft Systems (sUAS).'",
     details: [
       "Course code: ALC-451",
-      "Self-paced — start, stop, and resume anytime",
+      "Self-paced - start, stop, and resume anytime",
       "Save the completion certificate as a PDF",
       "Counts as your initial aeronautical knowledge requirement",
     ],
@@ -250,7 +251,7 @@ const part61PilotSteps: Step[] = [
     duration: "20 minutes",
     cost: "Free",
     description:
-      "Log into IACRA and submit FAA Form 8710-13 — the Airman Certificate and/or Rating Application — selecting Remote Pilot as the certificate sought.",
+      "Log into IACRA and submit FAA Form 8710-13 - the Airman Certificate and/or Rating Application - selecting Remote Pilot as the certificate sought.",
     details: [
       "Reference your ALC-451 completion certificate",
       "Reference your existing Part 61 certificate number",
@@ -266,11 +267,11 @@ const part61PilotSteps: Step[] = [
     description:
       "Bring your completed application, ALC-451 certificate, proof of current flight review, and a government photo ID to one of four authorized parties for identity validation.",
     details: [
-      "CFI (Certified Flight Instructor) — typically the easiest, often free for current students",
-      "FSDO (Flight Standards District Office) — by appointment, no cost",
-      "DPE (Designated Pilot Examiner) — most charge a fee",
-      "ACR (Airman Certification Representative) — usually at flight schools",
-      "Heads up: a CFI cannot issue a temporary certificate — only a FSDO, DPE, or ACR can",
+      "CFI (Certified Flight Instructor) - typically the easiest, often free for current students",
+      "FSDO (Flight Standards District Office) - by appointment, no cost",
+      "DPE (Designated Pilot Examiner) - most charge a fee",
+      "ACR (Airman Certification Representative) - usually at flight schools",
+      "Heads up: a CFI cannot issue a temporary certificate - only a FSDO, DPE, or ACR can",
     ],
   },
   {
@@ -281,7 +282,7 @@ const part61PilotSteps: Step[] = [
     description:
       "Once submitted, TSA runs an automatic background check. Watch your email for FAA correspondence and the temporary certificate availability notice.",
     details: [
-      "Check spam folders — the FAA email is easily missed",
+      "Check spam folders - the FAA email is easily missed",
       "Most Part 61 pilots clear quickly since they're already in the system",
     ],
   },
@@ -323,7 +324,7 @@ const part61PilotSteps: Step[] = [
     description:
       "Part 61 pilots with a current flight review have a dedicated free recurrent course: ALC-515. Complete it every 24 calendar months to maintain your remote pilot privileges.",
     details: [
-      "Course: ALC-515 — Part 107 Small UAS Recurrent (Part 61 Pilots)",
+      "Course: ALC-515 - Part 107 Small UAS Recurrent (Part 61 Pilots)",
       "Free, online, no proctor",
       "Save the completion certificate with your records",
     ],
@@ -350,6 +351,25 @@ const sharedRequirements = [
     title: "Carry Your Credentials",
     text: "Bring your Remote Pilot Certificate (or temporary), drone registration, and a photo ID to every commercial flight in case the FAA or law enforcement asks.",
   },
+];
+
+const licenseSeo = [
+  {
+    "@type": "Article",
+    headline: "How to Get a Part 107 Drone License: Step-by-Step Guide",
+    description:
+      "The complete path to your FAA Part 107 Remote Pilot Certificate: eligibility, FTN, test prep, the knowledge test, and IACRA.",
+    url: `${SITE.url}/a/drone-license-guide`,
+    image: `${SITE.url}/og/drone-license-guide.png`,
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+  organizationSchema,
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Articles", path: "/articles" },
+    { name: "Drone License Guide", path: "/a/drone-license-guide" },
+  ]),
 ];
 
 const PathToggle = ({
@@ -433,7 +453,7 @@ const PathToggle = ({
             <h3 className="text-xl font-bold mb-1">Part 61 Pilot</h3>
             <p className="text-sm text-muted-foreground">
               Existing manned pilot certificate with a current flight review.
-              Skip the test — take a free online course instead.
+              Skip the test - take a free online course instead.
             </p>
           </div>
           <ChevronRight
@@ -613,7 +633,6 @@ const PathSummary = ({ path }: { path: PathType }) => {
 };
 
 const DroneLicense = () => {
-  usePageTitle("How to Get Your Drone Pilot License");
   const [path, setPath] = useState<PathType>("new");
   const stepsRef = useRef<HTMLDivElement>(null);
 
@@ -622,6 +641,14 @@ const DroneLicense = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="How to Get a Part 107 Drone License (Step-by-Step) | LevoAir"
+        description="The complete path to your FAA Part 107 Remote Pilot Certificate: eligibility, FTN, test prep, the knowledge test, IACRA, and what it costs."
+        path="/a/drone-license-guide"
+        image={`${SITE.url}/og/drone-license-guide.png`}
+        type="article"
+        jsonLd={licenseSeo}
+      />
 
       <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -631,10 +658,11 @@ const DroneLicense = () => {
               Pilot Certification Guide
             </span>
             <ScrollFloat
+              as="h1"
               containerClassName="mb-4"
               textClassName="text-5xl md:text-6xl font-bold"
             >
-              Earn Your Wings
+              Get Your Part 107 Drone License
             </ScrollFloat>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               <BlurText
@@ -745,7 +773,7 @@ const DroneLicense = () => {
                 {
                   url: "https://www.ecfr.gov/",
                   label: "eCFR",
-                  desc: "Search 14 CFR Part 107 — the full regulation, always up to date.",
+                  desc: "Search 14 CFR Part 107 - the full regulation, always up to date.",
                 },
                 {
                   url: "https://iacra.faa.gov/",
@@ -900,22 +928,23 @@ const DroneLicense = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="p-10 md:p-14 text-center border-primary/20 bg-card/60 backdrop-blur-md">
               <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-                Need a Pilot Now?
+                Weighing It for Your Team?
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Skip the Process. Hire One of Ours.
+                Need Sites Flown Before Anyone Is Certified?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                If you need certified pilots for an upcoming job rather than
-                going through certification yourself, LevoAir provides FAA Part
-                107 certified contract pilots ready to deploy.
+                Getting a pilot certified means weeks of study, a proctored exam,
+                and recurrent training every 24 months. If the work can't wait,
+                our Part 107 pilots fly your sites now, for one job or a
+                recurring program.
               </p>
               <Button
                 asChild
                 className="gradient-primary font-semibold"
                 size="lg"
               >
-                <Link to="/contact">Hire a Pilot</Link>
+                <Link to="/contact" onClick={() => trackCTAClick("Get Sites Flown", "license_guide")}>Get Sites Flown</Link>
               </Button>
             </Card>
           </div>

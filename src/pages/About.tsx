@@ -2,7 +2,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Particles from "@/components/layout/Particles";
 import { Shield, Target, Zap } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { organizationSchema, breadcrumbSchema } from "@/lib/site";
 import GlassCube from "@/components/ui/GlassCube";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
@@ -10,26 +11,30 @@ import { BlurText } from "@/components/ui/BlurText";
 const values = [
   {
     icon: Shield,
-    title: "Safety First",
+    title: "Safety and compliance",
     description:
-      "FAA Part 107 certified with strict safety protocols on every flight. We take compliance seriously so you don't have to worry.",
+      "Our pilots are FAA Part 107 certified, and we file LAANC requests and run safety protocols on every flight.",
   },
   {
     icon: Target,
-    title: "Operational Precision",
+    title: "We keep the flight day",
     description:
-      "Thorough flight planning, airspace authorization, and disciplined execution on every mission we fly",
+      "We'll only move a flight for weather, and you'll hear about it from us first.",
   },
   {
     icon: Zap,
-    title: "Ready to Deploy",
+    title: "Room to grow",
     description:
-      "We integrate with your team quickly and handle the full operation from pre-flight planning to wheels up",
+      "New sites go on our schedule, so there's no new pilot for you to recruit or train.",
   },
 ];
 
+const aboutSeo = [
+  organizationSchema,
+  breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }]),
+];
+
 const About = () => {
-  usePageTitle("About");
   return (
     <>
       <Particles
@@ -45,6 +50,12 @@ const About = () => {
 
       <div className="min-h-screen relative">
         <Navbar />
+      <Seo
+          title="About LevoAir | FAA Part 107 Drone Operations"
+          description="LevoAir flies drone capture missions for data platforms, flight programs, and builders, with FAA Part 107 pilots, fixed flight days, and same-day uploads."
+          path="/about"
+          jsonLd={aboutSeo}
+        />
 
         <main className="pt-32 pb-24 relative z-10">
           <div className="container mx-auto px-4 max-w-5xl">
@@ -55,6 +66,7 @@ const About = () => {
                 OUR STORY
               </span>
               <ScrollFloat
+                as="h1"
                 containerClassName="mb-4"
                 textClassName="text-5xl md:text-6xl font-bold"
               >
@@ -62,7 +74,7 @@ const About = () => {
               </ScrollFloat>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 <BlurText
-                  text="Contract Drone Pilots for the Industry"
+                  text="Drone operations, built to scale."
                   delay={400}
                   duration={1000}
                   className="text-gradient"
@@ -75,9 +87,11 @@ const About = () => {
               <GlassCube className="w-full" wobbleAngle={0.5}>
                 <div className="p-12">
                   <p className="text-lg text-center leading-relaxed text-foreground/90">
-                    LevoAir provides FAA-certified contract drone pilots to companies that need
-                    skilled operators. We fly your drones, run your operations, and handle the
-                    regulatory side so your team can focus on delivering results to your clients.
+                    LevoAir flies capture missions for drone data platforms, flight programs, and
+                    the builders they serve. We fly your protocol in your app and upload the same day,
+                    and when you add sites, we put them on our schedule. We work directly with builders
+                    and as a dedicated operator inside larger programs, always to the standards of the
+                    platform or prime we fly for.
                   </p>
                 </div>
               </GlassCube>
@@ -130,9 +144,9 @@ const About = () => {
                 Our Experience
               </ScrollFloat>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                From construction sites to land surveys, we've flown operations across a range
-                of industries. Our pilots understand airspace regulations, LAANC authorizations,
-                and the operational discipline it takes to get the job done right the first time.
+                We've flown construction sites, land surveys, and inspections. Our pilots handle
+                airspace and LAANC themselves and know what it takes to capture a site right the
+                first time.
               </p>
             </div>
           </div>

@@ -45,6 +45,8 @@ export const Navbar = () => {
 
   const navLinks = [
     { href: "/", label: "HOME" },
+    { href: "/services", label: "SERVICES" },
+    { href: "/portfolio", label: "PORTFOLIO" },
     { href: "/about", label: "ABOUT US" },
     { href: "/articles", label: "ARTICLES" },
     { href: "/contact", label: "CONTACT" },
@@ -52,6 +54,8 @@ export const Navbar = () => {
 
   const staggeredMenuItems: StaggeredMenuItem[] = [
     { label: "Home", ariaLabel: "Go to home page", link: "/" },
+    { label: "Services", ariaLabel: "View our services", link: "/services" },
+    { label: "Portfolio", ariaLabel: "View our work", link: "/portfolio" },
     { label: "About", ariaLabel: "Learn about us", link: "/about" },
     { label: "Articles", ariaLabel: "Read our drone guides", link: "/articles" },
     { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
@@ -80,14 +84,14 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-8 transition-opacity duration-300 ease-in-out ${
+          <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-5 lg:space-x-8 transition-opacity duration-300 ease-in-out ${
             shouldAnimate ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -98,7 +102,7 @@ export const Navbar = () => {
           <div className="flex items-center space-x-2 z-10">
             <div className="hidden md:block">
               <Button asChild className="gradient-primary font-semibold text-sm whitespace-nowrap">
-                <Link to="/contact">Hire a Pilot</Link>
+                <Link to="/contact">Book a Test Flight</Link>
               </Button>
             </div>
           </div>

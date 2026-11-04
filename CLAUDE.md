@@ -332,10 +332,14 @@ npx gh-pages -d dist
 ### Common Tasks
 
 **Adding a new page:**
-1. Create page component in `src/pages/NewPage.tsx`
-2. Add route to `src/App.tsx` ABOVE the NotFound catch-all route
-3. Update Navbar links in `src/components/layout/Navbar.tsx`
-4. Add link to Footer if needed
+1. Create page component in `src/pages/NewPage.tsx` and render `<Seo title description path />` in it (add `jsonLd` where it fits)
+2. Add the route to `src/routes.tsx` (pages are code-split and preloaded there, not in `App.tsx`)
+3. Add the path to the `routes` list in `scripts/prerender.mjs` so it is prerendered and lands in `sitemap.xml`
+4. Update Navbar links in `src/components/layout/Navbar.tsx` and the Footer if needed
+
+**SEO and prerendering:**
+- `npm run build` runs `vite build`, then `scripts/prerender.mjs`, which renders every route with Puppeteer into `dist/<route>.html` and writes `dist/sitemap.xml`. GitHub Pages serves `/services` from `services.html` with a 200. `npm run build:spa` skips prerendering.
+- Business facts (phone, service area) live in `src/lib/site.ts`. Proof stats and project photos live in `src/lib/proof.ts`. Empty fields are hidden, never shown as placeholders.
 
 **Adding a new feature to homepage:**
 1. Create component in `src/components/home/NewSection.tsx`

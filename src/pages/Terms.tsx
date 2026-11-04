@@ -1,13 +1,17 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
 
 const Terms = () => {
-    usePageTitle("Terms of Service");
 
     return (
         <div className="min-h-screen bg-background">
             <Navbar />
+      <Seo
+        title="Terms of Service | LevoAir"
+        description="Terms of service for the LevoAir website and drone services."
+        path="/terms"
+      />
 
             <main className="pt-32 pb-24">
                 <div className="container mx-auto px-4 max-w-4xl">

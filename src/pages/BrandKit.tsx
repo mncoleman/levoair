@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const BrandKit = () => {
-  usePageTitle("Brand Kit");
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, label: string) => {
@@ -144,6 +143,12 @@ const BrandKit = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo
+        title="Brand Kit | LevoAir"
+        description="LevoAir brand colors, typography, and logo assets."
+        path="/brand-kit"
+        noindex
+      />
 
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">

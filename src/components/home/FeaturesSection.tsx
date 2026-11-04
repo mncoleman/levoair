@@ -1,4 +1,4 @@
-import { Shield, Users, FileCheck, MessageSquare, LucideIcon } from "lucide-react";
+import { Shield, Users, FileCheck, MessageSquare, Plane, LucideIcon } from "lucide-react";
 import GlassCube from "@/components/ui/GlassCube";
 import ScrollFloat from "@/components/ScrollFloat";
 
@@ -16,7 +16,8 @@ const iconMap: Record<string, LucideIcon> = {
   Shield,
   Users,
   FileCheck,
-  MessageSquare
+  MessageSquare,
+  Plane
 };
 
 export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
@@ -25,17 +26,16 @@ export const FeaturesSection = ({ features }: FeaturesSectionProps) => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">
-            WHY LEVOAIR
+            HOW WE FLY
           </span>
           <ScrollFloat
             containerClassName="mb-4"
             textClassName="text-4xl md:text-5xl font-bold"
           >
-            THE REAL DIFFERENCE
+            We fly to your spec
           </ScrollFloat>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            You need reliable pilots who can show up and execute. With years
-            in aviation, we handle the flight so you can focus on the results.
+            Your ops team has a checklist for every pilot it brings on, and we'll cover it before the first flight.
           </p>
         </div>
 

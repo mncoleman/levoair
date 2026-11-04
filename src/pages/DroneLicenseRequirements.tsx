@@ -36,7 +36,8 @@ import {
   FileWarning,
   Scale,
 } from "lucide-react";
-import usePageTitle from "@/lib/usePageTitle";
+import { Seo } from "@/components/Seo";
+import { SITE, organizationSchema, breadcrumbSchema } from "@/lib/site";
 import ScrollFloat from "@/components/ScrollFloat";
 import { BlurText } from "@/components/ui/BlurText";
 import GlassCube from "@/components/ui/GlassCube";
@@ -442,6 +443,35 @@ const verdictStyle: Record<
   },
 };
 
+const requirementsSeo = [
+  {
+    "@type": "Article",
+    headline: "Do I Need a Drone License?",
+    description:
+      "When the FAA requires a drone license and when it does not, in plain English.",
+    url: `${SITE.url}/a/do-i-need-a-drone-license`,
+    image: `${SITE.url}/og/do-i-need-a-drone-license.png`,
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+  {
+    "@type": "FAQPage",
+    mainEntity: faqGroups.flatMap((g) =>
+      g.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a.join(" ") },
+      }))
+    ),
+  },
+  organizationSchema,
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Articles", path: "/articles" },
+    { name: "Do I Need a Drone License?", path: "/a/do-i-need-a-drone-license" },
+  ]),
+];
+
 const useReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -799,12 +829,19 @@ const FaqSection = ({ group }: { group: FaqGroup }) => (
 );
 
 const DroneLicenseRequirements = () => {
-  usePageTitle("Do I Need a Drone License?");
   const [result, setResult] = useState<{ purpose: Purpose; reason: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
+      <Seo
+        title="Do I Need a Drone License? Business vs. Personal Use | LevoAir"
+        description="When the FAA requires a drone license and when it does not, in plain English. Business vs. personal use, flying over houses, and common questions answered."
+        path="/a/do-i-need-a-drone-license"
+        image={`${SITE.url}/og/do-i-need-a-drone-license.png`}
+        type="article"
+        jsonLd={requirementsSeo}
+      />
 
       <main className="pt-32 pb-24 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl">
