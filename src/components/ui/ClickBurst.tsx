@@ -9,7 +9,16 @@ interface Particle {
     life: number;
     element: HTMLDivElement;
     color: string;
+    /** Surfaces the click started inside; the particle passes through these. */
+    ignore: Set<Element>;
 }
+
+const BOUNCE_SELECTOR = "[data-burst-bounce]";
+const RESTITUTION = 0.6; // fraction of speed kept after a bounce
+const FRICTION = 0.92; // horizontal slowdown when skidding along a card top
+const MAX_LIFE_FRAMES = 240; // ~4s at 60fps, so dots resting on a card don't linger
+const FADE_FRAMES = 30;
+const DOT = 8; // particle size in px (w-2 h-2); x/y is its top-left corner
 
 const ClickBurst = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -21,6 +30,12 @@ const ClickBurst = () => {
 
         const spawnParticles = (x: number, y: number) => {
             const particleCount = 12; // Mini white dots
+            const ignore = new Set<Element>(
+                Array.from(document.querySelectorAll(BOUNCE_SELECTOR)).filter((el) => {
+                    const r = el.getBoundingClientRect();
+                    return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+                })
+            );
 
             for (let i = 0; i < particleCount; i++) {
                 const el = document.createElement("div");
@@ -38,9 +53,10 @@ const ClickBurst = () => {
                     y: y,
                     vx: Math.cos(angle) * velocity,
                     vy: Math.sin(angle) * velocity,
-                    life: 1.0, // Used for scale optionally, but not for removal
+                    life: 0, // frames alive
                     element: el,
-                    color: "white"
+                    color: "white",
+                    ignore,
                 });
             }
         };
@@ -70,13 +86,48 @@ const ClickBurst = () => {
             const gravity = 0.5;
             const width = window.innerWidth;
             const height = window.innerHeight;
+            if (particlesRef.current.length === 0) return;
+
+            // Glass cards on screen this frame. Their unrotated box is close
+            // enough to the tilted card for a bounce to read correctly.
+            const surfaces = Array.from(document.querySelectorAll(BOUNCE_SELECTOR))
+                .map((el) => ({ el, r: el.getBoundingClientRect() }))
+                .filter(({ r }) => r.bottom > 0 && r.top < height && r.width > 0);
 
             // Filter out particles that have fallen off screen
             particlesRef.current = particlesRef.current.filter((p) => {
                 // Apply physics
                 p.vy += gravity; // Gravity
+                const prevX = p.x;
+                const prevY = p.y;
                 p.x += p.vx;
                 p.y += p.vy;
+
+                // Bounce off glass cards, resolved by which side the dot came from.
+                for (const { el, r: box } of surfaces) {
+                    if (p.ignore.has(el)) continue;
+                    // Grow the box by the dot size so the whole dot stops at the edge.
+                    const r = { left: box.left - DOT, top: box.top - DOT, right: box.right, bottom: box.bottom };
+                    const inside = p.x > r.left && p.x < r.right && p.y > r.top && p.y < r.bottom;
+                    if (!inside) continue;
+                    const wasInside = prevX > r.left && prevX < r.right && prevY > r.top && prevY < r.bottom;
+                    if (wasInside) continue; // the card scrolled onto the dot; let it fall through
+                    if (prevY <= r.top) {
+                        p.y = r.top;
+                        p.vy = -Math.abs(p.vy) * RESTITUTION;
+                        p.vx *= FRICTION;
+                    } else if (prevY >= r.bottom) {
+                        p.y = r.bottom;
+                        p.vy = Math.abs(p.vy) * RESTITUTION;
+                    } else if (prevX <= r.left) {
+                        p.x = r.left;
+                        p.vx = -Math.abs(p.vx) * RESTITUTION;
+                    } else {
+                        p.x = r.right;
+                        p.vx = Math.abs(p.vx) * RESTITUTION;
+                    }
+                }
+                p.life += 1;
 
                 // Collision with walls (hitting side of screen)
                 if (p.x <= 0 || p.x >= width) {
@@ -84,17 +135,16 @@ const ClickBurst = () => {
                     p.x = Math.max(0, Math.min(width, p.x));
                 }
 
-                // Removed life decay logic so they stay visible
-                // p.life -= 0.015;
 
                 // Update DOM
                 // Keep them visible until they fall past the bottom
-                if (p.y < height + 50) {
+                if (p.y < height + 50 && p.life < MAX_LIFE_FRAMES) {
+                    const fade = Math.min(1, (MAX_LIFE_FRAMES - p.life) / FADE_FRAMES);
                     gsap.set(p.element, {
                         x: p.x,
                         y: p.y,
-                        opacity: 1, // Stay full opacity
-                        scale: 1 // Stay full size
+                        opacity: fade,
+                        scale: 1
                     });
                     return true;
                 } else {

@@ -137,6 +137,8 @@ export default function GlassCube({
       ref={wrapperRef}
       className={className}
       style={{ perspective: '800px' }}
+      // ClickBurst particles bounce off anything marked with this.
+      data-burst-bounce=""
     >
       <div
         ref={cubeRef}
